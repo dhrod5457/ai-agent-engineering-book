@@ -179,7 +179,7 @@ Single-Agent Baseline이 안정된 후:
 
 Agent 수를 먼저 늘리지 않는다.
 
-## Capability Maturity
+## 확장 순서의 한 예
 
 이 책에서는 설명을 위해 다음 흐름을 사용한다.
 
@@ -196,9 +196,7 @@ Minimal Agent
 → Multi-Agent
 ~~~
 
-공식 Maturity Model이 아니다.
-
-시스템이 어떤 순서로 복잡해질 수 있는지 보여주는 Reference다.
+공식 Maturity Model이나 권장 순서를 뜻하지 않는다. 시스템의 Risk와 업무 특성에 따라 순서는 달라질 수 있으며, 필요한 문제가 생길 때 어떤 구조를 추가할지 보여주는 Reference다.
 
 ## Control before Autonomy
 
@@ -356,9 +354,7 @@ High-risk Action에 Policy가 있는가?
 Regression Eval이 있는가?
 ~~~
 
-모두 필요한 것은 시스템 Risk에 따라 다르다.
-
-하지만 질문 자체는 중요하다.
+각 항목의 필요 수준은 시스템 Risk에 따라 달라진다. 중요한 것은 기능 목록을 채우는 것이 아니라 이 질문에 명시적으로 답할 수 있는가이다.
 
 ## 이 장에서 가져갈 것
 
