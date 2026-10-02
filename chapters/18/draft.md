@@ -51,9 +51,9 @@ Verification Error
 
 > **Agent 실행에서 Model, Tool, State, Policy, Runtime의 주요 Event와 관계를 다시 구성할 수 있는 관찰 데이터.**
 
-Logging과 겹치지만 목적이 더 구조적이다.
+Logging과 겹치지만 목적이 더 구조적이다. 단순 Text Log를 쌓는 것이 아니라 Execution Path와 원인 관계를 다시 구성하는 데 초점을 둔다.
 
-단순 Text Log가 아니라 Execution Path를 재구성하는 데 초점을 둔다.
+Agent State Plane의 Event History가 Trace의 Source가 될 수는 있지만 둘을 같은 저장소나 같은 lifecycle로 만들 필요는 없다. Event History는 recovery를 위한 durable fact에 가깝고, Trace는 diagnosis와 evaluation을 위한 관찰 view까지 포함할 수 있다.
 
 ## 최소 Trace 후보
 
