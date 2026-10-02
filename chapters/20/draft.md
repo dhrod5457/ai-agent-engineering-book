@@ -251,7 +251,7 @@ Risk와 Cost에 따라 조정한다.
 must_not_regress:
 - security
 - critical data integrity
-- duplicate side effect
+- duplicate Side Effect
 - production authorization
 
 optimize:
