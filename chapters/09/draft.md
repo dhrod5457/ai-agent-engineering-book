@@ -16,9 +16,7 @@ Agent는 같은 Action을 다시 실행해야 할까.
 
 ## Recovery와 Retry는 다르다
 
-Retry는 보통 같은 논리 작업을 다시 시도하는 것이다.
-
-Recovery는 시스템이 중단된 뒤 **현재 상태를 다시 구성하고 안전한 다음 Action을 결정하는 과정**이다.
+Retry는 같은 논리 작업을 다시 시도하는 동작이다. Recovery는 시스템이 중단된 뒤 **현재 상태를 다시 구성하고 안전한 다음 Action을 결정하는 과정**이며, 그 결과로 Retry를 선택할 수도 있다.
 
 ~~~text
 Retry
@@ -62,13 +60,7 @@ Recovery 시 tool.completed Event가 있다면 해당 Operation을 다시 실행
 
 ## 왜 Model Call도 그대로 Replay하지 않는가
 
-LLM은 Nondeterministic할 수 있다.
-
-같은 Input을 다시 넣어도 다른 Decision을 만들 수 있다.
-
-또 Model Version이 바뀌었을 수도 있다.
-
-따라서 과거 실행을 재현할 목적이라면 당시 Model Result 자체를 Record로 사용하는 편이 더 정확하다.
+LLM 호출은 같은 Input에서도 결과가 달라질 수 있고 Model Version도 바뀔 수 있다. 따라서 과거 실행 상태를 복구할 때는 당시 Model Result를 다시 생성하려 하기보다 기록된 결과를 Execution History의 사실로 사용하는 편이 안전하다.
 
 ~~~text
 model.requested
@@ -124,7 +116,7 @@ Server가 Idempotency를 지원하면 같은 Key로 다시 요청해도 기존 �
 
 Server가 지원하지 않는다면 Harness가 External ID나 실행 Record를 확인해 중복 여부를 판단해야 한다.
 
-Exactly-once를 쉽게 보장할 수 있다고 가정하지 않는다.
+Agent Harness만으로 exactly-once semantics를 쉽게 보장할 수 있다고 가정하지 않는다.
 
 ## Tool Execution State
 
