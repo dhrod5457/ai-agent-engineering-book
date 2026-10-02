@@ -16,7 +16,8 @@ Phase 2 Concept        완료
 Phase 3 Scope          완료
 Phase 4 TOC            v0.1 완료
 Phase 5 Chapter Plan   완료
-Phase 6 Draft          Part I~V 완료 / Part VI 준비
+Phase 6 Draft          완료
+Phase 7 Review         준비
 ~~~
 
 Broad Research는 종료하고, 이후에는 장별 초고에 필요한 Targeted Research만 추가합니다.
@@ -132,10 +133,11 @@ Part VII Multi-Agent와 Production Boundary
 
 ## 다음 단계
 
-1. Part VI 18~21장 Draft 작성
-2. Part VI Structural Review
-3. Part VII Multi-Agent / Production Boundary Draft 진행
-4. 각 장 집필 중 필요한 Targeted Research만 추가
-5. Part 단위 Structural Review
+1. Phase 7 Line Review — Part I~II
+2. Cross-chapter Deduplication
+3. Terminology Review
+4. Evidence / Citation Review
+5. Publication-time Freshness Audit
+6. Manuscript Assembly
 
 기준일: 2026-10-02
