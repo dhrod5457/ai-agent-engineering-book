@@ -149,7 +149,7 @@ Tool이 compromise돼도 다른 Capability Credential까지 바로 노출되지 
 
 ## Credential Injection
 
-NVIDIA OpenShell 같은 최신 Agent Sandbox 설계에서는 Agent Workload가 실제 Secret을 직접 보지 않고 Gateway가 승인된 Endpoint Request에 Credential을 붙이는 구조를 사용한다.
+NVIDIA OpenShell 같은 최신 Agent Sandbox 설계에서는 Agent Workload가 Secret을 직접 보지 않고 Gateway가 승인된 Endpoint Request에 Credential을 붙이는 구조를 사용한다.
 
 개념:
 
@@ -312,7 +312,7 @@ Capability Discovery
 ≠ Credential Grant
 ~~~
 
-다음 장에서는 Credential이 있든 없든 Agent가 실제 Runtime에서 접근할 수 있는 범위를 다룬다.
+다음 장에서는 Credential이 있든 없든 Agent가 Runtime에서 접근할 수 있는 범위를 다룬다.
 
 Filesystem, Process, Network를 어디까지 열어줄 것인가.
 
