@@ -8,11 +8,11 @@ Audit Log에는 다음만 남아 있다.
 actor = service-account@company
 ~~~
 
-그런데 실제 질문은 더 많다.
+그런데 질문은 더 많다.
 
 누가 이 Agent를 시작했는가. 어떤 Application이 Agent를 Hosting했는가. Agent는 누구를 대신해 행동했는가. 어떤 Tool Identity가 실제 API를 호출했는가. 이 Action은 사용자의 권한에서 나온 것인가, Autonomous Workload 권한에서 나온 것인가.
 
-Agent가 실제 업무를 수행하려면 **누가 행동하는가**를 먼저 분리해야 한다.
+Agent가 업무를 수행하려면 **누가 행동하는가**를 먼저 분리해야 한다.
 
 ## Shared Service Account의 한계
 
@@ -55,7 +55,7 @@ Resource Identity
 
 ## Human User Identity
 
-실제 사용자다.
+요청을 시작한 사용자다.
 
 예:
 
@@ -192,7 +192,7 @@ Delegated와 Autonomous Mode를 한 Credential 모델로 합치지 않는다.
 
 ## Actor Chain
 
-Agent Action의 실제 Chain을 남기는 것이 중요하다.
+Agent Action의 전체 Chain을 남기는 것이 중요하다.
 
 ~~~text
 Human / Initiator
@@ -368,7 +368,7 @@ System Prompt에 다음을 넣을 수 있다.
 
 Context에는 도움이 된다.
 
-하지만 실제 Resource Access는 외부 Authorization이 강제해야 한다.
+하지만 Resource Access는 외부 Authorization이 강제해야 한다.
 
 ~~~text
 Identity Context
@@ -382,7 +382,7 @@ Authorization System
 
 ## 이 장에서 가져갈 것
 
-Agent가 실제 업무를 수행하면 "누가 Action을 했는가"를 하나의 Service Account로 축약하기 어렵다.
+Agent가 업무를 수행하면 "누가 Action을 했는가"를 하나의 Service Account로 축약하기 어렵다.
 
 다음 경계를 유지한다.
 
@@ -403,7 +403,7 @@ Delegated Access
 
 Identity를 분리하면 다음 질문이 생긴다.
 
-각 Identity가 실제 External API에 접근할 때 Credential을 어디에 둘 것인가.
+각 Identity가 External API에 접근할 때 Credential을 어디에 둘 것인가.
 
 Agent Runtime 안에 장기 API Key를 넣어둘 것인가.
 
