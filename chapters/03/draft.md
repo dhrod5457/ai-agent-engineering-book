@@ -357,33 +357,9 @@ Harness 변경 하나만으로도 행동이 달라질 수 있다.
 
 ## Model Upgrade는 Harness Audit Trigger다
 
-새 Model이 출시되면 흔히 기존 Harness에 그대로 교체한다.
+새 Model이 출시됐다고 기존 Harness를 그대로 유지해야 하는 것은 아니다. 먼저 기존 Harness와 단순한 Baseline을 비교하고, Planner·Memory·Evaluator 같은 Component가 여전히 필요한지 다시 측정한다.
 
-하지만 더 좋은 접근은 두 가지를 비교하는 것이다.
-
-~~~text
-New Model + Old Harness
-vs
-New Model + Minimal Harness
-~~~
-
-그리고 필요한 Component를 하나씩 복구한다.
-
-~~~text
-Minimal Baseline
-→ Add Planner
-→ Measure
-
-→ Add Memory
-→ Measure
-
-→ Add Evaluator
-→ Measure
-~~~
-
-이 과정을 Harness Ablation이라고 부를 수 있다.
-
-뒤의 21장에서 반복 실행과 Variance까지 포함해 자세히 다룬다.
+이 책에서는 이런 검증을 Harness Ablation으로 다룬다. 반복 실행과 Variance를 포함한 구체적인 방법은 21장에서 설명한다.
 
 ## 지금 필요한 것만 남긴다
 
