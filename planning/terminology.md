@@ -360,3 +360,46 @@ Agent State Plane
 Factory Control Plane
 = many work items / workers / delivery continuity
 ~~~
+
+
+# 표기 규칙
+
+본문에서 Architecture의 정의된 개념은 영문 Title Case를 유지한다.
+
+- Agent
+- Model
+- Harness
+- Context
+- Tool
+- State
+- Memory
+- Runtime
+- Sandbox
+- Trace
+- Eval
+- Goal
+- Artifact
+- Identity
+- Authorization
+- Approval
+- Completion
+- Side Effect
+- Long-running
+
+일반 서술의 production은 "운영"을 우선한다.
+
+다만 다음은 원문 또는 label을 유지한다.
+
+- Minimum Viable Production Agent
+- Production Readiness Checklist
+- Production DB / Cluster 같은 예시 이름
+- environment == "production" 같은 literal value
+- 논문/문서 제목
+
+책 자체의 synthesis 명칭은 정확히 유지한다.
+
+- Agent State Plane
+- Harness Debt
+- Memory Write Gate
+- AgentVersion
+- Factory Control Plane
