@@ -292,19 +292,19 @@ Containment는 Security뿐 아니라 Reliability에도 필요하다.
 
 Managed Runtime이 Session을 제공한다고 하자.
 
-그 Session 안에서 File이 유지될 수 있다.
+기본 compute의 memory와 local disk는 Runtime lifecycle에 묶일 수 있다. 반대로 AgentCore의 managed session storage처럼 stop/resume 사이에 Workspace 파일을 복원하는 기능도 존재한다.
 
-하지만 그것을 Long-term State로 간주하면 안 된다.
+중요한 것은 "Runtime이 항상 ephemeral인가"가 아니라 **Workspace Persistence와 Agent Execution State의 책임을 분리하는 것**이다.
 
 ~~~text
-Runtime Session
-= execution environment lifecycle
+Runtime / Session Storage
+= execution workspace lifecycle
 
 Agent State Plane
 = execution continuity
 ~~~
 
-Runtime이 종료돼도 Goal과 Artifact Reference, Approval State는 살아 있어야 할 수 있다.
+Workspace가 복원되더라도 Goal과 Artifact Reference, Approval State, 이미 실행한 External Side Effect는 별도 State에서 확인할 수 있어야 한다.
 
 ## 작은 예: Repository Fix Agent
 
