@@ -92,7 +92,7 @@ Trace
 
 이 구조로도 많은 Task를 처리할 수 있다.
 
-여기서 실제 Failure를 관찰한 뒤 Component를 추가한다.
+여기서 반복되는 Failure를 관찰한 뒤 Component를 추가한다.
 
 예를 들어 장시간 Coding Task에서 Model이 Context Limit에 가까워지면 Task를 조기 종료하는 문제가 반복된다고 하자.
 
@@ -389,9 +389,9 @@ Minimal Baseline
 
 좋은 Harness는 기능이 가장 많은 Harness가 아니다.
 
-현재 Task와 Model에서 실제로 필요한 책임을 명확히 가진 Harness다.
+현재 Task와 Model에서 필요한 책임을 명확히 가진 Harness다.
 
-초기 production Agent라면 다음 정도로도 시작할 수 있다.
+초기 운영 Agent라면 다음 정도로도 시작할 수 있다.
 
 ~~~text
 Agent Definition
