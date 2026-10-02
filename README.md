@@ -4,67 +4,138 @@ LLM을 단순한 응답 모델이 아니라 실제 환경에서 도구를 사용
 
 ## 중심 질문
 
-> LLM을 실제 작업 가능한 Agent로 만들기 위해 Model, Instruction, Context, Tool, Harness, Runtime, State, Guardrail, Eval을 어떻게 분리하고 조합해야 하는가?
+> LLM을 실제 작업 가능한 Agent로 만들기 위해 Model, Context, State, Memory, Tool, Harness, Runtime, Identity, Policy, Eval을 어떻게 분리하고 조합해야 하는가?
 
 이 저장소는 특정 Agent Framework 사용 설명서를 목표로 하지 않습니다. 제품별 API보다 오래 유지되는 Agent Engineering의 구조와 설계 원칙을 찾는 것이 목표입니다.
 
 ## 현재 단계
 
-```text
-Phase 1 Research       진행 중
-Phase 2 Concept        미착수
-Phase 3 Scope          미착수
-Phase 4 TOC            미착수
-Phase 5 Chapter Plan   미착수
+~~~text
+Phase 1 Research       1~3차 broad research 완료
+Phase 2 Concept        완료
+Phase 3 Scope          완료
+Phase 4 TOC            v0.1 완료
+Phase 5 Chapter Plan   준비
 Phase 6 Draft          미착수
-```
+~~~
 
-## 초기 연구 축
+Broad Research는 종료하고, 이후에는 장별 초고에 필요한 Targeted Research만 추가합니다.
 
-```text
-Model
-  ↓
-Instruction / Context
-  ↓
-Agent Loop / Harness
-  ↓
-Tool Interface
-  ↓
-Runtime / Sandbox
-  ↓
-State / Memory
-  ↓
-Guardrail / Approval
-  ↓
-Trace / Eval
-  ↓
-Outcome
-```
+## 현재 Reference Model
 
-추가 연구 축:
+~~~text
+Identity / Delegation
+        ↓
+Agent Definition
+        ↓
+Context Engine
+        ↓
+Agent Harness
+        ↔
+Agent State Plane
+        │
+        ├─ Event History
+        ├─ Checkpoint / Snapshot
+        ├─ Goal / Progress
+        ├─ Artifact Index
+        ├─ Approval State
+        ├─ External Source Version
+        └─ Memory Reference
+        ↓
+Capability / Policy Gateway
+        ↓
+Execution Runtime
+        ↓
+External World
+~~~
 
-- Long-running Agent
-- Tool / MCP / A2A
-- Security / Containment
-- Agent Evaluation
-- Multi-agent / Delegation / Handoff
-- Computer-use / Coding Agent benchmark
-- Model capability와 Agent capability의 분리
+Cross-cutting:
+
+- Trace / Audit
+- Eval / Regression
+- Security Policy
+- Cost / Latency
+- Versioning
+
+## 핵심 경계
+
+~~~text
+Model Capability
+≠ Agent Capability
+
+Context
+≠ Durable State
+
+Session
+≠ Goal
+
+Workspace
+≠ Memory
+
+Memory
+≠ Source of Truth
+
+Replay
+≠ Side-effect Re-execution
+
+Capability Discovery
+≠ Authorization
+
+Sandbox
+≠ Authorization
+
+Approval
+≠ Containment
+
+Agent State Plane
+≠ Software Factory Control Plane
+~~~
 
 ## 다른 책과의 경계
 
 - `ai-instruction-engineering-book`: CLAUDE.md, AGENTS.md, Rule, Skill, Hook 등 지침 엔지니어링
 - `cloud-agent-book`: Local/Cloud 실행 위치, Runner, Git handoff, Cloud execution
-- `software-factory-book`: Durable Task, Worker, Scheduler, Control Plane, Verification, Delivery
-- 이 책: **한 Agent를 실제 작업 가능한 실행 시스템으로 만드는 Harness와 Runtime 설계**
+- `software-factory-book`: Durable Work, Worker Fleet, Scheduler, Control Plane, Verification, Delivery
+- 이 책: **하나의 Agent를 실제 작업 가능한 실행 시스템으로 만드는 구조**
 
-## Research
+## Source of Truth
 
-1차 리서치는 `research/` 아래에서 관리합니다.
+Planning:
 
-- `research/catalog/`: 출처 카탈로그
-- `research/topics/`: 주제별 근거 정리
-- `research/synthesis/`: 여러 출처를 교차해 만든 종합 모델
-- `research/meta/`: 조사 방법과 품질 기준
+- `planning/concept.md`
+- `planning/scope.md`
+- `planning/terminology.md`
+- `planning/research-gap-audit.md`
+- `planning/toc.md`
+- `planning/chapter-evidence-map.md`
+
+Research:
+
+- `research/catalog/source-catalog.md`
+- `research/topics/`
+- `research/synthesis/agent-engineering-reference-model-v0.3.md`
+- `research/meta/methodology.md`
+
+## 현재 책 구조
+
+~~~text
+Part I   Model에서 Agent로
+Part II  Context와 Tool을 설계한다
+Part III Agent State Plane
+Part IV  Memory를 안전하게 사용한다
+Part V   Identity, Security, Runtime
+Part VI  Agent를 관찰하고 개선한다
+Part VII Multi-Agent와 Production Boundary
+~~~
+
+현재 TOC는 25장 + Epilogue v0.1이다.
+
+## 다음 단계
+
+1. 장별 Chapter Plan 작성
+2. 11장 External State Reconciliation targeted research
+3. 17장 Risk-adaptive Policy targeted research
+4. 21장 Harness Ablation targeted research
+5. Part I부터 Draft 시작
 
 기준일: 2026-10-02
