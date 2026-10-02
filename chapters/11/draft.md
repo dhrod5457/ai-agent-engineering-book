@@ -388,7 +388,7 @@ Agent B는 현재 Version과 비교할 수 있다.
 
 Agent가 Internal Checklist를 모두 완료했다고 하자.
 
-그래도 최종 Completion 전에는 실제 Artifact와 Source를 확인한다.
+그래도 최종 Completion 전에는 현재 Artifact와 Source를 확인한다.
 
 ~~~text
 Internal Completion Claim
