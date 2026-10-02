@@ -285,7 +285,7 @@ Current Risk Context
 Use / Refresh / Ignore
 ~~~
 
-예를 들어 Production Mutation 직전에는 Memory에 저장된 Host 정보보다 Current Infra Source를 다시 읽는다.
+예를 들어 운영 환경을 수정하기 직전에는 Memory에 저장된 Host 정보보다 Current Infra Source를 다시 읽는다.
 
 ## Memory Lineage
 
@@ -443,7 +443,7 @@ Source와 Scope가 다르기 때문이다.
 
 ## Memory Eval
 
-Memory를 추가했으면 실제 이득과 Risk를 측정해야 한다.
+Memory를 추가했으면 이득과 Risk를 측정해야 한다.
 
 Eval 예:
 
@@ -487,7 +487,7 @@ Part IV까지 오면 Agent는 Context와 State, Memory를 서로 다른 lifecycl
 
 이제 다음 질문으로 넘어간다.
 
-Agent가 실제 External System에 Action을 실행할 때 **누구의 Identity와 Credential로 움직여야 하는가.**
+Agent가 External System에 Action을 실행할 때 **누구의 Identity와 Credential로 움직여야 하는가.**
 
 Part V에서는 Agent Identity, Credential Boundary, Sandbox와 Risk-adaptive Policy를 다룬다.
 
