@@ -1,6 +1,6 @@
 # 20장. Eval을 CI로 만든다
 
-Agent가 Production에서 같은 실수를 두 번 했다.
+Agent가 운영 환경에서 같은 실수를 두 번 했다.
 
 첫 번째에는 운영자가 고쳤다.
 
@@ -35,7 +35,7 @@ Change
 → Promote
 ~~~
 
-## Production Failure를 Regression으로 만든다
+## 운영 실패를 Regression으로 만든다
 
 좋은 Feedback Loop는 다음과 같다.
 
@@ -59,7 +59,7 @@ Re-run
 
 ## Failure Triage
 
-모든 Production Failure를 Eval Case로 만들 필요는 없다.
+모든 운영 실패를 Eval Case로 만들 필요는 없다.
 
 다음 질문을 본다.
 
@@ -154,7 +154,7 @@ Current Production Version
 
 ## Shadow
 
-실제 Traffic과 유사한 Input을 Candidate Agent에 넣되 Side Effect는 실행하지 않는 방식이다.
+운영 Traffic과 유사한 Input을 Candidate Agent에 넣되 Side Effect는 실행하지 않는 방식이다.
 
 ~~~text
 Production Input
@@ -162,11 +162,11 @@ Production Input
    └─ Candidate Agent → shadow only
 ~~~
 
-실제 분포에서 Behavior를 비교할 수 있다.
+운영 분포에서 Behavior를 비교할 수 있다.
 
 ## Canary
 
-일부 Low-risk Traffic에 Candidate를 실제 적용한다.
+일부 Low-risk Traffic에 Candidate를 적용한다.
 
 문제가 없으면 확대한다.
 
@@ -341,7 +341,7 @@ Eval Dataset도 현실과 멀어질 수 있다.
 
 확인할 것:
 
-- 실제 Production Failure를 여전히 반영하는가.
+- 최근 운영 실패를 여전히 반영하는가.
 - Tool/API가 바뀌었는가.
 - 너무 쉬워졌는가.
 - Model이 Benchmark-specific pattern을 학습했는가.
@@ -398,11 +398,11 @@ Trace
 → Promotion
 ~~~
 
-이 구조가 있어야 Agent가 운영하면서 실제로 개선된다.
+이 구조가 있어야 Agent가 운영 과정에서 개선된다.
 
 다음 장에서는 Candidate Change 중에서도 가장 자주 쌓이는 Harness Component를 다룬다.
 
-Planner, Memory, Evaluator, Subagent가 실제로 도움이 되는지 어떻게 측정하고 제거할 것인가.
+Planner, Memory, Evaluator, Subagent가 도움이 되는지 어떻게 측정하고 제거할 것인가.
 
 Harness Ablation과 Debt로 넘어간다.
 
