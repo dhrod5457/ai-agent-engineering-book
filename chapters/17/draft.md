@@ -188,7 +188,7 @@ Control Profile은 다음을 결정할 수 있다.
 
 ## Human Approval은 Risk-tiered하게
 
-AWS Agentic AI Lens 같은 최신 Guidance에서도 모든 Action을 Human Review에 보내는 방식이 Approval Fatigue와 Rubber-stamp Review를 만들 수 있음을 지적한다.
+AWS가 공개한 Agentic AI Lens에서는 모든 Action을 Human Review에 보내는 방식이 Approval Fatigue와 Rubber-stamp Review를 만들 수 있다고 지적한다. 이는 vendor guidance이며 업계 공통 표준으로 해석하지 않는다.
 
 Human은 다음 Action에 집중하는 편이 낫다.
 
@@ -314,7 +314,7 @@ After Step:
 privilege expires
 ~~~
 
-AWS Agentic AI Lens도 Dynamic Boundary와 Temporary Credential 같은 패턴을 권고한다.
+AWS의 Agentic AI Lens는 Dynamic Boundary와 Temporary Credential 같은 패턴을 권고한다. 이 역시 하나의 공개 운영 지침 사례로 사용한다.
 
 Agent의 전체 Lifetime 동안 High-risk 권한을 유지할 필요가 없다.
 
