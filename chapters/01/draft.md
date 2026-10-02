@@ -299,44 +299,9 @@ Runtime
 
 ## 더 많은 자율성이 먼저는 아니다
 
-Agent 시스템을 만들 때 눈에 잘 띄는 기능부터 추가하기 쉽다.
+Agent 시스템은 Memory, Planner, Subagent 같은 눈에 띄는 기능부터 추가하기 쉽다. 하지만 운영에서 더 먼저 필요한 것은 대개 작은 Tool Surface, 통제된 Runtime, Verification, Trace다.
 
-- Memory
-- Planner
-- Subagent
-- Multi-Agent
-- Browser
-- Computer Use
-
-하지만 운영 환경에서 더 먼저 필요한 것은 대개 Control과 Verification이다.
-
-최소 Agent는 다음처럼 시작할 수 있다.
-
-~~~text
-Model
-+ Clear Instruction
-+ Small Tool Surface
-+ Controlled Runtime
-+ Deterministic Verification
-+ Trace
-~~~
-
-그리고 필요할 때 확장한다.
-
-~~~text
-Minimal Agent
-→ Tool Contract
-→ Reproducible Runtime
-→ Trace
-→ Eval
-→ Durable State
-→ Identity / Policy
-→ Memory
-→ Long-running
-→ Multi-Agent
-~~~
-
-이 순서가 유일한 정답은 아니다. 핵심은 기능 수를 Agent의 성숙도로 보지 않는 것이다.
+어떤 기능을 어떤 순서로 추가할지는 Task와 Risk에 따라 달라진다. 핵심은 기능 수를 Agent의 성숙도로 보지 않는 것이다. 실제 도입 순서는 25장에서 다시 정리한다.
 
 ## 이 책이 다루는 경계
 
