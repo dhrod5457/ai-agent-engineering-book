@@ -285,7 +285,7 @@ Harness는 State를 읽고 Transition을 만든다.
 
 State Plane은 Process Lifetime 밖에서 필요한 정보를 유지한다.
 
-다음 Part에서 이 구조를 자세히 다룬다.
+Agent State Plane은 Part III에서 이 구조를 자세히 다룬다.
 
 ## Harness와 Runtime도 분리한다
 
