@@ -2,7 +2,7 @@
 
 모든 Tool Call마다 사람에게 승인받도록 만들면 안전해 보인다.
 
-실제 운영에서는 다른 문제가 생긴다.
+운영에서는 다른 문제가 생긴다.
 
 Agent가 File을 읽을 때마다 묻고, Test를 실행할 때마다 묻고, Issue를 조회할 때마다 묻는다.
 
@@ -130,7 +130,7 @@ Risk에 따라 Control을 다르게 조합하는 사고방식이다.
 
 ## Risk Input은 하나의 Score가 아닐 수 있다
 
-실제 Policy는 여러 입력을 함께 본다.
+운영 Policy는 여러 입력을 함께 본다.
 
 ~~~text
 Action Risk
@@ -378,7 +378,7 @@ Denied:
 
 이 Manifest는 Planning을 돕는다.
 
-하지만 실제 Enforcement Source는 아니다.
+하지만 Enforcement Source는 아니다.
 
 ~~~text
 Policy Manifest
@@ -416,7 +416,7 @@ Verifier가 Executor와 완전히 다른 Model이어야 한다는 뜻은 아니�
 
 ## Rollback과 Compensation
 
-Irreversible Action은 실제로 완전히 되돌릴 수 없을 수 있다.
+Irreversible Action은 완전히 되돌릴 수 없을 수 있다.
 
 그래도 Compensation Plan이 필요할 수 있다.
 
@@ -494,11 +494,11 @@ Approval
 
 그리고 Risk에 따라 이 Control의 강도를 다르게 한다.
 
-중요한 것은 Agent가 Risk를 스스로 선언하는 것이 아니다.
+핵심은 Agent가 Risk를 스스로 선언하는 것이 아니다.
 
 External Policy가 Identity, Resource, Environment, Consequence를 바탕으로 Control Profile을 결정하는 것이다.
 
-Part V에서는 Agent가 실제 Action을 수행하기 위한 Security Boundary를 완성했다.
+Part V에서는 Agent가 Action을 수행하기 위한 Security Boundary를 완성했다.
 
 다음 Part에서는 이 시스템이 제대로 동작하는지 어떻게 관찰하고 측정할 것인가를 다룬다.
 
