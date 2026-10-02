@@ -408,6 +408,6 @@ Agent가 사용할 수 있는 정보는 많지만 Model의 Attention은 제한�
 - Anthropic, Harness Design for Long-running Application Development
 - Anthropic, Scaling Managed Agents
 - OpenAI Agents SDK
-- research/topics/04-harness-long-running.md
+- research/topics/04-harness-Long-running.md
 - research/topics/14-coding-agent-harness-comparison.md
 - research/topics/22-harness-ablation-and-minimalism.md
