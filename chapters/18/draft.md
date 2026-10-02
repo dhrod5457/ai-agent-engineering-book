@@ -127,7 +127,7 @@ output_contract
 failure_class
 ~~~
 
-Trace의 목표는 내부 사고 독백을 저장하는 것이 아니라 **시스템 행동을 재구성하는 것**이다.
+Trace의 목표는 private reasoning을 최대한 많이 저장하는 것이 아니라 **실제 시스템 행동과 결정에 사용된 외부 근거를 재구성하는 것**이다.
 
 ## Model Trace
 
