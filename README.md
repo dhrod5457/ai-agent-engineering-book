@@ -16,7 +16,7 @@ Phase 2 Concept        완료
 Phase 3 Scope          완료
 Phase 4 TOC            v0.1 완료
 Phase 5 Chapter Plan   완료
-Phase 6 Draft          Part I 완료 / Part II 준비
+Phase 6 Draft          Part I~III 완료 / Part IV 준비
 ~~~
 
 Broad Research는 종료하고, 이후에는 장별 초고에 필요한 Targeted Research만 추가합니다.
@@ -132,9 +132,9 @@ Part VII Multi-Agent와 Production Boundary
 
 ## 다음 단계
 
-1. Part II 4~6장 Draft 작성
-2. Part II Structural Review
-3. Part III Agent State Plane Draft 진행
+1. Part IV 12~13장 Draft 작성
+2. Part IV Structural Review
+3. Part V Identity, Security, Runtime Draft 진행
 4. 각 장 집필 중 필요한 Targeted Research만 추가
 5. Part 단위 Structural Review
 
