@@ -293,7 +293,7 @@ A2A는 independent Agent System 간 Collaboration Boundary다.
 
 이제 책의 마지막 장에서 지금까지의 내용을 도입 순서로 압축한다.
 
-처음부터 Memory, Multi-Agent, MicroVM을 모두 넣지 않고 Minimum Viable Production Agent에서 어떻게 시작할 것인가.
+처음부터 Memory, Multi-Agent, MicroVM을 모두 넣지 않고 Minimum Viable 운영 Agent에서 어떻게 시작할 것인가.
 
 ## 주요 근거
 
