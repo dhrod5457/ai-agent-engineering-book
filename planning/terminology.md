@@ -361,6 +361,100 @@ Factory Control Plane
 = many work items / workers / delivery continuity
 ~~~
 
+## Side Effect
+
+Agent 또는 Tool 실행이 외부 상태를 실제로 바꾸는 효과.
+
+예:
+- file write
+- issue creation
+- message send
+- deployment
+- payment
+
+Model이 Action을 제안하는 것과 실제 Side Effect가 발생하는 것을 분리한다.
+
+## Completion Claim
+
+Model 또는 Agent가 Goal을 완료했다고 주장하는 것.
+
+자연어 self-report 또는 structured completion signal일 수 있다.
+
+## Completion Authority
+
+Goal이 실제로 완료됐는지 최종 판정하는 책임.
+
+가능하면 다음처럼 Model self-report 밖의 Evidence와 연결한다.
+
+- deterministic test
+- artifact validation
+- external state check
+- policy / human acceptance
+
+~~~text
+Completion Claim
+≠ Completion Authority
+~~~
+
+## Verification
+
+Artifact, Side Effect, External State가 Goal의 completion condition을 만족하는지 확인하는 과정.
+
+가능한 경우 deterministic verifier를 우선하고, 정성 판단이 필요한 부분만 Model/Human Grader를 사용한다.
+
+## Long-running Agent
+
+하나의 짧은 inference/session 범위를 넘어 Goal, Progress, External State, Artifact를 지속적으로 추적해야 하는 Agent 실행.
+
+Long Context와 동일한 개념이 아니다.
+
+## Memory Write Gate
+
+Observation 또는 Result를 Persistent Memory로 승격하기 전에 provenance, scope, sensitivity, contradiction, freshness 등을 검사하는 이 책의 synthesis.
+
+외부 표준 용어가 아니다.
+
+## AgentVersion
+
+Agent behavior에 영향을 주는 구성요소의 version boundary를 설명하기 위한 이 책의 synthesis.
+
+예:
+
+~~~text
+AgentVersion = (
+  model,
+  instruction,
+  context_policy,
+  harness,
+  state_schema,
+  memory_policy,
+  tools,
+  runtime,
+  policy,
+  grader
+)
+~~~
+
+정확한 표준 tuple이 아니라 reproducible evaluation을 위한 개념이다.
+
+## Agent-as-Tool
+
+Manager Agent가 전체 Goal과 ownership을 유지한 채 Specialist Agent에게 bounded subtask를 요청하고 결과를 돌려받는 협업 pattern.
+
+제품별 공식 용어와 동일하다고 가정하지 않는다.
+
+## Handoff
+
+현재 Work 또는 Interaction의 ownership을 다른 Agent에게 넘기는 transition.
+
+Context 전달뿐 아니라 Goal State와 Effective Authorization 재평가가 필요할 수 있다.
+
+## Remote Agent
+
+독립된 Runtime, State, Policy를 가진 별도 Agent System.
+
+Local Subagent 또는 bounded Tool과 동일하지 않다.
+
 
 # 표기 규칙
 
