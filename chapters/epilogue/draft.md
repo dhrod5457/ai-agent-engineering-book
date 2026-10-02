@@ -93,9 +93,7 @@ Verification
 
 Model이 잘못 판단해도 피해 범위를 줄인다.
 
-더 강한 Model은 유용하다.
-
-하지만 더 강한 Boundary도 여전히 필요하다.
+더 강한 Model은 유용하지만, 실제 Side Effect를 다루는 Boundary와 Verification 책임까지 자동으로 사라지지는 않는다.
 
 ## Completion은 말이 아니라 Evidence다
 
@@ -114,16 +112,6 @@ Claim
 가능하면 Deterministic Evidence를 사용한다.
 
 이 원칙은 Coding Agent뿐 아니라 업무 Agent에도 같다.
-
-## Multi-Agent보다 먼저 Boundary
-
-Agent를 여러 개 만드는 것은 쉽다.
-
-좋은 Collaboration Boundary를 만드는 것은 어렵다.
-
-Single-Agent의 State, Tool, Identity, Verification이 불안정한 상태에서 Multi-Agent를 추가하면 Failure Surface가 커질 수 있다.
-
-Agent 수는 Architecture 품질의 지표가 아니다.
 
 ## Agent Engineering에서 Software Factory로
 
@@ -178,8 +166,6 @@ Agent Engineering은 이 질문에 대한 Software Engineering이다.
 ## 마지막 원칙
 
 Agent에게 일을 맡긴다는 것은 Model을 완전히 신뢰한다는 뜻이 아니다.
-
-오히려 반대에 가깝다.
 
 불확실한 판단을 하는 Component를 운영 시스템 안에 넣되:
 
