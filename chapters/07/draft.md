@@ -6,7 +6,7 @@ Agent를 오래 실행하기 시작하면 거의 모든 문제가 "상태"라는
 
 문제는 이들을 같은 것으로 취급할 때 생긴다.
 
-Session을 지우면 Goal이 사라지고, Runtime이 종료되면 Progress가 사라지고, 오래된 Memory가 현재 사실보다 우선하고, Conversation Summary가 실제 실행 이력을 대신하게 된다.
+Session을 지우면 Goal이 사라지고, Runtime이 종료되면 Progress가 사라지고, 오래된 Memory가 현재 사실보다 우선하고, Conversation Summary가 실행 이력을 대신하게 된다.
 
 Long-running Agent를 설계하려면 먼저 **서로 다른 수명과 권한을 가진 상태를 분리해야 한다.**
 
@@ -45,7 +45,7 @@ External Source of Truth
 
 ## Inference Context
 
-Context는 현재 한 번의 Model Inference에 실제로 들어가는 정보다.
+Context는 현재 한 번의 Model Inference에 들어가는 정보다.
 
 앞 장에서 본 것처럼 Context는 Projection이다.
 
@@ -81,7 +81,7 @@ Session은 매우 유용하다.
 
 예를 들어 사용자와 20 Turn을 대화했다고 해서 현재 Goal의 Completion Condition이 명확하게 구조화돼 있다는 보장은 없다.
 
-Session History에는 "테스트가 통과했다"고 적혀 있어도 실제 Artifact나 Test Result가 현재 유효한지도 별도 확인해야 한다.
+Session History에는 "테스트가 통과했다"고 적혀 있어도 Artifact나 Test Result가 현재 유효한지는 별도 확인해야 한다.
 
 ## Run State
 
@@ -107,7 +107,7 @@ Run State는 Conversation보다 시스템 제어에 가깝다.
 
 ## Workspace State
 
-Workspace는 실제 실행환경의 상태다.
+Workspace는 실행환경의 상태다.
 
 예:
 
@@ -152,7 +152,7 @@ Goal을 단순 User Prompt와 동일시하지 않는다.
 
 > 로그인 오류 좀 고쳐줘.
 
-실제 실행 Goal은 더 구체적이어야 할 수 있다.
+실행 Goal은 더 구체적이어야 할 수 있다.
 
 ~~~text
 Objective:
@@ -175,7 +175,7 @@ Goal은 현재 실행의 Completion Contract다.
 
 ## Artifact State
 
-Artifact는 Agent가 실제로 만든 결과물이다.
+Artifact는 Agent가 만든 결과물이다.
 
 예:
 
@@ -456,7 +456,7 @@ Context
 
 다음 질문은 자연스럽다.
 
-이렇게 분리한 상태를 실제로 어디에서 관리할 것인가.
+이렇게 분리한 상태를 어디에서 관리할 것인가.
 
 프로세스가 죽고 Runtime이 교체돼도 Goal과 Progress, Approval과 Artifact를 잃지 않으려면 어떤 계층이 필요할까.
 
