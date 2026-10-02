@@ -91,7 +91,7 @@ canceled
 
 ~~~text
 MCP Task
-= long-running capability invocation
+= Long-running Capability Invocation
 
 A2A Task
 = remote Agent work contract
