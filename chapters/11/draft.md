@@ -68,7 +68,7 @@ Source가 바뀌었다고 항상 모든 작업을 다시 시작할 필요는 없
 
 ## Version Conflict와 Decision Conflict
 
-최근 Selective Revalidation 연구에서는 이 차이를 명확하게 구분한다.
+2026년 공개된 Selective Revalidation preprint에서는 이 차이를 명확하게 구분한다.
 
 ### Version Conflict
 
@@ -420,7 +420,7 @@ Long-running 난이도를 Step 수만으로 설명하기 어렵다.
 
 초기에 읽은 State가 수백 Action 뒤의 Final Decision에도 영향을 줄 수 있다.
 
-최근 연구에서는 이런 Dependency Length를 Task-State Horizon으로 측정하려는 접근이 있다.
+2026년 preprint에서는 이런 Dependency Length를 Task-State Horizon으로 측정하려는 접근이 제안됐다.
 
 아직 일반적인 표준 Metric은 아니다.
 
