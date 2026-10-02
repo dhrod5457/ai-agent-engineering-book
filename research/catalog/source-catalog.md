@@ -224,3 +224,143 @@
   - execution-based evaluator
   - task initial state와 environment가 명시적
 - 중요성: Computer-use Agent에서 Runtime과 Eval Environment가 핵심임을 보여준다.
+
+
+## H. 2차 조사 — State / Memory / Identity
+
+### OpenAI Agents SDK — Sessions
+- URL: https://openai.github.io/openai-agents-python/sessions/
+- 확인점:
+  - conversation history를 run 간 유지
+  - client-managed session과 server-managed continuation을 구분
+- 중요성: Session을 long-term memory와 분리하는 근거.
+
+### OpenAI Agents SDK — Sandbox Agent Memory
+- URL: https://openai.github.io/openai-agents-python/sandbox/memory/
+- 확인점:
+  - Session memory와 Agent memory를 명시적으로 분리
+  - memory summary → index → rollout detail의 progressive disclosure
+  - stale memory보다 current environment를 우선
+  - agent별 memory layout isolation
+- 중요성: Memory를 canonical source가 아닌 reusable guidance로 보는 근거.
+
+### OpenAI — Using Goals in Codex
+- URL: https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex
+- 게시: 2026-05-09
+- 확인점:
+  - Goal은 persisted thread state
+  - objective, lifecycle, budget, evidence-based completion
+  - global memory와 분리
+- 중요성: Durable objective를 conversation과 별도 state로 관리하는 사례.
+
+### Amazon Bedrock AgentCore Identity
+- URL: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/identity.html
+- 확인점:
+  - Agent workload identity
+  - user-delegated / autonomous access
+  - credential management와 audit
+- 중요성: Agent principal과 user principal을 분리하는 운영 사례.
+
+## I. 2차 조사 — Runtime / Sandbox
+
+### AWS AgentCore Runtime — microVMs
+- URL: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-how-it-works.html
+- 확인점:
+  - session별 dedicated microVM
+  - CPU / memory / filesystem isolation
+  - runtime session state는 ephemeral
+- 중요성: Runtime state와 durable memory의 분리.
+
+### gVisor Security Architecture
+- URL: https://gvisor.dev/docs/architecture_guide/intro/
+- 확인점:
+  - userspace application kernel
+  - host kernel syscall surface 축소
+  - systrap / KVM platform
+- 중요성: container와 VM 사이의 isolation 선택지.
+
+### Firecracker Design
+- URL: https://github.com/firecracker-microvm/firecracker/blob/main/docs/design.md
+- 확인점:
+  - KVM microVM boundary
+  - seccomp, cgroup, namespace, jailer
+- 중요성: hardware virtualization + defense-in-depth 사례.
+
+### NVIDIA OpenShell
+- URL: https://github.com/NVIDIA/OpenShell
+- 확인점:
+  - supervisor와 sandbox 분리
+  - kernel-level file/syscall/network policy
+  - credential을 approved endpoint에서만 주입
+- 중요성: Agent runtime을 policy enforcement point로 확장한 최신 사례.
+
+### Anthropic — Claude Code Sandboxing
+- URL: https://www.anthropic.com/engineering/claude-code-sandboxing
+- 게시: 2025-10-20
+- 확인점:
+  - filesystem + network isolation
+  - permission fatigue 감소
+- 중요성: local coding agent에서 OS-level isolation 적용 사례.
+
+### Anthropic — Claude Code Auto Mode
+- URL: https://www.anthropic.com/engineering/claude-code-auto-mode
+- 게시: 2026-03-25
+- 확인점:
+  - prompt injection probe
+  - action classifier
+  - safe allowlist
+  - subagent handoff gate
+- 중요성: approval을 human click에서 policy/classifier pipeline으로 옮긴 사례.
+
+## J. 2차 조사 — Protocol Boundary
+
+### MCP 2026-07-28 Tasks Extension
+- URL: https://blog.modelcontextprotocol.io/posts/2026-07-28/
+- 확인점:
+  - protocol-level session 제거
+  - Tasks는 extension으로 이동
+  - tasks/get, tasks/update, tasks/cancel
+- 중요성: Runtime Session과 Protocol Task를 분리해야 하는 근거.
+
+### A2A Specification — Task / Artifact / Authorization
+- URL: https://a2a-protocol.org/latest/specification/
+- 확인점:
+  - stateful remote Agent Task
+  - input-required / auth-required 포함 lifecycle
+  - Artifact를 Task output으로 분리
+  - server-side authorization
+- 중요성: MCP Task와 remote-agent work contract의 차이.
+
+## K. 2차 조사 — Long-horizon / Eval
+
+### OSWorld 2.0
+- URL: https://osworld-v2.xlang.ai/
+- 게시: 2026-06
+- 확인점:
+  - 108 long-horizon workflow
+  - human median 약 1.6시간
+  - hidden state, multi-item tracking, dynamic environment, conflict disambiguation
+  - long horizon에서 성능 급락
+- 중요성: Agent 장기 실패가 단순 GUI grounding 문제가 아니라 state/reconciliation 문제임을 보여준다.
+
+### tau2-bench 1.0.1 Changelog
+- URL: https://github.com/sierra-research/tau2-bench/blob/main/CHANGELOG.md
+- 게시: 2026-07
+- 확인점:
+  - grader 수정으로 기존 trajectory 점수가 바뀜
+  - release 이전/이후 score 직접 비교 금지 안내
+- 중요성: benchmark와 grader도 version pinning이 필요함.
+
+### OpenAI — Macro Evals for Agentic Systems
+- URL: https://developers.openai.com/cookbook/examples/partners/macro_evals_for_agentic_systems/macro_evals_for_agentic_systems
+- 게시: 2026-05-19
+- 확인점:
+  - 개별 trace 평가를 넘어 population-level recurring failure를 찾음
+- 중요성: Agent Eval CI에서 micro/macro eval을 분리하는 근거.
+
+### OpenAI — Agent Improvement Loop
+- URL: https://developers.openai.com/cookbook/topic/agents
+- 게시: 2026-05 계열
+- 확인점:
+  - trace → feedback → eval → harness change
+- 중요성: production feedback을 reusable regression으로 승격하는 패턴.
