@@ -10,7 +10,7 @@ Agent를 가장 짧게 구현하면 몇 줄짜리 반복문이 될 수 있다.
 
 Tool이 5분 동안 응답하지 않으면 어떻게 할까. 같은 Tool이 세 번 실패하면 계속 시도할까. 외부 API는 성공했는데 Agent 프로세스가 결과를 저장하기 전에 죽으면 어떻게 할까. 모델이 완료했다고 했지만 테스트가 실패하면 끝낼까.
 
-Agent Loop는 단순한 반복문에서 시작하지만 production에서는 하나의 작은 실행 제어 시스템이 된다.
+Agent Loop는 단순한 반복문에서 시작하지만 운영 환경에서는 하나의 작은 실행 제어 시스템이 된다.
 
 ## 최소 Loop
 
@@ -78,7 +78,7 @@ Actual Result
 
 즉 Model Decision과 Side Effect 사이에는 Harness와 Policy Boundary가 존재한다.
 
-## Production Loop가 추가로 가져야 하는 것
+## 운영 Loop가 추가로 가져야 하는 것
 
 최소 Loop에는 보이지 않지만 실제 Agent에 필요한 책임이 있다.
 
@@ -134,7 +134,7 @@ Task Completion
 
 둘은 다를 수 있다.
 
-Production Agent에서는 가능하면 Completion을 외부 Evidence에 연결한다.
+운영 Agent에서는 가능하면 Completion을 외부 Evidence에 연결한다.
 
 예:
 
@@ -427,7 +427,7 @@ Read Failure
     └─ No  → Inspect Failure → Retry
 ~~~
 
-Production Loop에서는 조금 더 필요하다.
+운영 Loop에서는 조금 더 필요하다.
 
 ~~~text
 Goal
@@ -467,7 +467,7 @@ PASS → Complete
 
 이 장의 결론은 다음 장으로 이어진다.
 
-Agent Loop를 production 수준으로 만들면서 책임이 계속 추가됐다.
+Agent Loop를 운영 수준으로 만들면서 책임이 계속 추가됐다.
 
 - Context
 - Tool Dispatch
