@@ -79,7 +79,7 @@ Response
 
 Model이 외부 환경을 관찰하고 Action을 선택하며 결과를 다시 읽기 때문이다.
 
-하지만 production에서 사용할 Agent는 이 반복만으로 충분하지 않다.
+하지만 운영 환경에서 사용할 Agent는 이 반복만으로 충분하지 않다.
 
 운영 시스템에서는 적어도 다음 질문이 생긴다.
 
@@ -310,7 +310,7 @@ Agent 시스템을 만들 때 눈에 잘 띄는 기능부터 추가하기 쉽다
 - Browser
 - Computer Use
 
-하지만 production에서 더 먼저 필요한 것은 대개 Control과 Verification이다.
+하지만 운영 환경에서 더 먼저 필요한 것은 대개 Control과 Verification이다.
 
 최소 Agent는 다음처럼 시작할 수 있다.
 
@@ -378,7 +378,7 @@ Agent가 일을 끝내는 능력은 Model뿐 아니라 Context, Tool, Harness, S
 
 > 모델의 판단을 실제 행동으로 바꾸는 과정에서 어떤 책임을 어디에 둘 것인가?
 
-다음 장에서는 이 구조의 가장 작은 실행 단위인 Agent Loop를 다룬다. Model이 Tool을 호출하고 Observation을 다시 읽는 단순 반복이 production 환경에서 어떤 Control을 필요로 하는지 살펴본다.
+다음 장에서는 이 구조의 가장 작은 실행 단위인 Agent Loop를 다룬다. Model이 Tool을 호출하고 Observation을 다시 읽는 단순 반복이 운영 환경에서 어떤 Control을 필요로 하는지 살펴본다.
 
 ## 주요 근거
 
