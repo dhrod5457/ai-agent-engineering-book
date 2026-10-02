@@ -26,7 +26,7 @@ Billing Agent
 
 하지만 Ownership이 다르다.
 
-이 장에서는 이를 Agent-as-Tool과 Handoff로 나눈다.
+이 장에서는 설명을 위해 이를 Agent-as-Tool과 Handoff라는 두 pattern으로 나눈다. 제품과 Framework마다 용어와 세부 semantics는 다를 수 있으므로 이름보다 ownership 차이에 집중한다.
 
 ## Agent-as-Tool
 
@@ -140,7 +140,7 @@ Agent B
 
 Agent B는 다른 Tool Scope를 가질 수 있다.
 
-Handoff에는 Work Ownership뿐 아니라 Effective Authorization 재평가가 필요하다.
+Handoff에는 Work Ownership 전달뿐 아니라 receiving Agent의 Effective Authorization 재평가가 필요하다.
 
 ## State Ownership
 
