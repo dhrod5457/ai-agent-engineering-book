@@ -35,13 +35,13 @@ Inference Context
 Conversation / Session State
 Run State
 Workspace State
-Goal / Task State
+Goal State
 Artifact State
 Long-term Memory
 External Source of Truth
 ~~~
 
-이 taxonomy는 업계 표준 분류가 아니라 여러 SDK와 Runtime 구현에서 반복되는 차이를 설명하기 위한 이 책의 정리다.
+이 taxonomy는 업계 표준이 아니라 여러 SDK와 Runtime 구현에서 반복되는 lifecycle과 authority 차이를 설명하기 위한 working model이다.
 
 ## Inference Context
 
@@ -131,7 +131,7 @@ AWS AgentCore 같은 Runtime 사례도 Session별 격리 환경을 제공한다.
 
 따라서 Workspace가 유지될 수 있더라도 실행 연속성의 유일한 근거로 삼지 않는 편이 복구에 유리하다.
 
-## Goal / Task State
+## Goal State
 
 Goal은 Agent가 무엇을 완료해야 하는지 표현한다.
 
@@ -210,7 +210,7 @@ Memory는 미래 실행에서 재사용할 정보를 보존한다.
 - 이전 해결에서 얻은 Lesson
 - Agent가 자주 실수하는 Pattern
 
-Memory는 현재 실행을 복구하기 위한 기본 저장소가 아니다.
+Memory는 현재 실행의 복구 상태를 담는 기본 저장소로 보지 않는다.
 
 ~~~text
 Checkpoint
@@ -285,7 +285,7 @@ Memory:
 
 예를 들어 Shell Tool이 출력한 수천 줄 Log를 영구 저장하는 것은 과할 수 있다.
 
-State를 단계적으로 승격한다고 생각할 수 있다.
+여기서는 편의상 Observation을 더 오래 유지되는 State로 옮기는 과정을 State Promotion이라고 부른다.
 
 ~~~text
 Ephemeral Observation
