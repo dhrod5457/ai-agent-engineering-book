@@ -364,3 +364,155 @@
 - 확인점:
   - trace → feedback → eval → harness change
 - 중요성: production feedback을 reusable regression으로 승격하는 패턴.
+
+
+## L. 3차 조사 — Memory Security
+
+### Microsoft Security — Guarding AI memory
+- URL: https://www.microsoft.com/en-us/security/blog/2026/06/22/guarding-ai-memory/
+- 게시: 2026-06-22
+- 확인점:
+  - persistent memory가 공격을 session 이후까지 지속시킬 수 있음
+  - memory의 write/read lifecycle 자체를 보안 대상으로 다룸
+- 중요성: Memory를 별도 security boundary로 보는 산업 근거.
+
+### Microsoft Zero Trust — Manage AI memory safety
+- URL: https://learn.microsoft.com/security/zero-trust/sfi/manage-agentic-memory-safety
+- 업데이트: 2026-06-03
+- 확인점:
+  - write intent/provenance gate
+  - retrieval risk decision
+  - CRUD provenance logging
+  - poisoning, XPIA persistence, cross-context leakage 운영 지표
+- 중요성: Memory security를 infrastructure control로 다루는 구체적 지침.
+
+### From Untrusted Input to Trusted Memory / MPBench
+- URL: https://arxiv.org/abs/2606.04329
+- 게시: 2026-06
+- 확인점:
+  - memory write channel과 structural vulnerability taxonomy
+  - aggressive write/retrieval이 attack surface를 키울 수 있음
+  - 기존 prompt-injection defense만으로 memory poisoning을 포괄하기 어려움
+- 중요성: Memory write policy 필요성.
+
+### MemSecBench
+- URL: https://arxiv.org/abs/2607.27080
+- 게시: 2026-07
+- 확인점:
+  - Write → Execute → Forget lifecycle
+  - persistence, consequence, repair를 함께 측정
+- 중요성: memory security eval을 lifecycle 단위로 확장.
+
+### MemPoison
+- URL: https://arxiv.org/abs/2607.14651
+- 게시: 2026-07
+- 확인점:
+  - direct / compositional / dormant memory corruption
+  - write-time consistency defense의 구조적 blind spot
+- 중요성: retrieval/context-sensitive defense 필요성.
+
+### MemSentry
+- URL: https://arxiv.org/abs/2609.08747
+- 게시: 2026-09
+- 확인점:
+  - memory write에 Accept / Review / Quarantine decision
+  - source trust, semantic risk, dependency impact를 결합
+- 중요성: deterministic memory write gate 설계 사례.
+
+## M. 3차 조사 — Durable State
+
+### Temporal — Durable Execution
+- URL: https://docs.temporal.io/temporal
+- 확인점:
+  - Workflow progress를 Event History에 기록
+  - crash 후 replay로 state 재구성
+- 중요성: Agent State Plane의 event history/replay 설계에 참고.
+
+### Temporal — Workflow Tasks
+- URL: https://docs.temporal.io/tasks
+- 확인점:
+  - event history를 Worker가 replay
+  - 이미 실행된 operation result는 history에서 복구
+  - 새로운 decision만 command로 생성
+- 중요성: replay와 side-effect 재실행을 분리하는 근거.
+
+### LangGraph — Persistence
+- URL: https://langchain-ai.github.io/langgraphjs/how-tos/persistence-postgres/
+- 확인점:
+  - Checkpointer: thread-scoped graph state / fault tolerance
+  - Store: cross-thread long-term memory
+- 중요성: Checkpoint와 Memory의 lifecycle 분리.
+
+## N. 3차 조사 — Agent Identity
+
+### Microsoft Entra Agent ID — Agent identities
+- URL: https://learn.microsoft.com/en-us/entra/agent-id/agent-identities
+- 확인점:
+  - Agent를 distinct service principal로 표현
+  - Agent identity 자체에 credential을 직접 두지 않는 구조
+  - delegated / autonomous token model
+- 중요성: Agent를 first-class principal로 보는 구체적 구현.
+
+### Microsoft Entra Agent ID — Overview
+- URL: https://learn.microsoft.com/en-us/entra/agent-id/what-is-microsoft-entra-agent-id
+- 확인점:
+  - Agent identity / lifecycle / access protection / governance
+  - OAuth, MCP, A2A integration
+- 중요성: Agent identity를 enterprise IAM 영역으로 확장.
+
+### Microsoft — Identity for AI agents
+- URL: https://learn.microsoft.com/en-us/startups/build/identity-management/identity-fundamentals-ai-agents
+- 업데이트: 2026-06-16
+- 확인점:
+  - User / Application / Workload / Agent / Tool / Resource identity 구분
+  - broad shared secret 사용 금지 권고
+- 중요성: Actor chain taxonomy 근거.
+
+### Microsoft Entra — Agent OBO Flow
+- URL: https://learn.microsoft.com/en-us/entra/agent-id/agent-on-behalf-of-oauth-flow
+- 확인점:
+  - user delegation을 OAuth 2.0 On-Behalf-Of로 처리
+  - consent와 delegated permission 필요
+- 중요성: delegated agent access의 표준적 모델.
+
+## O. 3차 조사 — Policy / Harness
+
+### NVIDIA OpenShell — Security Policy
+- URL: https://github.com/NVIDIA/OpenShell/blob/main/architecture/security-policy.md
+- 확인점:
+  - filesystem / process / network / provider policy
+  - fail-closed parser
+  - dynamic network policy reload
+  - proposal-risk prover
+- 중요성: task capability를 deterministic policy로 제한하는 최신 구현.
+
+### NVIDIA OpenShell — Sandbox Architecture
+- URL: https://github.com/NVIDIA/OpenShell/blob/main/architecture/sandbox.md
+- 확인점:
+  - Supervisor / Sandbox / Agent child trust level 분리
+  - credential과 policy authority를 workload 바깥에 유지
+- 중요성: Agent와 enforcement authority 분리.
+
+### OpenShell — Agent-driven Policy Management
+- URL: https://github.com/NVIDIA/OpenShell/issues/1062
+- 확인점:
+  - deny → propose → validate/prove → review → apply → retry
+  - Agent가 policy 변경을 직접 적용하지 않음
+- 중요성: 최소권한을 유지하면서 자율성을 확장하는 pattern.
+
+### Anthropic — Harness design for long-running apps
+- URL: https://www.anthropic.com/engineering/harness-design-long-running-apps
+- 게시: 2026-03-24
+- 확인점:
+  - Harness design이 Agent 성능에 큰 영향
+  - planner/generator/evaluator와 structured artifact
+  - 과도한 scaffold는 재검증 필요
+- 중요성: Harness component를 measurable hypothesis로 취급하는 근거.
+
+### Anthropic — Effective harnesses for long-running agents
+- URL: https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+- 게시: 2025-11-26
+- 확인점:
+  - initializer / incremental session / progress artifact
+  - compaction만으로 continuity 불충분
+- 중요성: Agent State Plane과 Harness의 연결.
