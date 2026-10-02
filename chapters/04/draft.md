@@ -145,7 +145,7 @@ Model에게 Event History 전체를 매 Turn 넣을 필요는 없다.
 
 이 원칙은 Long-running Agent에서 특히 중요하다.
 
-## Context Assembly은 하나의 Engine이다
+## Context Assembly는 하나의 Engine이다
 
 단순 Agent에서는 Context를 문자열을 이어 붙여 만들 수 있다.
 
