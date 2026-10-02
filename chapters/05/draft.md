@@ -40,11 +40,9 @@ Agent는 현재 Goal과 Context를 보고 다음을 판단해야 한다.
 
 따라서 Tool Contract는 Agent의 Decision Interface가 된다.
 
-SWE-agent 연구에서는 이런 관점을 Agent-Computer Interface, ACI로 표현했다.
+SWE-agent 연구는 이런 관점을 Agent-Computer Interface(ACI)로 표현했다. ACI를 모든 Agent Tool의 공식 표준명으로 쓰는 것은 아니지만, Tool 설계를 모델과 컴퓨터 사이의 인터페이스 문제로 보는 관점은 유용하다.
 
-이 책에서는 그 개념을 넓게 가져와 Tool을 Agent가 Computer와 상호작용하는 경계로 본다.
-
-## Generic Tool은 유연하지만 비싸다
+## Generic Tool은 유연하지만 판단 부담이 크다
 
 가장 극단적인 Tool은 Shell 하나다.
 
@@ -490,11 +488,9 @@ add_issue_comment
 
 대신 시스템이 더 예측 가능해진다.
 
-## Tool은 Product Interface다
+## Tool은 Agent-facing Interface다
 
-Agent에게 제공하는 Tool은 내부 개발자만 보는 API가 아니다.
-
-Model이 사용하는 Product Interface다.
+Agent에게 제공하는 Tool은 단순한 내부 API Wrapper가 아니다. Model이 직접 선택하고 사용하는 Agent-facing Interface다.
 
 따라서 다음을 관리해야 한다.
 
@@ -507,7 +503,7 @@ Model이 사용하는 Product Interface다.
 - Security
 - Evaluation
 
-Tool Design이 좋지 않으면 Model을 업그레이드해도 같은 종류의 실패가 남을 수 있다.
+Tool Design의 문제가 남아 있으면 Model을 업그레이드해도 같은 종류의 실패가 반복될 수 있다.
 
 ## 이 장에서 가져갈 것
 
