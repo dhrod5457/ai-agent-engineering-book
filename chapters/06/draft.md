@@ -220,31 +220,17 @@ MCP Task
 
 ## Capability Discovery와 Authorization은 다르다
 
-MCP Server가 Tool을 제공한다고 하자.
-
-Agent가 그 Tool의 존재를 알게 됐다고 해서 실행 권한이 생긴 것은 아니다.
+MCP Server가 Tool을 제공한다고 해서 현재 Agent가 그 Tool을 실행할 권한까지 얻는 것은 아니다.
 
 ~~~text
 Discovery
-= 무엇을 할 수 있다고 알려주는가
+= 어떤 Capability가 존재하는가
 
 Authorization
-= 지금 이 Principal이 실행할 수 있는가
+= 현재 Principal이 그 Action을 실행할 수 있는가
 ~~~
 
-둘은 별개다.
-
-실제 Authorization에는 다음이 들어갈 수 있다.
-
-- User Identity
-- Agent Identity
-- Task Scope
-- Target Resource
-- Environment
-- Risk
-- Approval State
-
-따라서 Capability Catalog를 곧 Permission List로 사용하지 않는다.
+Protocol 수준의 인증과 별개로 Application은 현재 Goal과 User/Agent Scope에 더 좁은 Policy를 적용할 수 있다. Identity, Delegation, Approval의 구체적인 설계는 Part V에서 다룬다.
 
 ## Protocol Authorization과 Application Policy
 
