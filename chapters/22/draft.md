@@ -6,7 +6,7 @@ Planner Agent, Research Agent, Coding Agent, Reviewer Agent, Security Agent를 �
 
 역할은 깔끔해 보인다.
 
-하지만 실제로는 새로운 문제가 생긴다.
+하지만 새로운 문제가 생긴다.
 
 어떤 State를 누구에게 넘길지 정해야 하고, 같은 Context를 여러 번 복제하고, Agent 사이에 다른 사실이 생기고, 실패 원인을 찾기 어려워진다.
 
@@ -132,7 +132,7 @@ Deploy Agent
 
 하지만 Agent가 많아졌다는 이유만으로 권한이 줄어드는 것은 아니다.
 
-실제 Authorization System에서 Scope를 분리해야 한다.
+Authorization System에서 Scope를 분리해야 한다.
 
 ## Independent Reviewer
 
@@ -197,7 +197,7 @@ Multi-Agent Architecture는 이 비용보다 분리 이득이 커야 한다.
 Context를 분리하면 명확한 이득이 있는가?
 Permission을 분리해야 하는가?
 독립 검증이 필요한가?
-실제로 병렬 가능한가?
+병렬 가능한가?
 역할별 Tool Surface가 크게 다른가?
 ~~~
 
@@ -240,7 +240,7 @@ More Agents
 
 성숙한 시스템이 하나의 Agent만 사용할 수도 있다.
 
-중요한 것은:
+판단 기준:
 
 - Boundary
 - State
@@ -266,7 +266,7 @@ Parallel Work
 Specialization
 ~~~
 
-다음 장에서는 Multi-Agent를 실제로 연결하는 두 패턴을 구분한다.
+다음 장에서는 Multi-Agent를 연결하는 두 패턴을 구분한다.
 
 Agent를 Tool처럼 호출하는 경우와, Work Ownership 자체를 넘기는 Handoff는 같은 구조가 아니다.
 
