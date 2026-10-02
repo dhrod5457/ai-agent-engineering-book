@@ -368,5 +368,5 @@ External State Reconciliation을 다룬다.
 - Anthropic, Harness Design for Long-running Application Development
 - OSWorld 2.0
 - Task-State Horizon research
-- research/topics/04-harness-long-running.md
+- research/topics/04-harness-Long-running.md
 - research/topics/13-long-horizon-computer-use.md
