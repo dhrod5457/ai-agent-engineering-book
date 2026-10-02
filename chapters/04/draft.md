@@ -149,7 +149,7 @@ Model에게 Event History 전체를 매 Turn 넣을 필요는 없다.
 
 단순 Agent에서는 Context를 문자열을 이어 붙여 만들 수 있다.
 
-Production Agent에서는 여러 Source를 조합하게 된다.
+운영 Agent에서는 여러 Source를 조합하게 된다.
 
 예:
 
@@ -219,7 +219,7 @@ Read Specific Config
 
 이 방식의 장점은 단순 Token 절감이 아니다.
 
-Agent가 실제로 무엇을 필요로 했는지 Trace로 남기기 쉽다.
+Agent가 무엇을 필요로 했는지 Trace로 남기기 쉽다.
 
 또 Repository가 커져도 Context 크기를 상대적으로 제어하기 쉽다.
 
