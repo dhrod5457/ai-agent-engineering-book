@@ -14,7 +14,7 @@ Compaction을 추가했다.
 
 이전 실수를 반복해서 Memory를 추가했다.
 
-몇 달 뒤 Harness에는 많은 Component가 있지만 어떤 것이 실제로 필요한지 아무도 모른다.
+몇 달 뒤 Harness에는 많은 Component가 있지만 어떤 것이 필요한지 아무도 모른다.
 
 Agent Harness에도 Debt가 생긴다.
 
@@ -55,7 +55,7 @@ Model
 
 여기에 Component를 하나씩 추가한다.
 
-Baseline 자체가 복잡하면 어떤 Scaffold가 실제로 기여했는지 알기 어렵다.
+Baseline 자체가 복잡하면 어떤 Scaffold가 기여했는지 알기 어렵다.
 
 ## Component Inventory
 
