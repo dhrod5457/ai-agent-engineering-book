@@ -303,7 +303,7 @@ Security 91%
 Long-horizon 48%
 ~~~
 
-이 Agent는 Short Task에는 강하지만 Long-running에는 약하다.
+이 Agent는 Short Task에는 강하지만 Long-running Task에는 약하다.
 
 Capability별 Slice가 필요한 이유다.
 
