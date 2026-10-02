@@ -6,7 +6,7 @@ Agent에게 다음 Instruction을 줬다고 하자.
 
 좋은 규칙이다.
 
-하지만 실제 File System에는 사용자의 SSH Key와 Cloud Credential, 다른 Project Source가 Mount돼 있다.
+하지만 호스트 File System에는 사용자의 SSH Key와 Cloud Credential, 다른 Project Source가 Mount돼 있다.
 
 Agent가 Prompt Injection에 속거나 Tool Bug가 생기면 Instruction만으로 Access를 막기 어렵다.
 
@@ -185,7 +185,7 @@ Container는 Process/Filesystem/Resource Isolation에 익숙한 도구다.
 - AppArmor/SELinux
 - namespace
 
-"Container를 쓴다"보다 실제 Isolation Policy가 중요하다.
+"Container를 쓴다"보다 적용된 Isolation Policy가 중요하다.
 
 ## gVisor
 
@@ -365,7 +365,7 @@ required
 
 Sandbox는 Agent에게 "하지 마라"고 말하는 기능이 아니다.
 
-잘못 행동했을 때도 실제로 갈 수 없는 경계를 만드는 기능이다.
+잘못 행동했을 때도 접근할 수 없는 경계를 만드는 기능이다.
 
 ~~~text
 Instruction
