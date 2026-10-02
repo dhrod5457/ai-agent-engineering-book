@@ -6,7 +6,7 @@
 
 목표는 Agent Framework 기능을 나열하는 것이 아니라 다음 경계를 검증하는 것이다.
 
-> Model / Instruction / Context / Tool / Harness / Runtime / State / Identity / Security / Eval / Orchestration은 각각 무엇을 책임하고 어디서 분리되어야 하는가?
+> Model / Instruction / Context / Tool / Harness / Runtime / State / Memory / Identity / Security / Eval / Orchestration은 각각 무엇을 책임하고 어디서 분리되어야 하는가?
 
 ## 조사 구조
 
@@ -45,15 +45,20 @@ Evaluation Method
 - topics/14-coding-agent-harness-comparison.md: Claude Code, Codex, SWE-agent 공통 harness 패턴
 - topics/15-eval-ci-regression.md: trace → eval → regression → promotion loop
 - topics/16-benchmark-versioning-measurement.md: benchmark versioning과 measurement hygiene
+- topics/17-memory-security-write-policy.md: memory poisoning, write gate, retrieval security
+- topics/18-durable-state-event-log-replay.md: event history, checkpoint, replay, idempotency
+- topics/19-delegated-agent-identity-zero-trust.md: agent identity, delegation, actor chain
+- topics/20-risk-adaptive-containment-policy.md: task risk별 sandbox/policy와 권한 확장
+- topics/21-external-state-reconciliation.md: source refresh, version, reconciliation
+- topics/22-harness-ablation-and-minimalism.md: harness ablation, scaffold debt, minimal baseline
 - synthesis/agent-engineering-reference-model.md: 1차 reference model v0.1
-- synthesis/agent-engineering-reference-model-v0.2.md: 2차 조사 반영 reference model
+- synthesis/agent-engineering-reference-model-v0.2.md: 2차 reference model
+- synthesis/agent-engineering-reference-model-v0.3.md: 3차 reference model / Agent State Plane
 - meta/methodology.md: 조사와 근거 관리 방법
 
 ## 현재 결론
 
-Agent를 단순히 LLM + Tool로 정의하는 것은 부족하다.
-
-현재 가장 설명력이 높은 구조는 다음과 같다.
+3차 조사에서는 **Agent State Plane**이 책의 중심 개념 후보로 구체화됐다.
 
 ~~~text
 Identity / Delegation
@@ -63,30 +68,48 @@ Agent Definition
 Context Engine
         ↓
 Agent Harness
-        ↔ State Plane
+        ↔
+Agent State Plane
+        │
+        ├─ Event History
+        ├─ Checkpoint / Snapshot
+        ├─ Goal / Progress
+        ├─ Artifact
+        ├─ Approval
+        ├─ External Source Version
+        └─ Memory Reference
         ↓
-Tool / Capability Gateway
+Capability / Policy Gateway
         ↓
 Execution Runtime
         ↓
 External World
-
-Cross-cutting:
-Trace / Audit / Eval / Security Policy
 ~~~
 
-특히 2차 조사에서 State를 하나의 저장소로 보면 안 된다는 점이 명확해졌다.
+핵심 경계:
 
 ~~~text
 Context
-≠ Session
-≠ Workspace
+≠ Durable State
+
+Session
 ≠ Goal
-≠ Artifact
-≠ Long-term Memory
-≠ External Source of Truth
+
+Workspace
+≠ Memory
+
+Memory
+≠ Source of Truth
+
+Replay
+≠ Side-effect Re-execution
+
+Agent State Plane
+≠ Software Factory Control Plane
 ~~~
 
-또한 long-horizon Agent에서는 단순 context 확대보다 state refresh, reconciliation, milestone, verification reserve가 중요하다.
+Persistent Memory는 자동 write bucket으로 두지 않는다. Memory write를 privileged side effect로 보고 provenance, scope, security, contradiction, lifecycle을 거쳐 Accept / Review / Quarantine한다.
 
-Multi-agent는 여전히 선택적 상위 구조로 본다. Single-agent의 tool boundary, state, runtime, identity, eval이 먼저 성립해야 한다.
+Long-horizon Agent는 internal state만 믿지 않고 irreversible action, resume, handoff, completion 전에 authoritative external source를 refresh/reconcile해야 한다.
+
+Multi-agent는 여전히 선택적 상위 구조다. 먼저 single-agent의 State Plane, identity, policy, runtime, verification이 성립해야 한다.
