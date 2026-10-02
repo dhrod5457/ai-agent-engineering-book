@@ -336,27 +336,9 @@ B:
 Executor + Evaluator
 ~~~
 
-각각 50회 반복했다고 하자.
+반복 실행에서 Success 차이는 거의 없는데 Planner가 Latency와 Cost를 일관되게 늘린다고 하자. 이 경우 Planner가 현재 Model과 Task Distribution에서 Load-bearing Component인지 다시 검토할 수 있다.
 
-결과:
-
-~~~text
-Long-horizon Success
-A 82%
-B 83%
-
-Latency
-A +28%
-
-Cost
-A +25%
-~~~
-
-이 조건이라면 Planner가 Load-bearing Component인지 의심할 수 있다.
-
-물론 Dataset과 Variance를 확인해야 한다.
-
-한 번의 결과만으로 제거하지 않는다.
+다만 Dataset과 run-to-run variance를 함께 확인해야 한다. 한 번의 결과만으로 제거하지 않는다.
 
 ## Component가 해결한 Failure를 기록한다
 
