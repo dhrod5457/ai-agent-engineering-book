@@ -168,16 +168,7 @@ Long Context만 늘리는 것으로 해결하지 않는다.
 
 ## 10단계: Multi-Agent
 
-Single-Agent Baseline이 안정된 후:
-
-- Context Isolation
-- Permission Isolation
-- Independent Review
-- Parallel Work
-
-이득이 명확할 때 추가한다.
-
-Agent 수를 먼저 늘리지 않는다.
+Single-Agent Baseline이 안정된 뒤에도 Context·Permission 분리, 독립 검증, 병렬화에서 명확한 이득이 있을 때만 Multi-Agent를 추가한다. 판단 기준 자체는 22장에서 다뤘으므로 여기서는 확장 순서의 마지막 선택지로만 둔다.
 
 ## 확장 순서의 한 예
 
