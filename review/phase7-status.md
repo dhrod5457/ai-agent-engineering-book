@@ -65,3 +65,16 @@ Agent State Plane ≠ Factory Control Plane
 
 ### 4. Manuscript Assembly
 최종 review 후 chapter draft를 하나의 manuscript 구조로 조립한다.
+
+
+## 후속 완료
+
+- Terminology Review: PASS
+- Cross-chapter Deduplication: PASS
+- Evidence / Citation Review: PASS
+- Source Catalog: 완료
+- Freshness Gate Index: 완료
+- Manuscript Assembly v0.1: 완료
+- Assembly Validation: PASS
+
+현재 다음 작업은 claim-level Source Note 삽입이다.
