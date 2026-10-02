@@ -178,7 +178,7 @@ uncertainties
 recommended_next_action
 ~~~
 
-"검토 완료"만 반환하면 Manager가 실제 내용을 알 수 없다.
+"검토 완료"만 반환하면 Manager가 검토 내용을 알 수 없다.
 
 ## Independent Verifier
 
@@ -193,7 +193,7 @@ Verifier
 → PASS / FAIL + evidence
 ~~~
 
-하지만 독립성이 실제로 있어야 한다.
+하지만 독립성이 구조적으로 보장돼야 한다.
 
 가능하면 Verifier가:
 
