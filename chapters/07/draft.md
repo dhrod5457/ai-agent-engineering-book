@@ -127,9 +127,9 @@ Workspace Exists
 ≠ Durable State Exists
 ~~~
 
-AWS AgentCore 같은 Runtime 사례도 Session별 격리 환경을 제공하지만 그 Runtime State를 장기 durability와 동일하게 취급하지 않는다.
+AWS AgentCore 같은 Runtime 사례도 Session별 격리 환경을 제공한다. 기본 microVM의 memory와 local disk는 compute lifecycle에 묶이지만, 2026-10-02 기준 별도 managed session storage를 구성하면 stop/resume 사이에 filesystem을 복원할 수 있다. 다만 이 storage도 session lifecycle과 runtime version에 제약을 받으므로 Goal, Approval, Long-term Memory 같은 Durable State와 동일하게 취급하지 않는다.
 
-Workspace는 사라져도 다시 만들 수 있게 설계하는 편이 복구에 유리하다.
+따라서 Workspace가 유지될 수 있더라도 실행 연속성의 유일한 근거로 삼지 않는 편이 복구에 유리하다.
 
 ## Goal / Task State
 
