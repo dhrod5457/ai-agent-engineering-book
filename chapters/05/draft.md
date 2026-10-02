@@ -87,9 +87,9 @@ Action Space가 좁아진다.
 
 모델 자유도는 줄지만 성공 조건과 Policy를 명확하게 만들 수 있다.
 
-어느 쪽이 항상 옳은 것은 아니다.
+어느 쪽이 항상 옳은 것은 아니다. Tool을 지나치게 세분화하면 호출 수와 조합 비용이 늘고, 반대로 지나치게 넓히면 선택과 검증 비용이 커진다.
 
-중요한 것은 Tool Surface의 폭이 Trade-off라는 점이다.
+핵심은 Tool Surface의 폭 자체가 Trade-off라는 점이다.
 
 ## Capability Boundary를 먼저 정한다
 
@@ -507,7 +507,7 @@ Model이 사용하는 Product Interface다.
 - Security
 - Evaluation
 
-Tool Design이 좋지 않으면 Model을 업그레이드해도 일정한 실패가 남을 수 있다.
+Tool Design이 좋지 않으면 Model을 업그레이드해도 같은 종류의 실패가 남을 수 있다.
 
 ## 이 장에서 가져갈 것
 
