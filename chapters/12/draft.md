@@ -285,7 +285,7 @@ query
 → top-k memories
 ~~~
 
-하지만 Production Agent에서는 Retrieval 자체가 Policy Decision일 수 있다.
+하지만 운영 Agent에서는 Retrieval 자체가 Policy Decision일 수 있다.
 
 다음 질문이 필요하다.
 
@@ -388,7 +388,7 @@ Memory를 추가하면 과거 경험을 재사용할 수 있다.
 - retrieval cost
 - conflict resolution
 
-그래서 Memory는 기본 Component가 아니라 실제 필요가 있을 때 추가하는 편이 낫다.
+그래서 Memory는 기본 Component가 아니라 필요가 확인될 때 추가하는 편이 낫다.
 
 ~~~text
 No Memory
