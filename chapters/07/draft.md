@@ -385,23 +385,9 @@ Workspace는 실제 변경을 담지만 Execution Intent를 설명하지 않는�
 
 ## Memory를 Source of Truth로 사용하면 생기는 문제
 
-Memory는 과거의 압축된 정보다.
+Memory는 과거 정보를 재사용하기 위한 내부 데이터이고, External Source of Truth는 현재의 Canonical Data다. 둘이 충돌하면 기본적으로 최신 Authoritative Source를 다시 확인해야 한다.
 
-Source of Truth는 현재의 Canonical Data다.
-
-이 둘의 충돌에서 기본 원칙은 다음과 같다.
-
-~~~text
-Current Authoritative Source
-        >
-Stale Internal Memory
-~~~
-
-물론 Source 자체가 신뢰할 수 없는 경우도 있다.
-
-그때는 Authority Ranking과 Reconciliation Rule이 필요하다.
-
-하지만 "Memory가 있으니 다시 조회하지 않는다"는 기본값은 위험하다.
+이 원칙의 운영 측면은 11장의 Reconciliation에서, Memory 자체의 lifecycle과 security는 Part IV에서 자세히 다룬다.
 
 ## 작은 예: Coding Agent의 State
 
