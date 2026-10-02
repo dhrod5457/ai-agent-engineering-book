@@ -2,7 +2,7 @@
 
 이 책은 Model 이야기로 시작했다.
 
-같은 Model을 사용해도 Agent의 실제 능력은 달라질 수 있다고 했다.
+같은 Model을 사용해도 Agent Capability는 달라질 수 있다고 했다.
 
 마지막까지 오면 그 이유가 분명해진다.
 
@@ -22,7 +22,7 @@ Model
 + Eval
 ~~~
 
-이 구성요소가 함께 실제 행동을 만든다.
+이 구성요소가 함께 행동을 만든다.
 
 ## Model은 계속 바뀐다
 
@@ -101,7 +101,7 @@ Model이 잘못 판단해도 피해 범위를 줄인다.
 
 Agent가 "완료했습니다"라고 말하는 것은 Completion Claim이다.
 
-실제 Completion은 다른 문제다.
+Completion은 다른 문제다.
 
 ~~~text
 Claim
@@ -134,7 +134,7 @@ Agent State Plane
 = execution continuity
 ~~~
 
-조직에서 Agent를 실제 생산 시스템으로 운영하기 시작하면 상위 문제가 생긴다.
+조직에서 Agent를 생산 시스템으로 운영하기 시작하면 상위 문제가 생긴다.
 
 ~~~text
 Which work should run?
@@ -181,7 +181,7 @@ Agent에게 일을 맡긴다는 것은 Model을 완전히 신뢰한다는 뜻이
 
 오히려 반대에 가깝다.
 
-불확실한 판단을 하는 Component를 실제 시스템 안에 넣되:
+불확실한 판단을 하는 Component를 운영 시스템 안에 넣되:
 
 - 권한을 제한하고
 - 상태를 보존하고
