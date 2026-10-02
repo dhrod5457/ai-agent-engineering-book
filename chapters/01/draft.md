@@ -24,7 +24,7 @@ LLM을 사용할 때 가장 눈에 잘 띄는 변화는 모델 성능이다. 새
 delete_file("/tmp/build/result.json")
 ~~~
 
-실제 Agent 시스템에서는 그 뒤에 더 많은 일이 일어난다.
+Agent 시스템에서는 그 뒤에 더 많은 일이 일어난다.
 
 - 이 Tool을 현재 Agent가 사용할 권한이 있는가.
 - 경로가 허용된 Sandbox 안에 있는가.
@@ -81,7 +81,7 @@ Model이 외부 환경을 관찰하고 Action을 선택하며 결과를 다시 �
 
 하지만 production에서 사용할 Agent는 이 반복만으로 충분하지 않다.
 
-실제 시스템에는 적어도 다음 질문이 생긴다.
+운영 시스템에서는 적어도 다음 질문이 생긴다.
 
 ~~~text
 언제 멈출 것인가?
@@ -101,7 +101,7 @@ Agent를 둘러싼 실행 시스템의 문제다.
 
 ## Agent Capability를 구성하는 것
 
-이 책에서는 Agent Capability를 다음과 같은 함수로 생각한다.
+Agent Capability는 다음과 같은 함수로 생각할 수 있다.
 
 ~~~text
 Agent Capability
@@ -344,7 +344,7 @@ Agent 시스템을 만들 때 눈에 잘 띄는 기능부터 추가하기 쉽다
 
 하지만 production에서 더 먼저 필요한 것은 대개 Control과 Verification이다.
 
-이 책에서는 최소 Agent를 다음처럼 시작한다.
+최소 Agent는 다음처럼 시작할 수 있다.
 
 ~~~text
 Model
@@ -404,7 +404,7 @@ Software Factory Control Plane
 
 Model과 Agent를 같은 것으로 보면 실패 원인을 잘못 찾기 쉽다.
 
-Agent가 실제로 일을 끝내는 능력은 Model뿐 아니라 Context, Tool, Harness, State, Runtime, Identity, Verification이 함께 만든다.
+Agent가 일을 끝내는 능력은 Model뿐 아니라 Context, Tool, Harness, State, Runtime, Identity, Verification이 함께 만든다.
 
 따라서 Agent Engineering의 첫 질문은 "어떤 모델을 쓸 것인가"가 아니다.
 
