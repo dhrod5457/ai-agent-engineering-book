@@ -83,11 +83,16 @@
 ## 11장. External State Reconciliation
 주요 근거:
 - topics/21-external-state-reconciliation.md
+- research/targeted/11-external-state-reconciliation.md
 - OSWorld 2.0
+- From Version Conflicts to Decision Conflicts
+- Task-State Horizon research
+- AgentRewind
 - optimistic concurrency patterns
 
-주의:
-- reconciliation capability 자체 benchmark는 추가 조사 여지 있음.
+핵심 보강:
+- version conflict와 decision conflict를 분리
+- selective revalidation과 CAS/transaction commit
 
 ## 12장. Agent Memory의 실제 경계
 주요 근거:
@@ -130,11 +135,15 @@
 ## 17장. Risk-adaptive Policy
 주요 근거:
 - topics/20-risk-adaptive-containment-policy.md
+- research/targeted/17-risk-adaptive-policy.md
+- AWS Agentic AI Lens
+- AWS Cedar multi-agent authorization
 - OpenShell Policy
 - Claude Code Auto Mode
 
 주의:
 - R0~R4는 illustrative synthesis이며 외부 표준이 아니다.
+- risk-tiered approval, user-context propagation, external tool authorization 근거 확보.
 
 ## 18장. Trace 없이는 Agent를 디버깅할 수 없다
 주요 근거:
@@ -161,8 +170,15 @@
 ## 21장. Harness Ablation과 Debt
 주요 근거:
 - topics/22-harness-ablation-and-minimalism.md
+- research/targeted/21-harness-ablation.md
 - Anthropic Harness Design
-- Agent Eval practices
+- Anthropic Managed Agents
+- Automated Alignment Researchers harness ablation
+- AuditBench
+
+핵심 보강:
+- repeated trials와 run-to-run variance
+- capability-specific component value
 
 ## 22장. Single-Agent First
 주요 근거:
@@ -189,14 +205,21 @@
 
 # Coverage Summary
 
-현재 25개 장 모두 최소 하나 이상의 1차 또는 공식 source group을 갖는다.
+현재 25개 장 모두 Chapter Plan과 최소 하나 이상의 1차 또는 공식 source group을 갖는다.
 
-보강 우선순위가 높은 장:
+기존 보강 우선순위였던 11장, 17장, 21장도 targeted research를 완료했다.
 
-1. 11장 External State Reconciliation
-2. 17장 Risk-adaptive Policy
-3. 21장 Harness Ablation
+현재 상태:
 
-이 세 장은 외부 표준보다 현재 synthesis 비중이 높으므로 초고 전에 targeted research를 한 번 더 수행한다.
+~~~text
+Broad Research       완료
+Concept              완료
+Scope                완료
+TOC v0.1             완료
+Chapter Evidence     완료
+Chapter Plan 1~25    완료
+Epilogue Plan        완료
+Targeted Research    11 / 17 / 21 완료
+~~~
 
-나머지 장은 현재 evidence로 chapter plan 작성 가능하다.
+따라서 Part I부터 Draft 단계로 진입 가능하다.
