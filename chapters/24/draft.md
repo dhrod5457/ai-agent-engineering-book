@@ -10,6 +10,8 @@
 
 A2A는 이런 독립 Agent System 사이의 상호운용 문제를 다룬다.
 
+2026-10-02 기준 A2A의 최신 정식 Specification은 1.0.0이다. 이 장에서는 버전별 JSON 표현보다 1.0에서도 유지되는 Agent Card, Message, Task, Artifact, Authorization의 책임 경계에 집중한다.
+
 ## Remote Agent는 Tool과 다르다
 
 Tool은 bounded capability를 제공한다.
@@ -169,7 +171,7 @@ Authorization
 = can this caller use it
 ~~~
 
-Remote Agent Server가 최종 Access Policy를 강제해야 한다.
+Remote Agent Server가 최종 Access Policy를 강제해야 한다. A2A 1.0의 AUTH_REQUIRED 상태 자체도 특정 Action을 승인했다는 뜻은 아니며, 실제 Authorization Scope와 Credential 의미는 구현이나 Credential Issuer가 별도로 정의해야 한다.
 
 ## Async Work
 
@@ -293,7 +295,7 @@ A2A는 independent Agent System 간 Collaboration Boundary다.
 
 ## 주요 근거
 
-- A2A Protocol Specification
+- A2A Protocol Specification 1.0.0 (2026-10-02 기준)
 - MCP 2026-07-28
 - research/topics/12-mcp-a2a-task-boundary.md
 - research/topics/07-multi-agent-interoperability.md
