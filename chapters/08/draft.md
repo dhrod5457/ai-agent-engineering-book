@@ -181,7 +181,7 @@ Progress를 Model의 자유 텍스트 Summary만으로 관리하지 않는 이�
 
 물론 Progress 자체도 틀릴 수 있다.
 
-그래서 실제 Artifact와 Verification Result를 함께 연결한다.
+그래서 Artifact와 Verification Result를 함께 연결한다.
 
 ## Artifact Index
 
@@ -204,7 +204,7 @@ Artifact Exists
 ≠ Artifact Verified
 ~~~
 
-OSWorld 2.0 같은 Long-horizon 사례에서도 파일이 존재한다는 사실을 실제 결과 정확성으로 오해하는 실패가 관찰된다.
+OSWorld 2.0 같은 Long-horizon 사례에서도 파일이 존재한다는 사실을 결과의 정확성으로 오해하는 실패가 관찰된다.
 
 ## Approval State
 
@@ -411,7 +411,7 @@ Factory Control Plane
 - delivery
 ~~~
 
-실제 시스템에서는 두 계층이 연결될 수 있다.
+운영 시스템에서는 두 계층이 연결될 수 있다.
 
 하지만 개념적으로 분리해야 책임이 명확해진다.
 
@@ -478,7 +478,7 @@ Agent State Plane은 이 책의 중심 개념이다.
 
 Responsibility Boundary다.
 
-다음 장에서는 State Plane이 실제 Failure Recovery에 어떻게 사용되는지 다룬다.
+다음 장에서는 State Plane이 Failure Recovery에 어떻게 사용되는지 다룬다.
 
 특히 Replay를 "모든 것을 다시 실행하는 것"으로 오해하면 어떤 문제가 생기는지, External Side Effect를 중복 없이 복구하려면 무엇이 필요한지 살펴본다.
 
