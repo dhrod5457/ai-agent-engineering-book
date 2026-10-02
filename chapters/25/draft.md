@@ -32,7 +32,7 @@ Model
 + Trace
 ~~~
 
-이 구조가 실제 Task를 끝낼 수 있는지 먼저 본다.
+이 구조가 Task를 끝낼 수 있는지 먼저 본다.
 
 ## 1단계: Clear Tool Contract
 
@@ -98,7 +98,7 @@ artifact correct?
 
 ## 5단계: Eval
 
-실제 실패를 모아 Regression Case를 만든다.
+운영 실패를 모아 Regression Case를 만든다.
 
 ~~~text
 Failure
@@ -139,7 +139,7 @@ Risk가 올라갈수록 Control을 강화한다.
 
 ## 8단계: Memory
 
-반복 Task에서 실제 이득이 확인될 때 추가한다.
+반복 Task에서 이득이 확인될 때 추가한다.
 
 Memory를 넣기 전 질문:
 
@@ -376,7 +376,7 @@ Can it prove completion?
 
 Agent Engineering의 목표는 Agent를 최대한 자유롭게 만드는 것이 아니다.
 
-필요한 자유를 주면서도 실제 업무를 맡길 수 있는 구조를 만드는 것이다.
+필요한 자유를 주면서도 업무를 맡길 수 있는 구조를 만드는 것이다.
 
 이 책의 마지막에는 하나의 원칙이 남는다.
 
