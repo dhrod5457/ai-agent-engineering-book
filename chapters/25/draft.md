@@ -17,7 +17,7 @@
 
 오히려 그렇게 시작하면 Agent를 만들기 전에 Platform부터 만들어질 수 있다.
 
-Production Agent의 출발점은 더 작게 잡을 수 있다.
+운영 Agent의 출발점은 더 작게 잡을 수 있다.
 
 ## Minimum Viable Agent
 
@@ -362,7 +362,7 @@ Regression Eval이 있는가?
 
 ## 이 장에서 가져갈 것
 
-Production Agent는 기능 수로 정의되지 않는다.
+운영 Agent는 기능 수로 정의되지 않는다.
 
 더 중요한 것은 다음이다.
 
