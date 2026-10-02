@@ -291,45 +291,13 @@ Runtime
 
 ## Agent State Plane
 
-이 책에서 중요한 개념 하나를 미리 소개한다.
+장시간 작업에서는 현재 Goal과 Progress, 이미 실행한 Action, 생성한 Artifact, Pending Approval을 잃지 않아야 한다.
 
-장시간 작업에서는 Agent가 다음 정보를 잃지 않아야 한다.
+이 책에서는 이런 **한 Agent 실행의 연속성**을 담당하는 계층을 Agent State Plane이라고 부른다. 외부 표준 명칭이 아니라 여러 구현과 연구에서 반복되는 책임을 설명하기 위한 synthesis다.
 
-- 현재 Goal
-- 어디까지 진행했는가
-- 어떤 Tool이 이미 실행됐는가
-- 어떤 Artifact가 만들어졌는가
-- 어떤 Approval을 기다리고 있는가
-- 어떤 외부 Source Version을 기준으로 판단했는가
+핵심은 Context와 Durable State를 분리하는 것이다. 모델이 현재 Context에서 어떤 정보를 잊더라도 시스템까지 상태를 잃어서는 안 된다.
 
-이 책에서는 이런 실행 연속성을 담당하는 계층을 **Agent State Plane**이라고 부른다.
-
-이 표현은 업계 표준 명칭이 아니라 이 책이 여러 구현과 연구를 설명하기 위해 사용하는 synthesis다.
-
-~~~text
-Agent State Plane
-- Event History
-- Checkpoint
-- Goal / Progress
-- Artifact
-- Approval State
-- Source Version
-- Memory Reference
-~~~
-
-중요한 점은 이것이 Context와 다르다는 것이다.
-
-~~~text
-State Plane
-   ↓ 필요한 정보만 Projection
-Context Engine
-   ↓
-Model
-~~~
-
-모델이 모든 State를 항상 볼 필요는 없다.
-
-반대로 모델이 현재 Context에서 잊었다고 해서 시스템까지 상태를 잃어서는 안 된다.
+구성과 Recovery 방식은 Part III에서 자세히 다룬다.
 
 ## 더 많은 자율성이 먼저는 아니다
 
