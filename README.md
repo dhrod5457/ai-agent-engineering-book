@@ -17,7 +17,7 @@ Phase 3 Scope          완료
 Phase 4 TOC            v0.1 완료
 Phase 5 Chapter Plan   완료
 Phase 6 Draft          완료
-Phase 7 Review         준비
+Phase 7 Review         Part I~II Line Review 완료
 ~~~
 
 Broad Research는 종료하고, 이후에는 장별 초고에 필요한 Targeted Research만 추가합니다.
@@ -133,11 +133,12 @@ Part VII Multi-Agent와 Production Boundary
 
 ## 다음 단계
 
-1. Phase 7 Line Review — Part I~II
-2. Cross-chapter Deduplication
-3. Terminology Review
-4. Evidence / Citation Review
-5. Publication-time Freshness Audit
-6. Manuscript Assembly
+1. Line Review — Part III
+2. Line Review — Part IV~V
+3. Line Review — Part VI~VII + Epilogue
+4. Terminology / Cross-chapter Deduplication
+5. Evidence / Citation Review
+6. Publication-time Freshness Audit
+7. Manuscript Assembly
 
 기준일: 2026-10-02
