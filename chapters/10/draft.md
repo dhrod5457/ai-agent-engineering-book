@@ -62,7 +62,7 @@ Agent는 여러 Item의 State를 동시에 유지해야 한다.
 
 이런 문제는 단일 대화 Memory만으로 안정적으로 관리하기 어렵다.
 
-## OSWorld 2.0이 보여주는 문제
+## OSWorld 2.0에서 드러나는 문제
 
 2026년 OSWorld 2.0은 기존 Desktop Agent Benchmark보다 훨씬 긴 Workflow를 포함한다.
 
@@ -164,18 +164,16 @@ Agent는 Source Registry와 Discovery Strategy가 필요할 수 있다.
 
 ~~~text
 Discovery
-max 15% budget
+→ 필요한 범위에서 제한
 
 Execution
-min 60% budget reserve
+→ 핵심 작업에 충분한 budget 확보
 
 Verification
-min 20% budget reserve
+→ 마지막까지 별도 reserve 유지
 ~~~
 
-이 숫자는 표준이 아니다.
-
-핵심은 전체 Budget뿐 아니라 Phase별 Resource를 의식하는 것이다.
+구체적인 비율은 Task와 비용 구조에 따라 달라진다. 핵심은 전체 Budget만 두지 말고 탐색, 실행, 검증이 서로의 자원을 소진하지 않게 관리하는 것이다.
 
 ## Verification Reserve
 
@@ -290,9 +288,9 @@ Long-running Agent가 실패하는 전형적인 패턴이다.
 
 Task에서 중요한 State가 얼마나 오래 유지돼야 하고, 얼마나 많은 Transition을 거쳐 마지막 Decision까지 영향을 주는가도 중요하다.
 
-최근 연구에서는 이런 관점을 Task-State Horizon으로 설명하려는 시도가 있다.
+2026년 공개된 preprint에서는 이런 관점을 Task-State Horizon으로 정의하고 별도 benchmark로 측정하려는 시도가 있다.
 
-이 개념은 아직 표준 Metric이 아니다.
+아직 일반적인 표준 Metric은 아니다.
 
 하지만 "Step이 많다"보다 "오래된 State Dependency를 얼마나 오래 정확히 유지해야 하는가"를 보는 관점은 Agent 설계에 유용하다.
 
