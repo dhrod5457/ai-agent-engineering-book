@@ -15,8 +15,8 @@ Phase 1 Research       1~3차 broad research 완료
 Phase 2 Concept        완료
 Phase 3 Scope          완료
 Phase 4 TOC            v0.1 완료
-Phase 5 Chapter Plan   준비
-Phase 6 Draft          미착수
+Phase 5 Chapter Plan   완료
+Phase 6 Draft          준비
 ~~~
 
 Broad Research는 종료하고, 이후에는 장별 초고에 필요한 Targeted Research만 추가합니다.
@@ -132,10 +132,10 @@ Part VII Multi-Agent와 Production Boundary
 
 ## 다음 단계
 
-1. 장별 Chapter Plan 작성
-2. 11장 External State Reconciliation targeted research
-3. 17장 Risk-adaptive Policy targeted research
-4. 21장 Harness Ablation targeted research
-5. Part I부터 Draft 시작
+1. Part I 1~3장 Draft 작성
+2. Part I 내부 용어·중복 검토
+3. Part II Draft 진행
+4. 각 장 집필 중 필요한 Targeted Research만 추가
+5. Part 단위 Structural Review
 
 기준일: 2026-10-02
