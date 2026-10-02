@@ -320,7 +320,7 @@ Stale Client View
 
 ## MCP가 Agent Architecture를 단순화하는 지점
 
-MCP의 가장 큰 장점은 Agent와 External Capability의 결합도를 줄일 수 있다는 점이다.
+MCP는 Agent와 External Capability의 결합도를 줄이는 데 사용할 수 있다.
 
 ~~~text
 Before
@@ -342,9 +342,9 @@ Agent C ─┘
 
 각 Agent와 User의 Authorization Context는 별도로 유지해야 한다.
 
-## MCP Server를 Trust Boundary로 본다
+## MCP Server는 Enforcement Point가 될 수 있다
 
-MCP Server는 Agent와 External System 사이에서 중요한 위치에 있다.
+MCP Server는 Agent와 External System 사이에서 중요한 Enforcement Point가 될 수 있다. 다만 모든 Policy가 반드시 MCP Server 하나에 모여야 한다는 뜻은 아니다.
 
 가능한 책임:
 
