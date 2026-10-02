@@ -228,24 +228,9 @@ Baseline + Planner
 
 ## Component Record
 
-Harness가 커지면 각 Component의 존재 이유를 기록하는 것이 좋다.
+Harness가 커지면 각 Component가 어떤 Failure 때문에 들어왔고, 어떤 Eval이 효과를 확인했으며, 마지막으로 어느 Model에서 검증됐는지 기록하는 편이 좋다.
 
-예:
-
-~~~text
-component: progress_artifact
-introduced_for: premature_completion
-expected_effect: improve_long_horizon_completion
-eval_cases: LH-012, LH-019, LH-031
-introduced_model: model-A
-last_verified_model: model-C
-owner: agent-platform
-removal_candidate: false
-~~~
-
-이런 Metadata는 나중에 Model Upgrade Audit에서 유용하다.
-
-"왜 이 코드가 있는가"를 Commit History에서 추측하지 않아도 된다.
+이 기록은 Model Upgrade 때 제거 후보를 찾고 "왜 이 Component가 존재하는가"를 Commit History에서 다시 추측하는 비용을 줄인다. 구체적인 Record와 Ablation 절차는 21장에서 다룬다.
 
 ## Harness와 State를 분리한다
 
