@@ -113,9 +113,7 @@ Protocol Object와 Domain Object를 분리한다.
 
 ## 2026-07-28의 Stateless Core
 
-2026년 7월 MCP Specification 변화에서 중요한 방향 중 하나는 Protocol Core를 Stateless하게 단순화한 것이다.
-
-Protocol-level Session에 의존하는 대신 각 Request가 더 self-describing한 구조로 이동했다.
+2026-07-28 MCP base specification은 final 상태이며, 이 revision의 중요한 변화 중 하나는 protocol core를 stateless하게 만든 것이다. 기존처럼 protocol-level session에 의존하기보다 각 request가 필요한 protocol/client context를 함께 전달하는 방향으로 바뀌었다.
 
 이 변화가 주는 설계상 교훈은 명확하다.
 
@@ -155,7 +153,7 @@ G-102와 R-77은 서로 다른 Lifecycle을 가질 수 있다.
 - External Job
 - Batch Processing
 
-MCP의 Task 확장은 이런 Long-running Capability Invocation을 표현하는 데 사용될 수 있다.
+MCP의 Tasks는 이런 Long-running Capability Invocation을 표현하기 위한 별도 extension이다. 2026-10-02 기준 base protocol revision은 final이지만 Tasks extension 문서는 Draft로 표시돼 있으므로, core protocol과 같은 안정성 수준으로 취급하지 않는다.
 
 개념적으로:
 
@@ -230,13 +228,7 @@ Authorization
 = 현재 Principal이 그 Action을 실행할 수 있는가
 ~~~
 
-Protocol 수준의 인증과 별개로 Application은 현재 Goal과 User/Agent Scope에 더 좁은 Policy를 적용할 수 있다. Identity, Delegation, Approval의 구체적인 설계는 Part V에서 다룬다.
-
-## Protocol Authorization과 Application Policy
-
-Protocol 수준의 Authentication/Authorization이 있어도 Application Policy는 남는다.
-
-예를 들어 Agent가 GitHub MCP Server에 정상적으로 인증됐다고 하자.
+Protocol 수준의 Authentication/Authorization이 있어도 Application Policy는 남는다. 예를 들어 Agent가 GitHub MCP Server에 정상적으로 인증됐다고 하자.
 
 그 Credential이 다음을 허용할 수 있다.
 
@@ -284,26 +276,6 @@ Model
 
 Server 자체를 신뢰한다고 반환 Content까지 모두 trusted instruction으로 취급하지 않는다.
 
-## Cache와 Capability List
-
-Stateless Protocol에서는 Capability List 같은 정보가 매 요청마다 바뀌지 않는 경우 Cache가 중요해질 수 있다.
-
-하지만 Cache에도 Version 문제가 있다.
-
-~~~text
-Cached Tool List
-        ↓
-Server Capability Changed
-        ↓
-Stale Client View
-~~~
-
-따라서 Cache는 Authority가 아니라 Optimization이다.
-
-중요한 Operation 직전에는 실제 Authorization/Validation을 다시 한다.
-
-이 원칙은 뒤의 External State Reconciliation과 닮아 있다.
-
 ## MCP가 Agent Architecture를 단순화하는 지점
 
 MCP는 Agent와 External Capability의 결합도를 줄이는 데 사용할 수 있다.
@@ -330,7 +302,7 @@ Agent C ─┘
 
 ## MCP Server는 Enforcement Point가 될 수 있다
 
-MCP Server는 Agent와 External System 사이에서 중요한 Enforcement Point가 될 수 있다. 다만 모든 Policy가 반드시 MCP Server 하나에 모여야 한다는 뜻은 아니다.
+MCP Server는 Agent와 External System 사이의 Enforcement Point가 될 수 있다. 다만 모든 Policy가 반드시 MCP Server 하나에 모여야 하는 것은 아니다.
 
 가능한 책임:
 
@@ -423,7 +395,7 @@ MCP Client
 
 이것들은 Identity, Policy, Memory Boundary의 문제다.
 
-Protocol을 도입했다고 Governance가 사라지지 않는다.
+Protocol을 도입해도 Identity, Policy, Memory 같은 Application 책임은 남는다.
 
 ## Protocol을 내부 Architecture의 중심으로 두지 않는다
 
