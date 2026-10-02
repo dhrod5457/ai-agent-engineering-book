@@ -127,7 +127,7 @@ output_contract
 failure_class
 ~~~
 
-Trace의 목표는 내부 사고 독백을 저장하는 것이 아니라 **실제 시스템 행동을 재구성하는 것**이다.
+Trace의 목표는 내부 사고 독백을 저장하는 것이 아니라 **시스템 행동을 재구성하는 것**이다.
 
 ## Model Trace
 
@@ -377,7 +377,7 @@ Verification
 
 이 경로를 다시 구성할 수 있게 하는 것이 Trace다.
 
-다음 장에서는 Trace를 보고 "왜 실패했는가"를 넘어서 "이 Agent가 실제로 얼마나 잘하는가"를 측정한다.
+다음 장에서는 Trace를 보고 "왜 실패했는가"를 넘어서 "이 Agent가 얼마나 잘하는가"를 측정한다.
 
 Output, Trajectory, Outcome, Reliability를 함께 보는 Agent Evaluation으로 넘어간다.
 
