@@ -2,7 +2,7 @@
 
 Agent가 최종 답변을 맞혔다.
 
-그런데 중간에 허용되지 않은 Tool을 세 번 호출했고, Production Data를 불필요하게 읽었으며, 같은 Action을 두 번 실행했다.
+그런데 중간에 허용되지 않은 Tool을 세 번 호출했고, 운영 Data를 불필요하게 읽었으며, 같은 Action을 두 번 실행했다.
 
 이 Agent를 성공했다고 볼 수 있을까.
 
@@ -59,7 +59,7 @@ Agent가 어떤 경로로 결과에 도달했는지 본다.
 
 ## Outcome Eval
 
-가능하면 실제 Environment 결과를 본다.
+가능하면 Environment의 최종 상태를 본다.
 
 Coding Agent:
 
@@ -82,7 +82,7 @@ Database Agent:
 expected final row state?
 ~~~
 
-Outcome Eval은 Proxy가 아니라 실제 Completion에 가깝다.
+Outcome Eval은 Proxy가 아니라 Completion 자체에 가깝다.
 
 ## Deterministic Grader
 
@@ -198,7 +198,7 @@ pass^k
 
 Agent 운영에서는 "한 번은 된다"와 "반복해서 된다"가 다르다.
 
-Production Task는 후자에 더 민감할 수 있다.
+운영 Task는 후자에 더 민감할 수 있다.
 
 ## Infrastructure Noise
 
@@ -281,7 +281,7 @@ Milestone 3 fail
 
 OSWorld 2.0 같은 Long-horizon Benchmark도 세밀한 Checkpoint를 활용한다.
 
-하지만 Partial Score가 실제 Completion을 대신해서는 안 된다.
+하지만 Partial Score가 Completion을 대신해서는 안 된다.
 
 ~~~text
 Diagnostic Partial Score
@@ -311,7 +311,7 @@ Capability별 Slice가 필요한 이유다.
 
 초기 Eval Dataset은 거대할 필요가 없다.
 
-실제 실패 20~50개부터 시작할 수 있다.
+운영에서 나온 실패 20~50개부터 시작할 수 있다.
 
 예:
 
@@ -322,7 +322,7 @@ Capability별 Slice가 필요한 이유다.
 - permission denial loop
 - hallucinated success
 
-Production Failure가 좋은 Eval Seed가 된다.
+운영 실패가 좋은 Eval Seed가 된다.
 
 ## Eval Case 구조
 
@@ -374,7 +374,7 @@ Cost:
 within budget
 ~~~
 
-이렇게 해야 실제 Agent 품질을 더 잘 볼 수 있다.
+이렇게 해야 Agent 품질을 더 잘 볼 수 있다.
 
 ## 이 장에서 가져갈 것
 
@@ -398,7 +398,7 @@ Cost
 
 다음 장에서는 이 Evaluation을 개발 Workflow에 넣는다.
 
-Production Failure를 Regression Case로 만들고, PR / Nightly / Release Gate에 연결하는 Eval CI를 다룬다.
+운영 실패를 Regression Case로 만들고, PR / Nightly / Release Gate에 연결하는 Eval CI를 다룬다.
 
 ## 주요 근거
 
