@@ -320,27 +320,9 @@ Internal Projection 전체에서 어떤 항목이 무효화됐는지 반영해�
 
 ## Reconciliation과 Memory
 
-Memory가 다음 정보를 가지고 있다고 하자.
+Memory는 Discovery를 빠르게 하는 hint가 될 수 있지만 Final Authority가 아니다. Irreversible Action이나 Completion 검증에서는 현재 Authoritative Source를 다시 확인한다.
 
-~~~text
-"이 고객은 VIP이므로 환불 한도가 높다"
-~~~
-
-현재 CRM에서는 VIP 상태가 해제됐다.
-
-Memory가 오래됐을 수 있다.
-
-Irreversible Action 전에 Current Source를 우선한다.
-
-~~~text
-Memory
-→ hypothesis / hint
-
-Current CRM
-→ authority
-~~~
-
-Memory는 Discovery를 빠르게 할 수 있지만 Final Authority가 아니다.
+Memory가 오래됐을 때 어떻게 무효화하고 다시 쓰는지는 Part IV에서 별도로 다룬다.
 
 ## Reconciliation과 Approval
 
