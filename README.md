@@ -17,7 +17,7 @@ Phase 3 Scope          완료
 Phase 4 TOC            v0.1 완료
 Phase 5 Chapter Plan   완료
 Phase 6 Draft          완료
-Phase 7 Review         Evidence Review 완료
+Phase 7 Review         완료
 ~~~
 
 Broad Research는 종료하고, 이후에는 장별 초고에 필요한 Targeted Research만 추가합니다.
@@ -133,7 +133,8 @@ Part VII Multi-Agent와 Production Boundary
 
 ## 다음 단계
 
-1. Publication-time Freshness Audit
-2. Manuscript Assembly
+1. Manuscript Assembly
+2. Manuscript consistency check
+3. Publication package preparation
 
 기준일: 2026-10-02
