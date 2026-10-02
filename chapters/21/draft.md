@@ -115,7 +115,7 @@ Compare
 
 ## Repeated Trials
 
-Anthropic의 Automated Alignment Researchers 관련 Harness Ablation 사례에서도 Run-to-run variance가 Component 차이보다 클 수 있음을 지적한다.
+Anthropic이 공개한 Automated Alignment Researchers 실험에서는 일부 비교에서 Run-to-run variance가 Component 차이보다 클 수 있다고 보고한다. 이 관찰은 해당 실험 조건의 결과이며 일반적인 수치 한계로 확장하지 않는다.
 
 따라서:
 
