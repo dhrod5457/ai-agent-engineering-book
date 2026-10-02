@@ -10,9 +10,7 @@ Planner Agent, Research Agent, Coding Agent, Reviewer Agent, Security Agent를 �
 
 어떤 State를 누구에게 넘길지 정해야 하고, 같은 Context를 여러 번 복제하고, Agent 사이에 다른 사실이 생기고, 실패 원인을 찾기 어려워진다.
 
-Multi-Agent는 복잡성을 없애는 구조가 아니다.
-
-복잡성을 다른 경계로 옮기는 구조다.
+Multi-Agent는 복잡성을 없애지 않는다. Context, ownership, permission, coordination이라는 새로운 경계를 추가한다.
 
 ## Single-Agent Baseline
 
@@ -238,7 +236,7 @@ More Agents
 = More Advanced System
 ~~~
 
-성숙한 시스템이 하나의 Agent만 사용할 수도 있다.
+운영적으로 성숙한 시스템이 하나의 Agent만 사용할 수도 있다.
 
 판단 기준:
 
