@@ -105,10 +105,13 @@
 - 중요성: Tool/Context 연결을 Agent 내부 구현과 분리하는 표준화 흐름.
 
 ### Agent2Agent Protocol Specification
-- URL: https://a2aproject.github.io/A2A/latest/specification/
+- URL: https://a2a-protocol.org/latest/specification/
+- 최신 정식 버전: 1.0.0 (2026-10-02 확인)
 - 확인점:
   - independent agent 간 capability discovery와 interaction
-  - Message / Task / Artifact를 분리
+  - Agent Card / Message / Task / Artifact를 분리
+  - Task는 stateful lifecycle을 가지며 INPUT_REQUIRED / AUTH_REQUIRED interrupted state 지원
+  - AUTH_REQUIRED 상태 자체는 특정 operation authorization을 의미하지 않음
   - remote agent 내부 memory/tools를 노출하지 않고 협업
 - 중요성: Tool protocol(MCP)과 Agent-to-Agent protocol의 경계.
 
@@ -263,13 +266,17 @@
 
 ## I. 2차 조사 — Runtime / Sandbox
 
-### AWS AgentCore Runtime — microVMs
+### AWS AgentCore Runtime — microVMs and session storage
 - URL: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-how-it-works.html
+- Session storage: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-filesystem-configurations.html
 - 확인점:
   - session별 dedicated microVM
   - CPU / memory / filesystem isolation
-  - runtime session state는 ephemeral
-- 중요성: Runtime state와 durable memory의 분리.
+  - 기본 microVM compute의 memory/local disk는 lifecycle-bound
+  - managed session storage(Preview)를 구성하면 stop/resume 사이 filesystem 복원 가능
+  - session storage는 per-session이며 idle expiry와 runtime version update 등 별도 lifecycle을 가짐
+  - 구조화된 장기 정보는 Memory 같은 별도 subsystem과 분리
+- 중요성: Runtime isolation, Workspace persistence, Durable Agent State를 같은 개념으로 취급하지 않아야 함.
 
 ### gVisor Security Architecture
 - URL: https://gvisor.dev/docs/architecture_guide/intro/
@@ -516,3 +523,75 @@
   - initializer / incremental session / progress artifact
   - compaction만으로 continuity 불충분
 - 중요성: Agent State Plane과 Harness의 연결.
+
+
+## P. Publication-time Freshness Audit — 2026-10-02
+
+### MCP
+- Current final spec: 2026-07-28
+- Next listed release 2026-12-15는 2026-10-02 기준 NOT READY
+- 2026-07-28의 stateless core / explicit state handles / Tasks extension 경계 유지
+- Source: https://plan.modelcontextprotocol.io/matrix
+
+### A2A
+- Current latest released specification: 1.0.0
+- 기존 조사 당시 사용한 0.3 계열보다 protocol version이 상승
+- Agent Card / Message / Task / Artifact / Task lifecycle이라는 책의 핵심 경계는 1.0에서도 유지
+- 1.0은 version negotiation과 AUTH_REQUIRED semantics를 더 명확히 정의
+- Source: https://a2a-protocol.org/latest/specification/
+
+### OpenAI Agents SDK
+- Session memory와 Agent long-term memory 분리 구조 유지
+- Sandbox session과 conversational Session 구분 유지
+- Codex Goals의 persisted objective / completion condition 구조 확인
+- Source:
+  - https://openai.github.io/openai-agents-python/sessions/
+  - https://openai.github.io/openai-agents-python/sandbox/memory/
+  - https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex
+
+### AWS AgentCore
+- session별 dedicated microVM isolation 유지
+- 기본 compute state는 ephemeral
+- managed session storage(Preview)가 추가되어 stop/resume 사이 filesystem persistence 가능
+- 이 변경 때문에 "Workspace는 항상 ephemeral"이라는 단정 대신 Workspace Persistence와 Durable Agent State를 분리하도록 본문 수정
+- Source:
+  - https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-sessions.html
+  - https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/runtime-filesystem-configurations.html
+
+### Anthropic Claude Code
+- Sandboxing의 filesystem + network boundary 설명 유지
+- Auto Mode의 approval fatigue / classifier-based automation 방향 유지
+- Source:
+  - https://www.anthropic.com/engineering/claude-code-sandboxing
+  - https://www.anthropic.com/engineering/claude-code-auto-mode
+
+### AWS Agentic AI Lens
+- tool invocation의 external authorization
+- originating user context propagation
+- high-risk mutation의 HITL
+- deterministic risk classification
+- risk-tiered approval
+  가 현재 guidance에 유지됨
+- Source:
+  - https://docs.aws.amazon.com/wellarchitected/latest/agentic-ai-lens/agentsec02-bp01.html
+  - https://docs.aws.amazon.com/wellarchitected/latest/agentic-ai-lens/agentsec04-bp02.html
+
+### OSWorld 2.0
+- 108 long-horizon tasks
+- human median 약 1.6시간
+- 69.6% tasks > 1h
+- hidden state / multi-item tracking / conflict disambiguation / dynamic environment challenge 유지
+- Source: https://osworld-v2.xlang.ai/
+
+### tau2-bench
+- 1.0.1 grading change와 release 간 score 비호환 경고 유지
+- benchmark / grader version pinning 근거로 계속 사용 가능
+
+### Memory Security preprints
+2026-10-02 기준 다음 자료는 여전히 preprint / emerging research로 취급:
+- MPBench — arXiv:2606.04329
+- MemSecBench — arXiv:2607.27080
+- MemPoison — arXiv:2607.14651
+- MemSentry — arXiv:2609.08747
+
+본문에서 업계 표준이나 확정된 일반 사실처럼 표현하지 않는다.
