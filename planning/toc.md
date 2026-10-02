@@ -1,7 +1,7 @@
 # Table of Contents
 
 기준일: 2026-10-02
-상태: v0.1
+상태: v0.2 — Phase 7 reviewed
 
 # AI Agent Engineering
 
@@ -316,12 +316,13 @@ Multi-Agent → Production Boundary
 
 # 현재 판단
 
-25장은 다소 많지만 각 장의 책임 경계가 분명하다.
+25장 + Epilogue 구조를 유지한다.
 
-초고 단계에서 다음 압축 후보를 검토한다.
+Phase 6 Draft와 Phase 7 Structural / Line / Terminology / Dedup Review 결과, 필수 병합 대상 장은 없다.
 
-- 14장 + 15장 병합 가능
-- 18장 + 19장 일부 병합 가능
-- 22장 + 23장 병합 가능
+각 장의 책임:
+- 14장 Identity / 15장 Credential
+- 18장 Trace / 19장 Eval
+- 22장 Multi-Agent 도입 판단 / 23장 Ownership Pattern
 
-압축 시 22~23장 수준까지 줄일 수 있다.
+이 경계는 현재 원고에서 충분히 분리돼 있으므로 Manuscript Assembly에서도 유지한다.
