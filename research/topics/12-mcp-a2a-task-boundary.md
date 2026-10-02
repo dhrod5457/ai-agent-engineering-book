@@ -52,6 +52,8 @@ MCP Task creation은 server-directed라는 점도 중요하다.
 
 ## A2A Task
 
+2026-10-02 기준 최신 정식 A2A Specification은 1.0.0이다.
+
 A2A Task는 remote Agent가 client를 위해 수행하는 stateful unit of work다.
 
 Task에는:
@@ -153,5 +155,5 @@ Factory Task
 
 - MCP 2026-07-28 Specification release
 - MCP 2026-07-28 Release Candidate
-- A2A Protocol Specification
+- A2A Protocol Specification 1.0.0
 - AWS AgentCore Runtime sessions
