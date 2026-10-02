@@ -150,7 +150,7 @@ Agent가 외부 세계에 Action을 수행하는 인터페이스다.
 
 같은 API라도 Agent에게 어떤 이름, Schema, 결과 형태로 제공하는지에 따라 실제 사용성이 달라질 수 있다.
 
-SWE-agent는 이를 Agent-Computer Interface, ACI라는 관점으로 설명했다. 핵심은 모델이 같더라도 컴퓨터와 상호작용하는 인터페이스 설계가 성능에 영향을 준다는 것이다.
+SWE-agent 연구는 이를 Agent-Computer Interface(ACI)라는 관점으로 다뤘다. 이 용어를 모든 Tool 시스템의 표준명으로 쓰려는 것은 아니다. 핵심은 같은 모델을 사용해도 컴퓨터와 상호작용하는 인터페이스 설계에 따라 실제 성능이 달라질 수 있다는 점이다.
 
 ### Harness
 
@@ -250,11 +250,9 @@ Framework는 유용하다.
 - Crash 후 어떤 State를 복구할 것인가.
 - Completion을 어떤 Evidence로 판정할 것인가.
 
-Framework는 구현 도구다.
+Framework는 구현 도구다. Architecture는 책임의 배치다.
 
-Architecture는 책임의 배치다.
-
-이 책이 특정 SDK 사용법보다 Responsibility Boundary에 집중하는 이유다.
+따라서 이 책은 특정 SDK의 기능 목록보다 각 책임을 어디에 둘지에 집중한다.
 
 ## Model, Harness, Runtime을 먼저 나눈다
 
@@ -338,9 +336,7 @@ Minimal Agent
 → Multi-Agent
 ~~~
 
-이 순서가 유일한 정답은 아니다.
-
-핵심은 Agent의 기능 수를 성숙도로 보지 않는 것이다.
+이 순서가 유일한 정답은 아니다. 핵심은 기능 수를 Agent의 성숙도로 보지 않는 것이다.
 
 ## 이 책이 다루는 경계
 
