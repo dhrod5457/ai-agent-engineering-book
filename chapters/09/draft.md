@@ -30,7 +30,7 @@ Recovery
   + decide next safe step
 ~~~
 
-두 개념을 섞으면 duplicate side effect가 생길 수 있다.
+두 개념을 섞으면 중복 Side Effect가 생길 수 있다.
 
 ## Replay는 재실행이 아니다
 
