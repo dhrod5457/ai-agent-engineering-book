@@ -19,7 +19,7 @@
 
 표현 예:
 
-> Anthropic이 공개한 Managed Agents 사례에서는 Brain, Hands, Session을 분리했다.
+> Anthropic이 공개한 long-running agent 사례에서는 session 간 progress artifact와 runtime continuity를 별도 engineering concern으로 다뤘다.
 
 기준:
 - "Anthropic은 이렇게 한다"보다 "공개 사례에서 관찰됐다"를 우선한다.
@@ -62,8 +62,9 @@
 - Agent State Plane
 - Harness Debt
 - Memory Write Gate
-- AgentVersion tuple
+- AgentVersion
 - R0~R4 illustrative control profile
+- Agent-as-Tool / Handoff ownership distinction
 
 ## 6. Example / Thought Experiment
 
