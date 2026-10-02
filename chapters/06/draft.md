@@ -155,7 +155,7 @@ G-102와 R-77은 서로 다른 Lifecycle을 가질 수 있다.
 - External Job
 - Batch Processing
 
-MCP의 Task 확장은 이런 long-running capability invocation을 표현하는 데 사용될 수 있다.
+MCP의 Task 확장은 이런 Long-running Capability Invocation을 표현하는 데 사용될 수 있다.
 
 개념적으로:
 
@@ -179,7 +179,7 @@ MCP Task는 Product Domain의 Task와 같지 않다.
 
 ~~~text
 MCP Task
-= long-running capability invocation
+= Long-running Capability Invocation
 ~~~
 
 예를 들어 "고객 환불 처리"라는 Product Task 하나가 여러 MCP Tool Call과 MCP Task를 포함할 수 있다.
