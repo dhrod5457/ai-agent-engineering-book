@@ -99,13 +99,13 @@ AgentCore Runtime은 각 session을 전용 microVM으로 격리한다.
 - memory
 - filesystem
 
-session 종료 후 microVM과 memory를 폐기한다.
+기본 microVM compute의 memory와 local disk는 session compute lifecycle에 묶이며 microVM 종료 시 폐기된다.
+
+2026-10-02 기준 AgentCore는 managed session storage(Preview)를 별도로 제공한다. 이 storage는 per-session filesystem을 stop/resume 사이에 복원할 수 있지만 idle expiry와 runtime version update 시 reset되는 lifecycle을 가진다. 구조화된 장기 정보에는 별도 AgentCore Memory를 사용할 수 있다.
 
 중요한 경계:
 
-> Session isolation은 durability와 다르다.
-
-Runtime state는 ephemeral이고, 장기 기억은 Memory 같은 별도 subsystem을 사용해야 한다.
+> Session isolation, Workspace persistence, Long-term durability는 서로 다른 책임이다.
 
 ## NVIDIA OpenShell
 
@@ -180,7 +180,7 @@ Sandbox 기술 선택 시:
 2. filesystem과 network boundary를 함께 설계한다.
 3. credential을 sandbox 내부에 최소화한다.
 4. multi-tenant Agent는 stronger isolation을 우선 검토한다.
-5. Runtime state는 disposable하게 설계한다.
+5. Runtime compute는 교체 가능하게 설계하고, 필요한 Workspace persistence는 별도 storage lifecycle로 명시한다.
 6. Sandbox policy도 version/eval/audit 대상이다.
 7. isolation과 authorization을 별개 계층으로 유지한다.
 
