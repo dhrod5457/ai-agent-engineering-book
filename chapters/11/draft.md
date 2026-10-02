@@ -68,7 +68,7 @@ Source가 바뀌었다고 항상 모든 작업을 다시 시작할 필요는 없
 
 ## Version Conflict와 Decision Conflict
 
-2026년 공개된 Selective Revalidation preprint에서는 이 차이를 명확하게 구분한다.
+2026년 9월 공개된 Selective Revalidation preprint는 이 차이를 Version Conflict와 Decision Conflict로 구분한다.
 
 ### Version Conflict
 
@@ -126,7 +126,7 @@ Action:
 re-plan / block
 ~~~
 
-이 방식은 모든 Context를 처음부터 다시 계산하는 것보다 선택적으로 대응할 수 있다.
+이 방식은 변경과 무관한 판단까지 전부 다시 계산하지 않고 영향을 받은 조건만 재검증하는 구조를 제시한다. 해당 연구는 controlled feasibility를 보인 결과이며 production generality까지 입증한 것은 아니다.
 
 ## Source Registry
 
@@ -420,7 +420,7 @@ Long-running 난이도를 Step 수만으로 설명하기 어렵다.
 
 초기에 읽은 State가 수백 Action 뒤의 Final Decision에도 영향을 줄 수 있다.
 
-2026년 preprint에서는 이런 Dependency Length를 Task-State Horizon으로 측정하려는 접근이 제안됐다.
+2026년 공개된 Task-State Horizon preprint는 이런 Dependency Length를 별도 축으로 측정하는 접근을 제안한다.
 
 아직 일반적인 표준 Metric은 아니다.
 
@@ -428,9 +428,7 @@ Long-running 난이도를 Step 수만으로 설명하기 어렵다.
 
 ## 이 장에서 가져갈 것
 
-Long-running Agent의 Working State는 현재 현실 그 자체가 아니다.
-
-Snapshot이다.
+Long-running Agent의 Working State는 현재 현실 그 자체가 아니라 특정 시점에 관찰한 Snapshot이다.
 
 그래서 중요한 Action 전에 다음 흐름이 필요하다.
 
