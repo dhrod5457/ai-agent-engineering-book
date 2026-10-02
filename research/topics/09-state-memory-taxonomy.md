@@ -59,9 +59,9 @@ Sandbox Memory는 summary와 index를 먼저 제공하고 필요한 경우 과�
 
 Agent Runtime의 sandbox는 파일과 process state를 session 동안 유지할 수 있다.
 
-하지만 runtime session 종료 후 workspace가 사라질 수 있다.
+AWS AgentCore의 기본 microVM compute state는 ephemeral이다. 다만 2026-10-02 기준 managed session storage를 구성하면 stop/resume 사이에 filesystem을 durable storage에서 복원할 수 있다. 이 storage는 per-session이며 idle expiry와 runtime version update 같은 lifecycle 제약이 있다.
 
-AWS AgentCore는 runtime session의 microVM state는 ephemeral하며 long-term durability 용도로 쓰지 말라고 명시한다.
+따라서 Workspace persistence를 지원하는 Runtime이라도 Goal/Approval/Long-term Memory 같은 Durable State와 동일한 개념으로 보지 않는다.
 
 따라서:
 
