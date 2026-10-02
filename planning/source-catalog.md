@@ -23,6 +23,7 @@ ID는 source의 영구 identifier가 아니라 이 저장소 내부 reference다
 | ID | Class | Source | Primary use |
 | --- | --- | --- | --- |
 | S-ANTHROPIC-CONTEXT | V | Anthropic Context Engineering | context selection / progressive context |
+| S-ANTHROPIC-TOOLS | V | Anthropic Tool Engineering | tool naming / schema / result contract |
 | S-MCP-2026-07 | O | Model Context Protocol 2026-07-28 | MCP base protocol |
 | S-MCP-TASKS-DRAFT | O | MCP Tasks extension, 2026-07-28 Draft | long-running capability invocation |
 | S-A2A-0.3 | O | A2A Protocol 0.3.0 | remote agent interoperability |
@@ -37,6 +38,7 @@ Freshness:
 | --- | --- | --- | --- |
 | S-TEMPORAL | R | Temporal Durable Execution / replay semantics | event history / replay / recovery |
 | S-LANGGRAPH-PERSIST | V | LangGraph Persistence | checkpoint / state implementation example |
+| S-AWS-AGENTCORE-RUNTIME | V | AWS AgentCore Runtime | runtime/session isolation example |
 | S-OSWORLD2 | P | OSWorld 2.0 | long-horizon dynamic state |
 | S-SELECTIVE-REVALIDATION | P | From Version Conflicts to Decision Conflicts | decision conflict / selective revalidation |
 | S-TSH | P | Task-State Horizon | state dependency horizon |
