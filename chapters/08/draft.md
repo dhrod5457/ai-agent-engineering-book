@@ -76,9 +76,9 @@ Durable Storage
 
 Process가 죽어도 State는 남는다.
 
-## 최소 구성
+## Reference 구성
 
-이 책의 Reference Model에서는 다음을 최소 후보로 둔다.
+이 책의 Reference Model에서는 다음 책임을 대표 구성요소로 둔다.
 
 ~~~text
 Agent State Plane
@@ -91,9 +91,7 @@ Agent State Plane
 - Memory Reference
 ~~~
 
-모든 시스템이 일곱 개 Table을 만들어야 한다는 뜻이 아니다.
-
-각 책임이 구분돼야 한다는 뜻이다.
+모든 시스템이 이 항목을 각각 별도 Table이나 Service로 구현해야 한다는 뜻은 아니다. 필요한 책임과 lifecycle을 구분하기 위한 Reference다.
 
 ## Event History
 
@@ -302,16 +300,7 @@ tool.completed
 external_id: PR-220
 ~~~
 
-따라서:
-
-~~~text
-Conversation History
-⊂ Execution History
-~~~
-
-로 보는 편이 정확하다.
-
-모델에게 보여줄 Conversation과 시스템이 복구에 사용할 Execution History의 목적이 다르다.
+Conversation History와 Execution History는 일부 Event를 공유할 수 있지만 목적이 다르다. Conversation은 모델과 사용자의 상호작용을 보존하고, Execution History는 복구와 Audit에 필요한 실행 사실을 보존한다.
 
 ## Snapshot과 Checkpoint
 
@@ -468,7 +457,7 @@ Execution Continuity를 유지하는 것이다.
 
 ## 이 장에서 가져갈 것
 
-Agent State Plane은 이 책의 중심 개념이다.
+Agent State Plane은 이 책 전체에서 반복해서 사용할 synthesis다.
 
 다시 정의하면:
 
