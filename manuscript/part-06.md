@@ -357,7 +357,7 @@ Runtime
 Verification
 ~~~
 
-이 경로를 다시 구성할 수 있게 하는 것이 실행 추적 기록이다. 다음 장에서는 실행 추적 기록을 보고 "왜 실패했는가"를 넘어서 "이 에이전트가 얼마나 잘하는가"를 측정한다. 출력, 실행 경로, 실제 환경에서 확인한 결과, 반복 실행의 신뢰성을 함께 보는 에이전트 평가으로 넘어간다.
+이 경로를 다시 구성할 수 있게 하는 것이 실행 추적 기록이다. 다음 장에서는 실행 추적 기록을 보고 "왜 실패했는가"를 넘어서 "이 에이전트가 얼마나 잘하는가"를 측정한다. 출력, 실행 경로, 실제 환경에서 확인한 결과, 반복 실행의 신뢰성을 함께 보는 에이전트 평가로 넘어간다.
 
 ### Source Notes
 
@@ -517,7 +517,7 @@ Security Dataset을 별도로 유지할 수 있다.
 
 ### Repeated Reliability
 
-에이전트는 같은 입력에도 결과가 달라질 수 있는할 수 있다. 한 번 성공했다고 안정적이라고 말하기 어렵다. 같은 작업을 여러 번 실행해야 할 수 있다.
+에이전트는 같은 입력에도 결과가 달라질 수 있다. 한 번 성공했다고 안정적이라고 말하기 어렵다. 같은 작업을 여러 번 실행해야 할 수 있다.
 
 ~~~text
 Trial 1: pass
@@ -616,7 +616,7 @@ Milestone 2 pass
 Milestone 3 fail
 ~~~
 
-OSWorld 2.0 같은 Long-horizon Benchmark도 세밀한 체크포인트(Checkpoint: 실행을 이어가기 위한 상태 기록)를 활용한다. 하지만 Partial Score가 완료를 대신해서는 안 된다.
+OSWorld 2.0처럼 여러 단계에 걸친 작업을 평가하는 벤치마크도 중간 진행을 평가하는 세밀한 확인 지점(Checkpoint)을 활용한다. 하지만 Partial Score가 완료를 대신해서는 안 된다.
 
 ~~~text
 Diagnostic Partial Score
@@ -847,7 +847,7 @@ evals/
 예:
 
 - 100+ multi-turn cases
-- 반복 실험s
+- 반복 실험
 - long-horizon
 - browser environment
 - security attack set
@@ -891,7 +891,7 @@ Production Input
 
 ### Canary
 
-일부 Low-risk Traffic에 후보를 적용한다. 문제가 없으면 확대한다. 에이전트 시스템은 같은 입력에도 결과가 달라질 수 있는하고 Environment Interaction이 있기 때문에 Offline Eval만으로 모든 것을 확인하기 어렵다.
+일부 Low-risk Traffic에 후보를 적용한다. 문제가 없으면 확대한다. 에이전트 시스템은 같은 입력에도 결과가 달라질 수 있고 Environment Interaction이 있기 때문에 Offline Eval만으로 모든 것을 확인하기 어렵다.
 
 ### AgentVersion
 
@@ -1205,7 +1205,7 @@ Run Same Eval Set
 Compare
 ~~~
 
-하지만 에이전트는 같은 입력에도 결과가 달라질 수 있는하다. 한 번의 실행으로 결론 내리면 위험하다.
+하지만 에이전트는 같은 입력에도 결과가 달라질 수 있다. 한 번의 실행으로 결론 내리면 위험하다.
 
 ### Repeated Trials
 
@@ -1445,7 +1445,7 @@ failure rate reduced
 
 ### 이 장에서 가져갈 것
 
-하네스는 시간이 지나며 자연스럽게 복잡해진다. 복잡성을 피할 수는 없지만 근거 없는 모델의 약점을 보완하는 보조 장치를 계속 유지할 필요도 없다.
+하네스는 시간이 지나며 자연스럽게 복잡해진다. 복잡성을 피할 수는 없지만 효과를 뒷받침할 근거가 없는 보조 장치를 계속 유지할 필요도 없다.
 
 핵심 원칙:
 

@@ -148,7 +148,7 @@ Security Dataset을 별도로 유지할 수 있다.
 
 ## Repeated Reliability
 
-에이전트는 같은 입력에도 결과가 달라질 수 있는할 수 있다. 한 번 성공했다고 안정적이라고 말하기 어렵다. 같은 작업을 여러 번 실행해야 할 수 있다.
+에이전트는 같은 입력에도 결과가 달라질 수 있다. 한 번 성공했다고 안정적이라고 말하기 어렵다. 같은 작업을 여러 번 실행해야 할 수 있다.
 
 ~~~text
 Trial 1: pass
@@ -247,7 +247,7 @@ Milestone 2 pass
 Milestone 3 fail
 ~~~
 
-OSWorld 2.0 같은 Long-horizon Benchmark도 세밀한 체크포인트(Checkpoint: 실행을 이어가기 위한 상태 기록)를 활용한다. 하지만 Partial Score가 완료를 대신해서는 안 된다.
+OSWorld 2.0처럼 여러 단계에 걸친 작업을 평가하는 벤치마크도 중간 진행을 평가하는 세밀한 확인 지점(Checkpoint)을 활용한다. 하지만 Partial Score가 완료를 대신해서는 안 된다.
 
 ~~~text
 Diagnostic Partial Score

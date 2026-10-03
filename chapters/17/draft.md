@@ -123,7 +123,7 @@ Environment
 Credential Scope
 ~~~
 
-예를 들어 같은 add_comment 도구이라도:
+예를 들어 같은 add_comment 도구라도:
 
 ~~~text
 public issue comment
@@ -313,7 +313,7 @@ NVIDIA OpenShell의 Agent-driven Policy Management는 이런 방향의 한 사�
 
 ## Effective Policy Manifest
 
-에이전트가 현재 무엇을 할 수 있는지 전혀 모르면 Trial-and-error Deny를 반복할 수 있다. 따라서 하네스(Harness: 모델 실행과 도구 사용을 제어하는 계층)에 Current Effective Policy를 필요한 정보를 골라 구성할 수 있다.
+에이전트가 현재 무엇을 할 수 있는지 전혀 모르면 Trial-and-error Deny를 반복할 수 있다. 따라서 하네스(Harness: 모델 실행과 도구 사용을 제어하는 계층)에 현재 유효한 정책에서 필요한 정보를 골라 전달할 수 있다.
 
 예:
 

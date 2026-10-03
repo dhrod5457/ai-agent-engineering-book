@@ -132,7 +132,7 @@ Agent
   └─ Production DB Read-only Tool
 ~~~
 
-모든 도구가 같은 권한 범위가 넓은 인증 정보를 공유할 필요는 없다. Tool Identity는 다음 장의 인증 정보의 사용 경계와 연결된다.
+모든 도구가 동일한 고권한 인증 정보를 공유할 필요는 없다. Tool Identity는 다음 장의 인증 정보의 사용 경계와 연결된다.
 
 ### Resource Identity
 
@@ -750,7 +750,7 @@ System Path
 
 ### Network Boundary
 
-파일 시스템만 막고 네트워크를 모두 열면 Data Exfiltration 경로가 남는다. 반대로 네트워크만 막고 Secret File이 보이면 다른 도구이나 이후 단계에서 노출될 수 있다. 그래서 파일 시스템과 네트워크를 함께 본다.
+파일 시스템만 막고 네트워크를 모두 열면 Data Exfiltration 경로가 남는다. 반대로 네트워크만 막고 Secret File이 보이면 다른 도구나 이후 단계에서 노출될 수 있다. 그래서 파일 시스템과 네트워크를 함께 본다.
 
 네트워크 정책 예:
 
@@ -1139,7 +1139,7 @@ Environment
 Credential Scope
 ~~~
 
-예를 들어 같은 add_comment 도구이라도:
+예를 들어 같은 add_comment 도구라도:
 
 ~~~text
 public issue comment
@@ -1329,7 +1329,7 @@ NVIDIA OpenShell의 Agent-driven Policy Management는 이런 방향의 한 사�
 
 ### Effective Policy Manifest
 
-에이전트가 현재 무엇을 할 수 있는지 전혀 모르면 Trial-and-error Deny를 반복할 수 있다. 따라서 하네스(Harness: 모델 실행과 도구 사용을 제어하는 계층)에 Current Effective Policy를 필요한 정보를 골라 구성할 수 있다.
+에이전트가 현재 무엇을 할 수 있는지 전혀 모르면 Trial-and-error Deny를 반복할 수 있다. 따라서 하네스(Harness: 모델 실행과 도구 사용을 제어하는 계층)에 현재 유효한 정책에서 필요한 정보를 골라 전달할 수 있다.
 
 예:
 

@@ -98,7 +98,7 @@ Authority / Permission Context
 
 ## Context Transfer
 
-작업 인계는 모든 컨텍스트(Context: 모델에 전달하는 정보)를 복제하는 것이 아니다. 에이전트 B가 필요한 컨텍스트만 필요한 정보를 골라 구성한다.
+작업 인계는 모든 컨텍스트(Context: 모델에 전달하는 정보)를 복제하는 것이 아니다. 에이전트 B에게 필요한 정보만 골라 컨텍스트를 구성한다.
 
 ~~~text
 State Plane

@@ -106,7 +106,7 @@ evals/
 예:
 
 - 100+ multi-turn cases
-- 반복 실험s
+- 반복 실험
 - long-horizon
 - browser environment
 - security attack set
@@ -150,7 +150,7 @@ Production Input
 
 ## Canary
 
-일부 Low-risk Traffic에 후보를 적용한다. 문제가 없으면 확대한다. 에이전트 시스템은 같은 입력에도 결과가 달라질 수 있는하고 Environment Interaction이 있기 때문에 Offline Eval만으로 모든 것을 확인하기 어렵다.
+일부 Low-risk Traffic에 후보를 적용한다. 문제가 없으면 확대한다. 에이전트 시스템은 같은 입력에도 결과가 달라질 수 있고 Environment Interaction이 있기 때문에 Offline Eval만으로 모든 것을 확인하기 어렵다.
 
 ## AgentVersion
 

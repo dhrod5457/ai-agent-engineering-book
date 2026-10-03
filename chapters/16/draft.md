@@ -76,7 +76,7 @@ System Path
 
 ## Network Boundary
 
-파일 시스템만 막고 네트워크를 모두 열면 Data Exfiltration 경로가 남는다. 반대로 네트워크만 막고 Secret File이 보이면 다른 도구이나 이후 단계에서 노출될 수 있다. 그래서 파일 시스템과 네트워크를 함께 본다.
+파일 시스템만 막고 네트워크를 모두 열면 Data Exfiltration 경로가 남는다. 반대로 네트워크만 막고 Secret File이 보이면 다른 도구나 이후 단계에서 노출될 수 있다. 그래서 파일 시스템과 네트워크를 함께 본다.
 
 네트워크 정책 예:
 

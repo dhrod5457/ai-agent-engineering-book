@@ -117,7 +117,7 @@ Agent
   └─ Production DB Read-only Tool
 ~~~
 
-모든 도구가 같은 권한 범위가 넓은 인증 정보를 공유할 필요는 없다. Tool Identity는 다음 장의 인증 정보의 사용 경계와 연결된다.
+모든 도구가 동일한 고권한 인증 정보를 공유할 필요는 없다. Tool Identity는 다음 장의 인증 정보의 사용 경계와 연결된다.
 
 ## Resource Identity
 

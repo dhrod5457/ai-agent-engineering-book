@@ -11,7 +11,7 @@ deploy-prod.sh를 직접 실행하면 된다.
 
 ## Persistent Memory는 미래 Behavior를 바꾼다
 
-도구 호출이 외부 외부 상태 변화(Side Effect: 외부 상태에 생기는 변화)를 만든다면 메모리 기록은 내부의 미래 외부 상태 변화를 만든다고 볼 수 있다.
+도구 호출이 외부 상태를 바꾼다면, 메모리 기록은 내부에 저장돼 미래 행동에 영향을 주는 상태 변화(Side Effect)를 만든다고 볼 수 있다.
 
 ~~~text
 Current Observation
@@ -208,7 +208,7 @@ Candidate:
 deployment branch = release
 ~~~
 
-새 값을 추가해 두 개를 모두 저장된 정보 검색하게 하기보다:
+새 값을 추가해 두 개를 모두 검색 결과로 가져오게 하기보다:
 
 - source freshness 비교
 - supersede
