@@ -8,9 +8,9 @@ Agent가 운영 환경에서 같은 실수를 두 번 했다.
 
 이 시스템에는 Logging은 있었지만 Learning Loop가 없었다.
 
-Agent Improvement는 사람이 문제를 기억하는 방식으로 운영하기 어렵다.
+Agent Improvement를 사람의 기억에 의존해 운영하기는 어렵다. 의미 있는 Failure를 다시 실행 가능한 Eval Case로 승격해야 한다.
 
-의미 있는 Failure를 다시 실행 가능한 Eval Case로 승격해야 한다.
+이 장에서 말하는 Eval CI는 배포 Pipeline 전체를 설명하려는 것이 아니다. Agent behavior 변경에 대한 regression gate를 개발 lifecycle에 넣는 데 초점을 둔다.
 
 ## Eval은 Release 전 행사만이 아니다
 
@@ -311,7 +311,7 @@ Production
 → sampled trace / shadow
 ~~~
 
-전통적인 Test Pyramid와 비슷하게 비용에 따라 계층화할 수 있다.
+일반적인 Test Suite와 마찬가지로 비용과 실행 시간에 따라 Eval cadence를 계층화할 수 있다.
 
 ## Eval Case Ownership
 

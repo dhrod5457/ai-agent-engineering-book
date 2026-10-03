@@ -353,23 +353,9 @@ Policy Failure / Denial
 
 Trace와 Eval에서도 같은 분리가 필요하다.
 
-## Handoff도 Loop의 한 형태다
+## Handoff도 하나의 Transition이 될 수 있다
 
-Multi-Agent 시스템에서는 모델이 Tool Call 대신 다른 Agent로 ownership을 넘길 수 있다.
-
-~~~text
-Agent A
-  ↓ Handoff
-Agent B
-  ↓
-Tool / Action
-~~~
-
-하지만 이 책에서는 처음부터 Multi-Agent를 기본 Loop로 두지 않는다.
-
-단일 Agent의 Loop와 State, Tool Boundary가 먼저 안정돼야 한다.
-
-Handoff는 이후에 추가되는 선택적 Transition이다.
+Multi-Agent 구조에서는 Tool Call 대신 다른 Agent로 ownership을 넘기는 Transition이 들어갈 수 있다. 다만 이 책에서는 이를 기본 Loop로 두지 않는다. 단일 Agent의 Loop와 State, Tool Boundary를 먼저 안정시킨 뒤 Part VII에서 Handoff를 별도로 다룬다.
 
 ## Loop와 State Machine
 
@@ -391,9 +377,9 @@ COMPLETED
 FAILED
 ~~~
 
-이 State는 모델이 자유 텍스트로 결정하는 것보다 시스템이 Transition Rule을 관리하는 편이 낫다.
+이런 State는 모델의 자유 텍스트보다 시스템의 Transition Rule로 관리하는 편이 낫다.
 
-다시 말하면 Agent Engineering에서는 불확실한 판단과 결정 가능한 규칙을 나눈다.
+Agent Engineering에서는 불확실한 판단과 기계적으로 판정 가능한 규칙을 나눈다.
 
 ~~~text
 Open-ended Diagnosis
@@ -461,11 +447,9 @@ Verification
 PASS → Complete
 ~~~
 
-여기서 중요한 것은 모델의 intelligence보다 Loop 주변의 Control이다.
+여기서 중요한 것은 모델의 지능만이 아니라 Loop 주변의 통제 구조다.
 
 ## Loop는 어디까지 Harness 책임인가
-
-이 장의 결론은 다음 장으로 이어진다.
 
 Agent Loop를 운영 수준으로 만들면서 책임이 계속 추가됐다.
 

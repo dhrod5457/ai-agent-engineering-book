@@ -8,7 +8,7 @@
 
 상대 Agent의 내부 Tool과 Memory를 직접 알 수 없고, Network Boundary가 있으며, Authentication과 Task Lifecycle이 필요하다.
 
-A2A는 이런 독립 Agent System 사이의 상호운용 문제를 다룬다.
+A2A는 이런 독립 Agent System 사이의 discovery, message exchange, task lifecycle, artifact 전달 같은 상호운용 문제를 다룬다.
 
 2026-10-02 기준 A2A의 최신 정식 Specification은 1.0.0이다. 이 장에서는 버전별 JSON 표현보다 1.0에서도 유지되는 Agent Card, Message, Task, Artifact, Authorization의 책임 경계에 집중한다.
 
@@ -77,16 +77,18 @@ Message는 단순 String보다 구조화된 Content를 가질 수 있다.
 
 Remote Agent에 위임한 Work는 Task Lifecycle을 가질 수 있다.
 
-예:
+2026-10-02 기준 A2A 0.3.0에는 다음 Task state가 정의돼 있다. 정확한 state 목록은 protocol version에 따라 달라질 수 있으므로 출간 전 다시 확인한다.
 
 ~~~text
 submitted
 working
 input-required
-auth-required
 completed
-failed
 canceled
+failed
+rejected
+auth-required
+unknown
 ~~~
 
 이 Task는 MCP Task와 다르다.
@@ -291,7 +293,7 @@ A2A는 independent Agent System 간 Collaboration Boundary다.
 
 이제 책의 마지막 장에서 지금까지의 내용을 도입 순서로 압축한다.
 
-처음부터 Memory, Multi-Agent, MicroVM을 모두 넣지 않고 Minimum Viable Production Agent에서 어떻게 시작할 것인가.
+처음부터 Memory, Multi-Agent, MicroVM을 모두 넣지 않고 Minimum Viable 운영 Agent에서 어떻게 시작할 것인가.
 
 ## 주요 근거
 

@@ -67,11 +67,13 @@ Later Retrieval
 Future behavior
 ~~~
 
-최근 Memory Security 연구들은 이 문제를 Session 단위 Prompt Injection과 별도로 평가하고 있다.
+2026년 공개된 여러 memory-security preprint와 Microsoft의 보안 guidance는 이 문제를 단발성 Prompt Injection과 구분해 다룬다. 공통점은 악성 정보가 장기 Memory에 남아 원래 입력 Context가 사라진 뒤에도 이후 Action에 영향을 줄 수 있다는 점이다.
 
 ## Write-time Filter만으로 충분하지 않다
 
-악성 Memory가 노골적이라면 쉽게 차단할 수 있다.
+MemPoison preprint는 baseline write-time defense가 직접적인 단일-record 공격에는 효과가 있어도, 여러 Memory가 결합되는 compositional attack이나 특정 Context에서 활성화되는 dormant attack에는 구조적 한계가 있을 수 있음을 보고한다.
+
+악성 Memory가 노골적이라면 비교적 쉽게 차단할 수 있다.
 
 예:
 
@@ -261,7 +263,7 @@ Source와 Scope가 명확하고 Risk가 낮다.
 
 현재 Agent가 직접 사용하면 안 되지만 조사/감사 대상으로 보존한다.
 
-이 구조는 최근 Memory Security 제안들과도 연결된다.
+이 구조는 최근 Memory Security 연구에서 제안되는 lifecycle 관점과 맞닿아 있다. 다만 Accept / Review / Quarantine 자체는 이 책의 설명용 policy model이다.
 
 ## Retrieval-time Policy
 

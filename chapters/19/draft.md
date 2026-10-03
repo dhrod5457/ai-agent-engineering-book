@@ -184,7 +184,7 @@ tau-bench 계열에서는 반복 신뢰성을 보는 Metric도 제안돼 왔다.
 
 ## pass@k와 pass^k
 
-두 Metric은 목적이 다르다.
+두 Metric은 목적이 다르다. 아래 식은 직관을 설명하기 위한 것으로, 실제 benchmark마다 계산 정의는 다시 확인해야 한다.
 
 개념적으로:
 
@@ -220,7 +220,7 @@ Anthropic의 Agentic Coding Eval 분석에서도 Infrastructure 설정이 결과
 
 ## Benchmark Result는 System Result다
 
-Agent Benchmark Score를 다음처럼 보는 편이 낫다.
+Agent Benchmark 결과를 다음처럼 시스템 전체의 결과로 보는 편이 낫다.
 
 ~~~text
 Benchmark Result

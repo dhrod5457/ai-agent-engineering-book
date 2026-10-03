@@ -115,7 +115,7 @@ Compare
 
 ## Repeated Trials
 
-Anthropic이 공개한 Automated Alignment Researchers 실험에서는 일부 비교에서 Run-to-run variance가 Component 차이보다 클 수 있다고 보고한다. 이 관찰은 해당 실험 조건의 결과이며 일반적인 수치 한계로 확장하지 않는다.
+Anthropic이 공개한 Automated Alignment Researchers harness ablation에서는 일부 조건을 한 번씩 비교했고, 저자들은 반복 조건에서 관찰한 run-to-run variance가 조건 간 차이보다 클 수 있어 결과를 suggestive하게 해석한다고 밝힌다. 이 사례를 일반 법칙으로 확장하지 않고, 오히려 repeated trial이 필요한 근거로 사용한다.
 
 따라서:
 
@@ -336,27 +336,9 @@ B:
 Executor + Evaluator
 ~~~
 
-각각 50회 반복했다고 하자.
+반복 실행에서 Success 차이는 거의 없는데 Planner가 Latency와 Cost를 일관되게 늘린다고 하자. 이 경우 Planner가 현재 Model과 Task Distribution에서 Load-bearing Component인지 다시 검토할 수 있다.
 
-결과:
-
-~~~text
-Long-horizon Success
-A 82%
-B 83%
-
-Latency
-A +28%
-
-Cost
-A +25%
-~~~
-
-이 조건이라면 Planner가 Load-bearing Component인지 의심할 수 있다.
-
-물론 Dataset과 Variance를 확인해야 한다.
-
-한 번의 결과만으로 제거하지 않는다.
+다만 Dataset과 run-to-run variance를 함께 확인해야 한다. 한 번의 결과만으로 제거하지 않는다.
 
 ## Component가 해결한 Failure를 기록한다
 

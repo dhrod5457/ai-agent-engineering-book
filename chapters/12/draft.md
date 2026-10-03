@@ -150,13 +150,13 @@ auth package 수정 시 integration test를 반드시 실행한다.
 이 시스템에서는 package install 실패 시 proxy config를 먼저 확인한다.
 ~~~
 
-### Long-term Relationship Context
+### 반복되는 프로젝트 맥락
 
 ~~~text
-이 프로젝트의 기본 branch는 develop이다.
+이 프로젝트는 기본적으로 develop branch에서 작업한다.
 ~~~
 
-단, 마지막 예처럼 외부에서 바뀔 수 있는 사실은 Source of Truth 확인이 필요하다.
+다만 이런 사실은 외부에서 바뀔 수 있다. Memory는 탐색의 출발점으로 쓸 수 있지만 실제 Action 전에는 현재 Source of Truth를 다시 확인해야 한다.
 
 ## Memory가 필요하지 않은 경우
 
@@ -309,7 +309,7 @@ Memory Retrieval
 
 과거 실행을 모두 Context에 넣을 필요는 없다.
 
-OpenAI Sandbox Agent Memory 사례처럼 Memory Summary와 Index를 먼저 제공하고, 필요할 때 상세 Rollout을 조회하는 방식이 가능하다.
+Memory Summary와 Index를 먼저 제공하고 필요할 때 상세 기록을 조회하는 방식이 가능하다. 일부 Agent memory 구현에서도 이런 progressive retrieval 패턴을 사용한다.
 
 개념적으로:
 
@@ -375,7 +375,7 @@ by: mem-22
 
 이렇게 하면 충돌 해결이 쉬워진다.
 
-## Memory가 Agent Capability를 항상 높이지는 않는다
+## Memory가 항상 Agent Capability를 높이는 것은 아니다
 
 Memory를 추가하면 과거 경험을 재사용할 수 있다.
 

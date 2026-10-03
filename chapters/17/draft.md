@@ -157,7 +157,7 @@ Tool Name만으로 Risk를 결정하지 않는다.
 
 ## External Policy Evaluation
 
-Model이 "이 Action은 안전하다"고 판단하는 것을 최종 Authorization으로 사용하지 않는다.
+Model이 "이 Action은 안전하다"고 판단한 결과를 최종 Authorization으로 사용하지 않는다. 특히 Model이 같은 untrusted input에 노출돼 있다면 risk classification 자체도 deterministic policy를 거쳐야 한다.
 
 추천 구조:
 
@@ -190,7 +190,7 @@ Control Profile은 다음을 결정할 수 있다.
 
 AWS가 공개한 Agentic AI Lens에서는 모든 Action을 Human Review에 보내는 방식이 Approval Fatigue와 Rubber-stamp Review를 만들 수 있다고 지적한다. 이는 vendor guidance이며 업계 공통 표준으로 해석하지 않는다.
 
-Human은 다음 Action에 집중하는 편이 낫다.
+Human Review는 다음과 같이 판단 비용과 영향이 큰 Action에 집중하는 편이 낫다.
 
 - High-impact
 - Irreversible
@@ -349,11 +349,7 @@ Apply versioned policy
 Retry
 ~~~
 
-NVIDIA OpenShell의 Agent-driven Policy Management는 이런 방향의 사례를 보여준다.
-
-Agent는 필요한 Capability를 설명할 수 있다.
-
-Policy Authority는 외부에 남긴다.
+NVIDIA OpenShell의 Agent-driven Policy Management는 이런 방향의 한 사례다. Agent는 필요한 Capability나 최소 policy change를 제안할 수 있지만, Policy Authority와 실제 적용 권한은 외부에 남긴다.
 
 ## Effective Policy Manifest
 

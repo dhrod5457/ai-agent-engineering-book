@@ -133,34 +133,24 @@ Subagent
 
 Anthropic이 Managed Agents와 Long-running Harness 관련 자료에서 강조하는 부분도 이 지점이다. Harness는 모델이 못한다고 가정하는 부분을 보완하지만, 모델이 발전하면 그 가정이 오래된 것이 될 수 있다.
 
-따라서 Harness는 Model보다 느리게 변하는 고정 인프라가 아니다.
+따라서 Harness를 고정 인프라처럼 취급해서는 안 된다. Model이 바뀌면 기존 Scaffold의 필요성도 다시 측정해야 한다.
 
-Model 변화와 함께 다시 측정해야 하는 Software다.
+## Harness, Runtime, Durable State를 분리한다
 
-## Brain, Hands, Session
-
-Agent 구조를 설명할 때 유용한 분리는 다음과 같다.
+운영 책임은 비유보다 실제 lifecycle로 나누는 편이 명확하다.
 
 ~~~text
-Brain
-= Model + Harness
+Harness
+= 실행 제어 로직
 
-Hands
-= Sandbox + Executable Tools
+Runtime
+= 실제 Tool과 Side Effect가 실행되는 환경
 
-Session
-= 실행 History / State
+Durable State
+= Process와 Runtime이 사라져도 남아야 하는 실행 정보
 ~~~
 
-이 분리는 모든 시스템에 그대로 적용해야 하는 표준은 아니다.
-
-하지만 운영 책임을 분리하는 데 유용하다.
-
-Brain 프로세스가 죽어도 Session이 남아 있으면 복구할 수 있다.
-
-Hands에 해당하는 Sandbox가 손상되면 새 Runtime을 만들 수 있다.
-
-이런 구조에서는 Runtime을 Durable State로 사용할 필요가 줄어든다.
+이렇게 분리하면 Runtime을 교체하거나 폐기해도 Goal과 Progress를 복구할 수 있다.
 
 ~~~text
 Disposable Runtime
@@ -168,7 +158,7 @@ Disposable Runtime
 Durable State
 ~~~
 
-라는 조합이 가능해진다.
+이 조합은 Long-running Agent의 복구 구조를 단순하게 만든다. Session, Workspace, Goal, Memory의 세부 경계는 Part III에서 다시 정리한다.
 
 ## Harness가 너무 많은 일을 하면 생기는 문제
 
@@ -234,28 +224,13 @@ Baseline + Planner
 - Security
 - Repeated Reliability
 
-Planner가 평균 Success를 2% 올리지만 Latency를 50% 늘린다면 모든 Task에 적용하는 것이 좋은 선택인지 다시 판단해야 한다.
+예를 들어 Planner가 성공률을 조금 높이더라도 Latency와 Cost를 크게 늘린다면 모든 Task에 적용할 이유는 없다. 실제 판단은 반복 Eval과 Task별 효과를 보고 내려야 한다.
 
 ## Component Record
 
-Harness가 커지면 각 Component의 존재 이유를 기록하는 것이 좋다.
+Harness가 커지면 각 Component가 어떤 Failure 때문에 들어왔고, 어떤 Eval이 효과를 확인했으며, 마지막으로 어느 Model에서 검증됐는지 기록하는 편이 좋다.
 
-예:
-
-~~~text
-component: progress_artifact
-introduced_for: premature_completion
-expected_effect: improve_long_horizon_completion
-eval_cases: LH-012, LH-019, LH-031
-introduced_model: model-A
-last_verified_model: model-C
-owner: agent-platform
-removal_candidate: false
-~~~
-
-이런 Metadata는 나중에 Model Upgrade Audit에서 유용하다.
-
-"왜 이 코드가 있는가"를 Commit History에서 추측하지 않아도 된다.
+이 기록은 Model Upgrade 때 제거 후보를 찾고 "왜 이 Component가 존재하는가"를 Commit History에서 다시 추측하는 비용을 줄인다. 구체적인 Record와 Ablation 절차는 21장에서 다룬다.
 
 ## Harness와 State를 분리한다
 
@@ -391,9 +366,7 @@ Long-running Recovery가 필요하면 Durable State를 추가한다.
 
 Specialist Isolation의 이득이 Coordination Cost보다 커지면 Multi-Agent를 검토한다.
 
-기능은 요구에서 나온다.
-
-Agent 유행에서 나오지 않는다.
+Component는 유행이 아니라 반복해서 관찰된 요구와 실패에서 추가한다.
 
 ## Part I에서 남은 질문
 
@@ -420,6 +393,6 @@ Agent가 사용할 수 있는 정보는 많지만 Model의 Attention은 제한�
 - Anthropic, Harness Design for Long-running Application Development
 - Anthropic, Scaling Managed Agents
 - OpenAI Agents SDK
-- research/topics/04-harness-long-running.md
+- research/topics/04-harness-Long-running.md
 - research/topics/14-coding-agent-harness-comparison.md
 - research/topics/22-harness-ablation-and-minimalism.md

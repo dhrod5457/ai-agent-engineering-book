@@ -86,7 +86,7 @@ Application과 Agent를 같은 Identity로 두면 어떤 Agent가 어떤 권한�
 
 특정 Agent를 구분하는 Principal이다.
 
-Microsoft Entra Agent ID 같은 최신 Identity 제품은 Agent를 별도 Service Principal 계열로 다루는 방향을 보여준다.
+Microsoft Entra Agent ID는 Agent를 별도 identity construct로 다루는 한 구현 사례다. Entra에서는 agent identity를 특수한 service principal로 표현하지만, 이를 모든 Agent 시스템의 표준 identity model로 일반화하지 않는다.
 
 Agent Identity에는 다음 Metadata가 연결될 수 있다.
 
@@ -97,7 +97,7 @@ Agent Identity에는 다음 Metadata가 연결될 수 있다.
 - environment
 - risk profile
 
-Agent가 코드 객체이기만 한 것이 아니라 Security Principal이 되는 셈이다.
+핵심은 Agent가 단순 코드 객체를 넘어 독립적인 Security Principal로 관리될 수 있다는 점이다.
 
 ## Workload Identity
 

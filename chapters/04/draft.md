@@ -46,7 +46,7 @@ Memory 전체도 Context가 아니다.
 
 이 구분이 중요한 이유는 Context Window가 저장장치가 아니기 때문이다.
 
-## More Context는 Better Agent가 아니다
+## More Context가 자동으로 Better Agent를 만들지는 않는다
 
 Context가 너무 적으면 필요한 정보가 빠진다.
 
@@ -65,7 +65,7 @@ Context가 너무 적으면 필요한 정보가 빠진다.
 - 200개의 Issue
 - 전체 Conversation History
 
-관련 정보가 Context 안에 존재하더라도 실제 판단에 사용될 확률이 높아진다고 단정할 수 없다.
+관련 정보가 Context 안에 존재한다는 사실만으로 판단 품질이 자동으로 높아지지는 않는다.
 
 ### Stale Context
 
@@ -278,7 +278,7 @@ Tool은 신뢰된 코드일 수 있다.
 - summarization
 - relevant section selection
 
-Tool Output Filtering은 Context Engineering이자 Security Boundary다.
+Tool Output Filtering은 Context Engineering이면서 동시에 Security Boundary가 될 수 있다.
 
 ## Conversation History는 State 전체가 아니다
 
@@ -311,18 +311,7 @@ assistant:
 
 이 정보는 Model이 읽을 수도 있지만 그보다 먼저 시스템이 정확하게 관리해야 한다.
 
-따라서:
-
-~~~text
-Conversation History
-⊂ Execution State
-~~~
-
-로 보는 편이 낫다.
-
-Conversation은 Context Source 중 하나다.
-
-State Store 전체가 아니다.
+따라서 Conversation History는 실행 상태 전체가 아니라 Context를 구성하는 Source 중 하나로 보는 편이 낫다. Tool 실행 ID, Approval, Artifact Checksum처럼 시스템이 정확하게 관리해야 하는 사실은 별도의 구조화된 State로 유지한다.
 
 ## Compaction은 유용하지만 한계가 있다
 
@@ -476,11 +465,7 @@ Tool Interface
 External World
 ~~~
 
-Context Engine은 외부 세계를 Model이 판단 가능한 형태로 Projection한다.
-
-Tool Interface는 Model의 결정을 외부 세계의 Action으로 변환한다.
-
-Agent Harness는 이 두 Interface 사이의 Loop를 제어한다.
+Context Engine은 외부 세계의 정보를 현재 판단에 필요한 형태로 Projection한다. Tool Interface는 Model의 결정을 외부 Action으로 연결하고, Harness는 이 두 Interface 사이의 Loop를 제어한다.
 
 ## 이 장에서 가져갈 것
 

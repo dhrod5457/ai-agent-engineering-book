@@ -32,7 +32,7 @@ Credential Boundary를 별도 계층으로 보는 이유다.
 
 ## Agent는 Intent를 만들고 Gateway가 Credential을 사용한다
 
-추천할 수 있는 구조는 다음과 같다.
+검토할 수 있는 기본 구조는 다음과 같다.
 
 ~~~text
 Agent

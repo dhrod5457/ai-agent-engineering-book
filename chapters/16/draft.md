@@ -129,33 +129,25 @@ Agent가 Shell을 실행한다면 Child Process Capability도 중요하다.
 
 Workload Risk에 따라 선택한다.
 
-## Isolation Level
+## Isolation 접근은 서로 다른 Trade-off를 가진다
 
-격리 기술은 여러 층이 있다.
-
-개념적으로:
+Agent Runtime에 사용할 수 있는 격리 접근은 여러 가지다.
 
 ~~~text
 OS Policy / Sandbox
-        ↓
 Container
-        ↓
 Userspace Kernel
-        ↓
 MicroVM
-        ↓
 Dedicated VM / Host
 ~~~
 
-위로 갈수록 무조건 좋다는 뜻은 아니다.
-
-Startup, Density, Compatibility, GPU, Debugging Cost가 달라진다.
+이 순서를 절대적인 보안 등급으로 읽어서는 안 된다. 실제 선택은 Threat Model, Startup, Density, Compatibility, GPU, Debugging Cost에 따라 달라진다.
 
 ## OS-level Sandbox
 
 Local Coding Agent에서는 OS-level Sandbox가 실용적일 수 있다.
 
-Anthropic Claude Code는 Linux의 bubblewrap 계열과 macOS Seatbelt 등을 사용해 Filesystem과 Network Boundary를 강화하는 접근을 공개했다.
+Anthropic은 Claude Code의 Bash sandbox에 Linux bubblewrap과 macOS Seatbelt 같은 OS primitive를 사용하는 방식을 공개했다.
 
 장점:
 
