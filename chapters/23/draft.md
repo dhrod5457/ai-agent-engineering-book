@@ -1,6 +1,6 @@
 # 23장. Agent-as-Tool과 Handoff
 
-두 Agent가 협업한다고 하자.
+두 에이전트가 협업한다고 하자.
 
 첫 번째 구조:
 
@@ -22,17 +22,11 @@ Billing Agent
   ↓ continue with user
 ~~~
 
-둘 다 Agent 사이의 호출처럼 보인다.
-
-하지만 Ownership이 다르다.
-
-이 장에서는 설명을 위해 이를 Agent-as-Tool과 Handoff라는 두 pattern으로 나눈다. 제품과 Framework마다 용어와 세부 semantics는 다를 수 있으므로 이름보다 ownership 차이에 집중한다.
+둘 다 에이전트 사이의 호출처럼 보이지만, 작업을 책임지는 주체가 다르다. 이 장에서는 설명을 위해 이를 Agent-as-Tool과 작업 인계라는 두 pattern으로 나눈다. 제품과 프레임워크마다 용어와 세부 semantics는 다를 수 있으므로 이름보다 담당 책임 차이에 집중한다.
 
 ## Agent-as-Tool
 
-Manager가 전체 Goal과 User Interaction을 계속 소유한다.
-
-Specialist Agent는 bounded subtask를 수행하고 Result를 반환한다.
+전체 작업을 관리하는 에이전트가 전체 목표와 User Interaction을 계속 소유한다. Specialist Agent는 bounded subtask를 수행하고 결과를 반환한다.
 
 ~~~text
 Manager
@@ -41,39 +35,39 @@ Manager
   └─ Security Agent
 ~~~
 
-Specialist는 Tool과 비슷한 역할을 한다.
+전문 역할의 에이전트는 도구와 비슷한 역할을 한다.
 
 ## 장점
 
 ### Ownership이 명확하다
 
-최종 Completion은 Manager가 판단한다.
+최종 완료는 전체 작업을 관리하는 에이전트가 판단한다.
 
 ### Context를 격리할 수 있다
 
-Specialist에게 필요한 정보만 제공할 수 있다.
+전문 역할의 에이전트에게 필요한 정보만 제공할 수 있다.
 
 ### Permission을 좁힐 수 있다
 
-Research Agent는 read-only일 수 있다.
+조사 에이전트는 read-only일 수 있다.
 
 ## 단점
 
 ### Manager Bottleneck
 
-모든 Result가 Manager로 돌아온다.
+모든 결과가 전체 작업을 관리하는 에이전트로 돌아온다.
 
 ### Context Concentration
 
-Manager가 전체 State를 많이 들고 있어야 할 수 있다.
+전체 작업을 관리하는 에이전트가 전체 상태를 많이 들고 있어야 할 수 있다.
 
 ### Result Interpretation
 
-Specialist Result를 Manager가 다시 해석해야 한다.
+Specialist Result를 전체 작업을 관리하는 에이전트가 다시 해석해야 한다.
 
 ## Handoff
 
-Handoff는 Work 또는 Interaction Ownership을 다른 Agent에게 넘긴다.
+작업 인계는 업무 또는 Interaction Ownership을 다른 에이전트에게 넘긴다.
 
 ~~~text
 Agent A
@@ -82,13 +76,11 @@ Agent B
   ↓ owns next interaction
 ~~~
 
-예를 들어 학생 상담 Agent가 장학 관련 문의를 Scholarship Agent로 넘긴다.
-
-이후 Scholarship Agent가 사용자와 직접 Interaction할 수 있다.
+예를 들어 학생 상담 에이전트가 장학 관련 문의를 Scholarship Agent로 넘긴다. 이후 Scholarship Agent가 사용자와 직접 Interaction할 수 있다.
 
 ## Handoff Contract
 
-Ownership을 넘길 때 무엇을 전달할지 명확해야 한다.
+담당 책임을 넘길 때 무엇을 전달할지 명확해야 한다.
 
 최소 후보:
 
@@ -102,13 +94,11 @@ Pending Questions
 Authority / Permission Context
 ~~~
 
-Conversation Summary 하나만 넘기면 중요한 State가 빠질 수 있다.
+대화 요약 하나만 넘기면 중요한 상태가 빠질 수 있다.
 
 ## Context Transfer
 
-Handoff는 모든 Context를 복제하는 것이 아니다.
-
-Agent B가 필요한 Context만 Projection한다.
+작업 인계는 모든 컨텍스트(Context: 모델에 전달하는 정보)를 복제하는 것이 아니다. 에이전트 B가 필요한 컨텍스트만 필요한 정보를 골라 구성한다.
 
 ~~~text
 State Plane
@@ -122,11 +112,7 @@ Agent B Context
 
 ## Authority Transfer
 
-가장 중요한 문제 중 하나다.
-
-Agent A가 가진 권한이 Agent B에게 자동으로 전달되는가.
-
-항상 그렇지 않다.
+가장 중요한 문제 중 하나다. 에이전트 A가 가진 권한이 에이전트 B에게 자동으로 전달되는가. 항상 그렇지 않다.
 
 예:
 
@@ -138,31 +124,25 @@ Agent B
 → scholarship decision support
 ~~~
 
-Agent B는 다른 Tool Scope를 가질 수 있다.
-
-Handoff에는 Work Ownership 전달뿐 아니라 receiving Agent의 Effective Authorization 재평가가 필요하다.
+에이전트 B는 다른 도구의 권한 범위를 가질 수 있다. 작업 인계에는 업무를 책임지는 주체 전달뿐 아니라 receiving Agent의 실제로 적용되는 권한 재평가가 필요하다.
 
 ## State Ownership
 
-Handoff 후 Goal State를 누가 수정하는가.
-
-두 Agent가 동시에 같은 Goal을 수정하면 Conflict가 생길 수 있다.
+작업 인계 후 Goal State를 누가 수정하는가. 두 에이전트가 동시에 같은 목표를 수정하면 충돌이 생길 수 있다.
 
 패턴:
 
 ### Single Owner
 
-현재 Active Agent만 Goal을 수정.
+현재 Active Agent만 목표를 수정.
 
 ### Shared State with Version
 
-여러 Agent가 Versioned State를 수정.
+여러 에이전트가 Versioned State를 수정.
 
 ### Parent/Child Goal
 
-Manager Goal 아래 Specialist Subgoal을 둔다.
-
-각 시스템에 맞게 선택한다.
+Manager Goal 아래 Specialist Subgoal을 둔다. 각 시스템에 맞게 선택한다.
 
 ## Result Contract
 
@@ -178,7 +158,7 @@ uncertainties
 recommended_next_action
 ~~~
 
-"검토 완료"만 반환하면 Manager가 검토 내용을 알 수 없다.
+"검토 완료"만 반환하면 전체 작업을 관리하는 에이전트가 검토 내용을 알 수 없다.
 
 ## Independent Verifier
 
@@ -195,17 +175,17 @@ Verifier
 
 하지만 독립성이 구조적으로 보장돼야 한다.
 
-가능하면 Verifier가:
+가능하면 검증 담당자가:
 
-- 다른 Tool
-- 다른 Evidence
+- 다른 도구
+- 다른 근거
 - deterministic test
 
 를 사용할 수 있다.
 
 ## Failure
 
-Specialist가 실패하면 Parent가 어떻게 처리할지 정한다.
+전문 역할의 에이전트가 실패하면 Parent가 어떻게 처리할지 정한다.
 
 ~~~text
 Specialist Failed
@@ -215,7 +195,7 @@ Specialist Failed
   └─ escalate
 ~~~
 
-Handoff 뒤 Failure가 발생하면 Ownership을 되돌릴지 정해야 한다.
+작업 인계 뒤 실패가 발생하면 담당 책임을 되돌릴지 정해야 한다.
 
 ## 작은 예: 코드 변경과 Security Review
 
@@ -240,17 +220,11 @@ severity
 evidence
 ~~~
 
-Manager가 수정 여부를 결정하고 Completion을 유지한다.
-
-여기서는 Handoff보다 Agent-as-Tool이 자연스럽다.
-
-반면 Customer Support에서 Billing 문제를 전문 Agent에게 넘긴다면 Handoff가 더 자연스러울 수 있다.
+전체 작업을 관리하는 에이전트가 수정 여부를 결정하고 완료를 유지한다. 여기서는 작업 인계보다 Agent-as-Tool이 자연스럽다. 반면 Customer Support에서 Billing 문제를 전문 에이전트에게 넘긴다면 작업 인계가 더 자연스러울 수 있다.
 
 ## Local Subagent와 Remote Agent
 
-같은 Process 안의 Subagent 호출과 독립 Service의 Agent 호출은 운영 경계가 다르다.
-
-Remote Agent에는 다음이 필요할 수 있다.
+같은 프로세스 안의 하위 에이전트 호출과 독립 서비스의 에이전트 호출은 운영 경계가 다르다. 원격 에이전트에는 다음이 필요할 수 있다.
 
 - network
 - authentication
@@ -273,11 +247,7 @@ Handoff
 = Ownership transfers
 ~~~
 
-그리고 Handoff에서는 Context뿐 아니라 State와 Authority도 전달 경계를 가져야 한다.
-
-다음 장에서는 이 협업이 같은 Application 내부가 아니라 독립 Agent System 사이에서 일어날 때 필요한 Protocol Boundary를 본다.
-
-A2A와 Remote Agent를 다룬다.
+그리고 작업 인계에서는 컨텍스트뿐 아니라 상태와 판단하거나 실행할 권한도 전달 경계를 가져야 한다. 다음 장에서는 이 협업이 같은 애플리케이션 내부가 아니라 독립 에이전트 시스템 사이에서 일어날 때 필요한 Protocol Boundary를 본다. A2A와 원격 에이전트를 다룬다.
 
 ## 주요 근거
 

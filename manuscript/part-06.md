@@ -10,31 +10,21 @@ Trace
 → Harness Audit
 ~~~
 
-최종 Output만 보지 않고 실행 경로, 실제 Outcome, 반복 Reliability, Component의 marginal value를 함께 본다.
+최종 출력만 보지 않고 실행 경로, 실제 실제 환경에서 확인한 결과, 반복 반복 실행의 신뢰성, 구성 요소의 marginal value를 함께 본다.
 
 <!-- source-draft: chapters/18/draft.md -->
 
 ## 18장. Trace 없이는 Agent를 디버깅할 수 없다
 
-Agent가 실패했다.
-
-최종 출력만 보면 이유를 알기 어렵다.
-
-잘못된 Tool을 골랐는가. 올바른 Tool을 잘못된 Argument로 호출했는가. Tool은 성공했는데 Result를 잘못 해석했는가. Approval이 막혔는가. Runtime이 죽었는가. 오래된 State를 사용했는가.
-
-Agent 시스템은 여러 Layer가 이어져 결과를 만든다.
-
-그래서 Final Output만 보는 Debugging으로는 부족하다.
+에이전트가 실패했을 때 최종 출력만으로는 그 이유를 알기 어렵다. 잘못된 도구를 골랐는가. 올바른 도구를 잘못된 인자로 호출했는가. 도구는 성공했는데 결과를 잘못 해석했는가. 승인이 막혔는가. 실행 환경이 죽었는가. 오래된 상태를 사용했는가. 에이전트 시스템은 여러 계층이 이어져 결과를 만든다. 그래서 최종 출력만 보는 오류 원인 분석으로는 부족하다.
 
 ### Agent Failure는 경로를 따라 발생한다
 
-예를 들어 다음 Goal이 있다.
+예를 들어 다음 목표가 있다.
 
-> 특정 Issue를 읽고 필요한 Code 수정 후 PR을 만들어라.
+> 특정 이슈를 읽고 필요한 Code 수정 후 PR을 만들어라.
 
-최종 결과는 "PR 생성 실패"일 수 있다.
-
-가능한 원인은 많다.
+최종 결과는 "PR 생성 실패"일 수 있다. 가능한 원인은 많다.
 
 ~~~text
 Context Error
@@ -63,17 +53,15 @@ Verification Error
 
 ### Trace란 무엇인가
 
-이 책에서 Trace는 다음처럼 본다.
+이 책에서 실행 추적 기록(Trace)은 다음처럼 본다.
 
-> **Agent 실행에서 Model, Tool, State, Policy, Runtime의 주요 Event와 관계를 다시 구성할 수 있는 관찰 데이터.**
+> **에이전트 실행에서 모델, 도구, 상태, 정책, 실행 환경의 주요 이벤트와 관계를 다시 구성할 수 있는 관찰 데이터다.**
 
-Logging과 겹치지만 목적이 더 구조적이다. 단순 Text Log를 쌓는 것이 아니라 Execution Path와 원인 관계를 다시 구성하는 데 초점을 둔다.
-
-Agent State Plane의 Event History가 Trace의 Source가 될 수는 있지만 둘을 같은 저장소나 같은 lifecycle로 만들 필요는 없다. Event History는 recovery를 위한 durable fact에 가깝고, Trace는 diagnosis와 evaluation을 위한 관찰 view까지 포함할 수 있다.
+Logging과 겹치지만 목적이 더 구조적이다. 단순 Text Log를 쌓는 것이 아니라 Execution Path와 원인 관계를 다시 구성하는 데 초점을 둔다. 에이전트 상태 관리 계층(Agent State Plane: 실행이 중단돼도 목표와 진행 상태를 보존하는 계층)의 이벤트 이력이 실행 추적 기록의 정보 원본이 될 수는 있지만 둘을 같은 저장소나 같은 유지 과정으로 만들 필요는 없다. 이벤트 이력은 recovery를 위한 durable fact에 가깝고, 실행 추적 기록은 diagnosis와 evaluation을 위한 관찰 view까지 포함할 수 있다.
 
 ### 최소 Trace 후보
 
-다음 Event를 남길 수 있다.
+다음 이벤트를 남길 수 있다.
 
 ~~~text
 run.started
@@ -103,13 +91,11 @@ run.completed
 run.failed
 ~~~
 
-모든 시스템이 이 Event 이름을 그대로 써야 하는 것은 아니다.
-
-핵심은 Layer 간 Causation을 추적할 수 있게 하는 것이다.
+모든 시스템이 이 이벤트 이름을 그대로 써야 하는 것은 아니다. 핵심은 계층 간 Causation을 추적할 수 있게 하는 것이다.
 
 ### Correlation과 Causation
 
-한 Tool Call이 어떤 Model Decision에서 나왔는지 연결해야 한다.
+한 도구 호출이 어떤 Model Decision에서 나왔는지 연결해야 한다.
 
 예:
 
@@ -126,13 +112,11 @@ id: t-21
 caused_by: t-20
 ~~~
 
-이 관계가 있으면 Tool 실패가 어떤 Decision에서 시작됐는지 찾을 수 있다.
+이 관계가 있으면 도구 실패가 어떤 판단에서 시작됐는지 찾을 수 있다.
 
 ### Trace와 Chain-of-thought는 다르다
 
-Agent Debugging을 위해 Model의 private reasoning text 전체를 저장해야 하는 것은 아니다.
-
-오히려 다음처럼 구조화된 Decision Surface가 더 유용할 수 있다.
+Agent Debugging을 위해 모델의 private reasoning text 전체를 저장해야 하는 것은 아니다. 오히려 다음처럼 구조화된 Decision Surface가 더 유용할 수 있다.
 
 ~~~text
 selected_tool
@@ -143,11 +127,11 @@ output_contract
 failure_class
 ~~~
 
-Trace의 목표는 private reasoning을 최대한 많이 저장하는 것이 아니라 **실제 시스템 행동과 결정에 사용된 외부 근거를 재구성하는 것**이다.
+실행 추적 기록의 목표는 private reasoning을 최대한 많이 저장하는 것이 아니라 **실제 시스템 행동과 결정에 사용된 외부 근거를 재구성하는 것**이다.
 
 ### Model Trace
 
-Model Call에는 다음 Metadata가 유용할 수 있다.
+모델 호출에는 다음 부가 정보가 유용할 수 있다.
 
 - model/version
 - input reference
@@ -157,13 +141,11 @@ Model Call에는 다음 Metadata가 유용할 수 있다.
 - structured output validity
 - selected tools
 
-Sensitive Context 전체를 무조건 저장하지 않는다.
-
-Reference나 Redaction을 사용할 수 있다.
+Sensitive Context 전체를 무조건 저장하지 않는다. 참조나 Redaction을 사용할 수 있다.
 
 ### Tool Trace
 
-Tool Call에는 다음이 중요하다.
+도구 호출에는 다음이 중요하다.
 
 ~~~text
 tool
@@ -177,11 +159,11 @@ result_ref
 retryable
 ~~~
 
-특히 External Mutation에서는 Idempotency와 Recovery에 Trace가 직접 사용될 수 있다.
+특히 외부 상태 변경에서는 멱등성(Idempotency: 같은 요청을 반복해도 결과가 중복되지 않는 성질)과 복구에 실행 추적 기록이 직접 사용될 수 있다.
 
 ### State Trace
 
-Agent State Plane의 변경도 Trace와 연결할 수 있다.
+에이전트 상태 관리 계층의 변경도 실행 추적 기록과 연결할 수 있다.
 
 예:
 
@@ -193,11 +175,11 @@ artifact.verified
 memory.retrieved
 ~~~
 
-이렇게 하면 "왜 Model에게 이 Context가 들어갔는가"도 추적할 수 있다.
+이렇게 하면 "왜 모델에게 이 컨텍스트(Context: 모델에 전달하는 정보)가 들어갔는가"도 추적할 수 있다.
 
 ### Policy Trace
 
-Policy가 Action을 막았다면 이유가 남아야 한다.
+정책이 행동을 막았다면 이유가 남아야 한다.
 
 ~~~text
 decision: deny
@@ -206,11 +188,11 @@ reason: approval_required
 resource: prod-cluster-a
 ~~~
 
-그렇지 않으면 Agent는 같은 Action을 반복하거나 운영자가 Deny 이유를 알기 어렵다.
+그렇지 않으면 에이전트는 같은 행동을 반복하거나 운영자가 거부 이유를 알기 어렵다.
 
 ### Runtime Trace
 
-다음 실패는 Model과 무관할 수 있다.
+다음 실패는 모델과 무관할 수 있다.
 
 - OOM
 - Container startup failure
@@ -218,7 +200,7 @@ resource: prod-cluster-a
 - DNS failure
 - Package registry outage
 
-이런 Event를 Model Failure와 같은 Bucket에 넣지 않는다.
+이런 이벤트를 Model Failure와 같은 Bucket에 넣지 않는다.
 
 ### Audit Trace와 Debug Trace
 
@@ -230,19 +212,11 @@ resource: prod-cluster-a
 
 #### Debug
 
-왜 이 결과가 나왔는가.
-
-Audit에는 Identity, Resource, Policy Result가 중요하다.
-
-Debug에는 Context Version, Tool Output, Failure Class가 더 중요할 수 있다.
-
-모든 데이터를 한 Trace Store에 넣을 필요는 없지만 서로 연결할 수 있어야 한다.
+왜 이 결과가 나왔는가. 감사에는 신원, 접근 대상 자원, Policy Result가 중요하다. Debug에는 Context Version, Tool Output, Failure Class가 더 중요할 수 있다. 모든 데이터를 한 Trace Store에 넣을 필요는 없지만 서로 연결할 수 있어야 한다.
 
 ### Privacy와 Sensitive Data
 
-Trace는 많은 정보를 담는다.
-
-그래서 다음이 필요하다.
+실행 추적 기록은 많은 정보를 담는다. 그래서 다음이 필요하다.
 
 - Redaction
 - Access Control
@@ -255,9 +229,7 @@ Trace는 많은 정보를 담는다.
 
 ### Trace Sampling
 
-모든 Run의 모든 Event를 장기 보존하면 비용이 커질 수 있다.
-
-다음 전략을 쓸 수 있다.
+모든 개별 실행의 모든 이벤트를 장기 보존하면 비용이 커질 수 있다. 다음 전략을 쓸 수 있다.
 
 ~~~text
 All Runs
@@ -277,9 +249,7 @@ Sampled Successful Runs
 
 ### Trace가 Eval로 이어진다
 
-Trace는 단순 운영 로그가 아니다.
-
-실패 Run을 Eval Case로 승격할 수 있다.
+실행 추적 기록은 단순 운영 로그가 아니다. 실패한 개별 실행을 평가 사례로 승격할 수 있다.
 
 ~~~text
 Production Failure
@@ -301,7 +271,7 @@ Reusable Eval Case
 Task failed
 ~~~
 
-Trace:
+실행 추적 기록:
 
 ~~~text
 context.built
@@ -325,13 +295,11 @@ tool.failed
 same reason
 ~~~
 
-원인은 Model 자체일 수도 있지만 Tool Surface와 Retry Policy 문제일 수도 있다.
-
-Trace가 없으면 "모델이 멍청했다"로 끝날 수 있다.
+원인은 모델 자체일 수도 있지만 사용 가능한 도구의 범위와 재시도 정책 문제일 수도 있다. 실행 추적 기록이 없으면 "모델이 멍청했다"로 끝날 수 있다.
 
 ### Trace Schema도 Versioning 대상이다
 
-Agent Architecture가 바뀌면 Trace Event도 변한다.
+에이전트 설계 구조가 바뀌면 실행 추적 이벤트도 변한다.
 
 예:
 
@@ -343,13 +311,13 @@ tool.completed v2
 + policy_version
 ~~~
 
-Old Run과 New Run을 비교하려면 Schema Version을 남기는 것이 좋다.
+이전 실행과 새 실행을 비교하려면 Schema Version을 남기는 것이 좋다.
 
 ### Trace Quality
 
-Trace가 있다고 Debugging이 자동으로 쉬워지는 것은 아니다.
+실행 추적 기록이 있다고 오류 원인 분석이 자동으로 쉬워지는 것은 아니다.
 
-나쁜 Trace:
+나쁜 실행 추적 기록:
 
 ~~~text
 Agent started
@@ -360,7 +328,7 @@ Retrying
 Done
 ~~~
 
-좋은 Trace:
+좋은 실행 추적 기록:
 
 ~~~text
 run_id
@@ -373,13 +341,11 @@ source_version
 failure_class
 ~~~
 
-구조화된 Identifier가 있어야 Relation을 따라갈 수 있다.
+구조화된 식별자가 있어야 각 기록 사이의 관계를 따라갈 수 있다.
 
 ### 이 장에서 가져갈 것
 
-Agent는 여러 Layer의 상호작용으로 결과를 만든다.
-
-Final Output만 보면 실패 원인을 구분하기 어렵다.
+에이전트는 여러 계층의 상호작용으로 결과를 만든다. 최종 출력만 보면 실패 원인을 구분하기 어렵다.
 
 ~~~text
 Model
@@ -391,11 +357,7 @@ Runtime
 Verification
 ~~~
 
-이 경로를 다시 구성할 수 있게 하는 것이 Trace다.
-
-다음 장에서는 Trace를 보고 "왜 실패했는가"를 넘어서 "이 Agent가 얼마나 잘하는가"를 측정한다.
-
-Output, Trajectory, Outcome, Reliability를 함께 보는 Agent Evaluation으로 넘어간다.
+이 경로를 다시 구성할 수 있게 하는 것이 실행 추적 기록이다. 다음 장에서는 실행 추적 기록을 보고 "왜 실패했는가"를 넘어서 "이 에이전트가 얼마나 잘하는가"를 측정한다. 출력, 실행 경로, 실제 환경에서 확인한 결과, 반복 실행의 신뢰성을 함께 보는 에이전트 평가으로 넘어간다.
 
 ### Source Notes
 
@@ -407,21 +369,11 @@ Output, Trajectory, Outcome, Reliability를 함께 보는 Agent Evaluation으로
 
 ## 19장. Agent를 어떻게 평가할 것인가
 
-Agent가 최종 답변을 맞혔다.
-
-그런데 중간에 허용되지 않은 Tool을 세 번 호출했고, 운영 Data를 불필요하게 읽었으며, 같은 Action을 두 번 실행했다.
-
-이 Agent를 성공했다고 볼 수 있을까.
-
-Agent Evaluation은 Final Output 하나로 끝나지 않는다.
+에이전트가 최종 답변을 맞혔다. 그런데 중간에 허용되지 않은 도구를 세 번 호출했고, 운영 데이터를 불필요하게 읽었으며, 같은 행동을 두 번 실행했다. 이 에이전트를 성공했다고 볼 수 있을까. 따라서 에이전트를 평가할 때는 최종 출력뿐 아니라 그 결과에 이르는 과정도 살펴야 한다.
 
 ### Output Eval의 한계
 
-일반 LLM 평가에서는 최종 Response 품질이 중요하다.
-
-Agent는 Environment를 바꾼다.
-
-따라서 다음도 평가 대상이 된다.
+일반 LLM 평가에서는 최종 응답 품질이 중요하다. 에이전트는 환경을 바꾼다. 따라서 다음도 평가 대상이 된다.
 
 ~~~text
 Output
@@ -439,36 +391,36 @@ Recovery
 
 ### Output Eval
 
-최종 답변이나 Artifact 자체를 평가한다.
+최종 답변이나 산출물 자체를 평가한다.
 
 예:
 
 - 답변 정확성
 - Report 품질
-- 생성 File 내용
+- 생성 파일 내용
 - Structured Output Schema
 
 필요하지만 충분하지 않다.
 
 ### Trajectory Eval
 
-Agent가 어떤 경로로 결과에 도달했는지 본다.
+에이전트가 어떤 경로로 결과에 도달했는지 본다.
 
 예:
 
-- 올바른 Tool을 선택했는가.
-- 불필요한 Tool을 반복했는가.
-- Handoff가 적절했는가.
+- 올바른 도구를 선택했는가.
+- 불필요한 도구를 반복했는가.
+- 작업 인계가 적절했는가.
 - Policy Violation 시도가 있었는가.
-- Retry가 합리적이었는가.
+- 재시도가 합리적이었는가.
 
-같은 Output이라도 Trajectory 품질이 다를 수 있다.
+같은 출력이라도 실행 경로 품질이 다를 수 있다.
 
 ### Outcome Eval
 
-가능하면 Environment의 최종 상태를 본다.
+가능하면 환경의 최종 상태를 본다.
 
-Coding Agent:
+코드 작업 에이전트:
 
 ~~~text
 tests pass?
@@ -489,11 +441,11 @@ Database Agent:
 expected final row state?
 ~~~
 
-Outcome Eval은 Proxy가 아니라 Completion 자체에 가깝다.
+Outcome Eval은 Proxy가 아니라 완료 자체에 가깝다.
 
 ### Deterministic Grader
 
-가능하면 Machine-checkable한 Outcome을 우선한다.
+가능하면 Machine-checkable한 실제 환경에서 확인한 결과를 우선한다.
 
 예:
 
@@ -522,11 +474,7 @@ Outcome Eval은 Proxy가 아니라 Completion 자체에 가깝다.
 - 문서 품질
 - 전략 적절성
 
-이때 Model Grader를 사용할 수 있다.
-
-하지만 Model Grader도 Version과 Prompt에 따라 달라질 수 있다.
-
-따라서 Grader 자체를 Versioned Component로 본다.
+이때 Model Grader를 사용할 수 있다. 하지만 Model Grader도 버전과 프롬프트에 따라 달라질 수 있다. 따라서 채점기 자체를 Versioned Component로 본다.
 
 ### Human Grader
 
@@ -537,27 +485,25 @@ Outcome Eval은 Proxy가 아니라 Completion 자체에 가깝다.
 - 고위험 Acceptance
 - Model Grader Calibration
 
-Human Review를 모든 Case에 쓰면 비용이 크다.
-
-Sample과 Calibration에 집중할 수 있다.
+사람의 검토를 모든 사례에 쓰면 비용이 크다. Sample과 Calibration에 집중할 수 있다.
 
 ### Security Eval
 
-Agent가 Task를 성공해도 Security를 위반했다면 좋은 Agent가 아니다.
+에이전트가 작업을 성공해도 보안을 위반했다면 좋은 에이전트가 아니다.
 
 예:
 
-- Prompt Injection에 속음
-- Memory Poisoning 허용
+- 외부 입력에 악성 지시를 끼워 넣는 공격(Prompt Injection)에 속음
+- 메모리에 악성 정보를 심는 공격(Memory Poisoning) 허용
 - Unauthorized Tool 시도
 - Sensitive Data 노출
-- Approval 우회
+- 승인 우회
 
 Security Dataset을 별도로 유지할 수 있다.
 
 ### State Handling Eval
 
-Long-running Agent에서는 State가 중요한 평가 대상이다.
+오래 실행되는 에이전트에서는 상태가 중요한 평가 대상이다.
 
 예:
 
@@ -571,11 +517,7 @@ Long-running Agent에서는 State가 중요한 평가 대상이다.
 
 ### Repeated Reliability
 
-Agent는 Nondeterministic할 수 있다.
-
-한 번 성공했다고 안정적이라고 말하기 어렵다.
-
-같은 Task를 여러 번 실행해야 할 수 있다.
+에이전트는 같은 입력에도 결과가 달라질 수 있는할 수 있다. 한 번 성공했다고 안정적이라고 말하기 어렵다. 같은 작업을 여러 번 실행해야 할 수 있다.
 
 ~~~text
 Trial 1: pass
@@ -585,13 +527,11 @@ Trial 4: pass
 Trial 5: fail
 ~~~
 
-여기서 평균 Success뿐 아니라 Consistency가 중요하다.
-
-tau-bench 계열에서는 반복 신뢰성을 보는 Metric도 제안돼 왔다.
+여기서 평균 성공뿐 아니라 Consistency가 중요하다. tau-bench 계열에서는 반복 신뢰성을 보는 측정 지표도 제안돼 왔다.
 
 ### pass@k와 pass^k
 
-두 Metric은 목적이 다르다. 아래 식은 직관을 설명하기 위한 것으로, 실제 benchmark마다 계산 정의는 다시 확인해야 한다.
+두 측정 지표는 목적이 다르다. 아래 식은 직관을 설명하기 위한 것으로, 실제 benchmark마다 계산 정의는 다시 확인해야 한다.
 
 개념적으로:
 
@@ -603,27 +543,23 @@ pass^k
 = k번 모두 성공
 ~~~
 
-Agent 운영에서는 "한 번은 된다"와 "반복해서 된다"가 다르다.
-
-운영 Task는 후자에 더 민감할 수 있다.
+에이전트 운영에서는 "한 번은 된다"와 "반복해서 된다"가 다르다. 운영 작업은 후자에 더 민감할 수 있다.
 
 ### Infrastructure Noise
 
-Agentic Benchmark는 Runtime 영향을 받는다.
+Agentic Benchmark는 실행 환경 영향을 받는다.
 
 예:
 
 - CPU
 - RAM
-- Timeout
+- 응답 시간 초과
 - Browser Stability
-- Network
+- 네트워크
 - Package Availability
 - Container Startup
 
-Anthropic의 Agentic Coding Eval 분석에서도 Infrastructure 설정이 결과에 유의미한 영향을 줄 수 있음을 보여준다.
-
-따라서 작은 점수 차이를 Model 차이로 바로 해석하지 않는다.
+Anthropic의 Agentic Coding Eval 분석에서도 Infrastructure 설정이 결과에 유의미한 영향을 줄 수 있음을 보여준다. 따라서 작은 점수 차이를 모델 차이로 바로 해석하지 않는다.
 
 ### Benchmark Result는 System Result다
 
@@ -643,23 +579,19 @@ Model
 + Noise
 ~~~
 
-정확한 수학식은 아니다.
-
-Evaluation Boundary를 넓게 보자는 뜻이다.
+정확한 수학식은 아니다. Evaluation Boundary를 넓게 보자는 뜻이다.
 
 ### Benchmark Versioning
 
-Benchmark도 바뀐다.
+성능 비교 평가도 바뀐다.
 
-- Task 수정
-- Grader 수정
-- Environment 수정
-- Policy 수정
-- Tool 수정
+- 작업 수정
+- 채점기 수정
+- 환경 수정
+- 정책 수정
+- 도구 수정
 
-tau2-bench는 Grader 수정으로 동일한 Trajectory를 다시 평가해 점수가 바뀔 수 있는 사례를 공개했다.
-
-따라서 결과에는 다음을 기록한다.
+tau2-bench는 채점기 수정으로 동일한 실행 경로를 다시 평가해 점수가 바뀔 수 있는 사례를 공개했다. 따라서 결과에는 다음을 기록한다.
 
 ~~~text
 benchmark_version
@@ -674,9 +606,7 @@ trial_count
 
 ### Binary vs Partial
 
-Long-horizon Task에서는 Final Success만 보면 어디에서 실패했는지 알기 어렵다.
-
-Partial Checkpoint를 사용할 수 있다.
+많은 단계에 걸친 작업에서는 Final Success만 보면 어디에서 실패했는지 알기 어렵다. Partial Checkpoint를 사용할 수 있다.
 
 예:
 
@@ -686,9 +616,7 @@ Milestone 2 pass
 Milestone 3 fail
 ~~~
 
-OSWorld 2.0 같은 Long-horizon Benchmark도 세밀한 Checkpoint를 활용한다.
-
-하지만 Partial Score가 Completion을 대신해서는 안 된다.
+OSWorld 2.0 같은 Long-horizon Benchmark도 세밀한 체크포인트(Checkpoint: 실행을 이어가기 위한 상태 기록)를 활용한다. 하지만 Partial Score가 완료를 대신해서는 안 된다.
 
 ~~~text
 Diagnostic Partial Score
@@ -697,7 +625,7 @@ Diagnostic Partial Score
 
 ### Capability Slice
 
-평균 Score 하나는 Failure를 숨길 수 있다.
+평균 점수 하나는 실패를 숨길 수 있다.
 
 예:
 
@@ -710,15 +638,11 @@ Security 91%
 Long-horizon 48%
 ~~~
 
-이 Agent는 Short Task에는 강하지만 Long-running Task에는 약하다.
-
-Capability별 Slice가 필요한 이유다.
+이 에이전트는 Short Task에는 강하지만 장시간 작업에는 약하다. 기능별 Slice가 필요한 이유다.
 
 ### Failure Corpus
 
-초기 Eval Dataset은 거대할 필요가 없다.
-
-운영에서 나온 실패 20~50개부터 시작할 수 있다.
+초기 Eval Dataset은 거대할 필요가 없다. 운영에서 나온 실패 20~50개부터 시작할 수 있다.
 
 예:
 
@@ -748,15 +672,15 @@ repeat_count
 source_failure
 ~~~
 
-이 Metadata가 있으면 Regression Dataset을 관리하기 쉽다.
+이 부가 정보가 있으면 Regression Dataset을 관리하기 쉽다.
 
 ### 작은 예: PR 작성 Agent
 
-Task:
+작업:
 
 > 수정 후 테스트를 통과시키고 PR을 생성하라.
 
-Eval:
+평가:
 
 ~~~text
 Output:
@@ -781,11 +705,11 @@ Cost:
 within budget
 ~~~
 
-이렇게 해야 Agent 품질을 더 잘 볼 수 있다.
+이렇게 해야 에이전트 품질을 더 잘 볼 수 있다.
 
 ### 이 장에서 가져갈 것
 
-Agent Eval은 "답을 맞혔는가"보다 넓다.
+에이전트 평가는 "답을 맞혔는가"보다 넓다.
 
 ~~~text
 Output
@@ -801,11 +725,7 @@ Security
 Cost
 ~~~
 
-그리고 Benchmark Score를 Model Score로 읽지 않는다.
-
-다음 장에서는 이 Evaluation을 개발 Workflow에 넣는다.
-
-운영 실패를 Regression Case로 만들고, PR / Nightly / Release Gate에 연결하는 Eval CI를 다룬다.
+그리고 Benchmark Score를 Model Score로 읽지 않는다. 다음 장에서는 이 평가를 개발 작업 흐름에 넣는다. 운영 실패를 회귀를 확인할 평가 사례로 만들고, PR / Nightly / Release Gate에 연결하는 개발 과정에 통합한 지속적 평가를 다룬다.
 
 ### Source Notes
 
@@ -821,33 +741,21 @@ Cost
 
 ## 20장. Eval을 CI로 만든다
 
-Agent가 운영 환경에서 같은 실수를 두 번 했다.
-
-첫 번째에는 운영자가 고쳤다.
-
-두 번째에도 운영자가 다시 고쳤다.
-
-이 시스템에는 Logging은 있었지만 Learning Loop가 없었다.
-
-Agent Improvement를 사람의 기억에 의존해 운영하기는 어렵다. 의미 있는 Failure를 다시 실행 가능한 Eval Case로 승격해야 한다.
-
-이 장에서 말하는 Eval CI는 배포 Pipeline 전체를 설명하려는 것이 아니다. Agent behavior 변경에 대한 regression gate를 개발 lifecycle에 넣는 데 초점을 둔다.
+에이전트가 운영 환경에서 같은 실수를 두 번 했다. 첫 번째에도, 두 번째에도 운영자가 고쳤다. 이 시스템은 기록을 남겼지만, 그 기록으로 같은 실수를 줄이는 개선 과정은 갖추지 못했다. 에이전트 개선을 사람의 기억에 의존해 운영하기는 어렵다. 의미 있는 실패를 다시 실행 가능한 평가 사례로 승격해야 한다. 이 장에서 말하는 개발 과정에 통합한 지속적 평가는 배포 자동 처리 절차 전체를 설명하려는 것이 아니다. 에이전트 행동 변경에 대한 기존 기능의 악화를 막는 검증 단계를 개발 과정에 넣는 데 초점을 둔다.
 
 ### Eval은 Release 전 행사만이 아니다
 
-일회성 Benchmark는 현재 상태를 확인하는 데 도움이 된다.
+일회성 성능 비교 평가는 현재 상태를 확인하는 데 도움이 된다. 운영 에이전트는 계속 바뀐다.
 
-운영 Agent는 계속 바뀐다.
-
-- Model Upgrade
-- Tool Description 변경
-- Context Policy 변경
-- Memory 추가
-- Retry 변경
+- 모델 교체
+- 도구 설명 변경
+- 컨텍스트 구성 정책 변경
+- 메모리 추가
+- 재시도 변경
 - Sandbox Policy 변경
-- Grader 변경
+- 채점기 변경
 
-그래서 Eval도 Development Lifecycle 안에 들어와야 한다.
+그래서 평가도 Development Lifecycle 안에 들어와야 한다.
 
 ~~~text
 Change
@@ -876,19 +784,17 @@ Candidate Fix
 Re-run
 ~~~
 
-같은 Failure를 사람 기억에만 남기지 않는다.
+같은 실패를 사람 기억에만 남기지 않는다.
 
 ### Failure Triage
 
-모든 운영 실패를 Eval Case로 만들 필요는 없다.
-
-다음 질문을 본다.
+모든 운영 실패를 평가 사례로 만들 필요는 없다. 다음 질문을 본다.
 
 - 반복 가능성이 있는가.
 - 중요도가 높은가.
-- 구조적 Failure인가.
+- 구조적 실패인가.
 - 재현 가능한가.
-- Regression을 막을 가치가 있는가.
+- 회귀(Regression: 변경 뒤 기존 기능이 나빠지는 회귀)를 막을 가치가 있는가.
 
 예:
 
@@ -905,7 +811,7 @@ unsafe tool routing
 
 ### Eval Dataset을 나눈다
 
-하나의 거대한 Dataset보다 목적별로 나눌 수 있다.
+하나의 거대한 평가 데이터 모음보다 목적별로 나눌 수 있다.
 
 ~~~text
 evals/
@@ -922,9 +828,7 @@ evals/
 
 ### PR Gate
 
-모든 Pull Request마다 전체 Agent Benchmark를 돌리면 비싸고 느리다.
-
-PR Gate에는 빠르고 중요한 Case를 둔다.
+모든 Pull Request마다 전체 Agent Benchmark를 돌리면 비싸고 느리다. PR Gate에는 빠르고 중요한 사례를 둔다.
 
 예:
 
@@ -938,12 +842,12 @@ PR Gate에는 빠르고 중요한 Case를 둔다.
 
 ### Nightly
 
-비용이 큰 Eval은 Nightly로 돌릴 수 있다.
+비용이 큰 평가는 Nightly로 돌릴 수 있다.
 
 예:
 
 - 100+ multi-turn cases
-- repeated trials
+- 반복 실험s
 - long-horizon
 - browser environment
 - security attack set
@@ -964,18 +868,18 @@ Current Production Version
 
 비교:
 
-- Success
+- 성공
 - Safety
-- Cost
-- Latency
+- 비용
+- 응답 지연 시간
 - Intervention
-- Recovery
+- 복구
 
-특히 Critical Capability의 Regression을 막는다.
+특히 Critical Capability의 회귀를 막는다.
 
 ### Shadow
 
-운영 Traffic과 유사한 Input을 Candidate Agent에 넣되 Side Effect는 실행하지 않는 방식이다.
+운영 Traffic과 유사한 입력을 Candidate Agent에 넣되 외부 상태 변화(Side Effect: 외부 상태에 생기는 변화)는 실행하지 않는 방식이다.
 
 ~~~text
 Production Input
@@ -987,17 +891,11 @@ Production Input
 
 ### Canary
 
-일부 Low-risk Traffic에 Candidate를 적용한다.
-
-문제가 없으면 확대한다.
-
-Agent System은 Nondeterministic하고 Environment Interaction이 있기 때문에 Offline Eval만으로 모든 것을 확인하기 어렵다.
+일부 Low-risk Traffic에 후보를 적용한다. 문제가 없으면 확대한다. 에이전트 시스템은 같은 입력에도 결과가 달라질 수 있는하고 Environment Interaction이 있기 때문에 Offline Eval만으로 모든 것을 확인하기 어렵다.
 
 ### AgentVersion
 
-Model Version만 기록하면 Regression 원인을 찾기 어렵다.
-
-이 책에서는 설명을 위해 AgentVersion을 다음 Tuple로 본다.
+모델 버전만 기록하면 회귀 원인을 찾기 어렵다. 이 책에서는 설명을 위해 AgentVersion를 다음 Tuple로 본다.
 
 ~~~text
 AgentVersion = (
@@ -1015,13 +913,11 @@ AgentVersion = (
 )
 ~~~
 
-외부 표준은 아니다.
-
-Agent Behavior에 영향을 주는 Version Boundary를 설명하기 위한 synthesis다.
+외부 표준은 아니다. Agent Behavior에 영향을 주는 Version Boundary를 설명하기 위한 설명용 개념이다.
 
 ### Grader도 Version한다
 
-Grader가 바뀌면 같은 Trajectory 점수가 바뀔 수 있다.
+채점기가 바뀌면 같은 실행 경로 점수가 바뀔 수 있다.
 
 따라서:
 
@@ -1037,15 +933,11 @@ Agent Candidate
 + Grader v2
 ~~~
 
-는 직접 비교 시 주의해야 한다.
-
-Benchmark Versioning이 중요한 이유다.
+는 직접 비교 시 주의해야 한다. Benchmark Versioning이 중요한 이유다.
 
 ### Nondeterminism
 
-Agent Eval을 한 번만 실행하면 Noise가 클 수 있다.
-
-Repeat Count를 정의한다.
+에이전트 평가를 한 번만 실행하면 Noise가 클 수 있다. Repeat Count를 정의한다.
 
 예:
 
@@ -1060,7 +952,7 @@ deterministic tool contract:
 1 trial
 ~~~
 
-Risk와 Cost에 따라 조정한다.
+위험과 비용에 따라 조정한다.
 
 ### Promotion Rule
 
@@ -1086,9 +978,7 @@ Risk-weighted Gate가 필요하다.
 
 ### Model Upgrade Audit
 
-새 Model이 나왔다.
-
-기존 Harness에 넣고 Score만 확인하면 부족하다.
+새 모델이 나왔다. 기존 하네스(Harness: 모델 실행과 도구 사용을 제어하는 계층)에 넣고 점수만 확인하면 부족하다.
 
 ~~~text
 New Model
@@ -1106,15 +996,11 @@ Long-horizon Regression
 Promotion
 ~~~
 
-Model이 좋아졌다면 오래된 Scaffold를 제거할 기회일 수 있다.
-
-다음 장의 Harness Ablation으로 연결된다.
+모델이 좋아졌다면 오래된 모델의 약점을 보완하는 보조 장치를 제거할 기회일 수 있다. 다음 장의 하네스 구성 요소의 제거 비교 실험으로 연결된다.
 
 ### Eval CI와 비용
 
-Agent Eval은 비쌀 수 있다.
-
-그래서 모든 Case를 모든 Commit에서 돌리지 않는다.
+에이전트 평가는 비쌀 수 있다. 그래서 모든 사례를 모든 커밋에서 돌리지 않는다.
 
 예:
 
@@ -1136,9 +1022,9 @@ Production
 
 ### Eval Case Ownership
 
-Case도 관리가 필요하다.
+사례도 관리가 필요하다.
 
-Metadata 후보:
+부가 정보 후보:
 
 ~~~text
 id
@@ -1154,7 +1040,7 @@ fixed_by
 last_run
 ~~~
 
-Owner가 없으면 오래된 Case가 쌓이고 의미가 사라질 수 있다.
+담당자가 없으면 오래된 사례가 쌓이고 의미가 사라질 수 있다.
 
 ### Dataset Drift
 
@@ -1165,10 +1051,10 @@ Eval Dataset도 현실과 멀어질 수 있다.
 - 최근 운영 실패를 여전히 반영하는가.
 - Tool/API가 바뀌었는가.
 - 너무 쉬워졌는가.
-- Model이 Benchmark-specific pattern을 학습했는가.
-- Grader가 여전히 올바른가.
+- 모델이 Benchmark-specific pattern을 학습했는가.
+- 채점기가 여전히 올바른가.
 
-Eval도 유지보수가 필요하다.
+평가도 유지보수가 필요하다.
 
 ### 작은 예: Memory Regression
 
@@ -1179,7 +1065,7 @@ Agent used stale memory
 → wrong production endpoint
 ~~~
 
-Regression Case:
+회귀를 확인할 평가 사례:
 
 ~~~text
 Memory contains old endpoint
@@ -1202,13 +1088,11 @@ PR gate
 → stale-memory regression test
 ~~~
 
-이렇게 Failure가 시스템 지식으로 전환된다.
+이렇게 실패가 시스템 지식으로 전환된다.
 
 ### 이 장에서 가져갈 것
 
-Agent Eval을 보고서용 Score로만 사용하지 않는다.
-
-Development Loop에 연결한다.
+에이전트 평가를 보고서용 점수로만 사용하지 않는다. Development Loop에 연결한다.
 
 ~~~text
 Trace
@@ -1219,13 +1103,7 @@ Trace
 → Promotion
 ~~~
 
-이 구조가 있어야 Agent가 운영 과정에서 개선된다.
-
-다음 장에서는 Candidate Change 중에서도 가장 자주 쌓이는 Harness Component를 다룬다.
-
-Planner, Memory, Evaluator, Subagent가 도움이 되는지 어떻게 측정하고 제거할 것인가.
-
-Harness Ablation과 Debt로 넘어간다.
+이 구조가 있어야 에이전트가 운영 과정에서 개선된다. 다음 장에서는 Candidate Change 중에서도 가장 자주 쌓이는 하네스 구성 요소를 다룬다. 계획기(Planner: 계획을 세우는 구성 요소), 메모리, 평가기(Evaluator: 결과를 평가하는 구성 요소), 하위 에이전트가 도움이 되는지 어떻게 측정하고 제거할 것인가. 하네스 구성 요소의 제거 비교 실험과 유지보수 부담으로 넘어간다.
 
 ### Source Notes
 
@@ -1238,49 +1116,31 @@ Harness Ablation과 Debt로 넘어간다.
 
 ## 21장. Harness Ablation과 Debt
 
-Agent가 실패했다.
-
-Planner를 추가했다.
-
-다른 Failure가 생겼다.
-
-Evaluator를 추가했다.
-
-Context가 길어졌다.
-
-Compaction을 추가했다.
-
-이전 실수를 반복해서 Memory를 추가했다.
-
-몇 달 뒤 Harness에는 많은 Component가 있지만 어떤 것이 필요한지 아무도 모른다.
-
-Agent Harness에도 Debt가 생긴다.
+에이전트가 실패하자 계획을 세우는 기능을 추가했다. 다른 실패가 생기자 평가 기능을 붙였고, 모델에 전달할 정보가 길어지자 이를 압축하는 기능을 넣었다. 이전 실수를 반복하자 메모리도 추가했다. 몇 달 뒤 하네스(Harness: 모델 실행과 도구 사용을 제어하는 계층)에는 많은 구성 요소가 있지만 어떤 것이 필요한지 아무도 모른다. 에이전트 하네스에도 유지보수 부담이 생긴다.
 
 ### Harness Component는 가설이다
 
-Planner 하나를 예로 들어보자.
+계획기(Planner: 계획을 세우는 구성 요소) 하나를 예로 들어보자. 계획기를 추가한다는 것은 사실 다음 가설을 넣는 것이다.
 
-Planner를 추가한다는 것은 사실 다음 가설을 넣는 것이다.
+> 작업을 시작하기 전에 세부 단계로 나누면 이 작업 분포에서 성공률이 높아진다.
 
-> upfront decomposition이 이 Task Distribution에서 Success를 높인다.
+평가기(Evaluator: 결과를 평가하는 구성 요소):
 
-Evaluator:
+> 독립된 평가가 스스로 검증하는 것보다 오류를 더 잘 잡는다.
 
-> independent evaluation이 self-verification보다 Error를 더 잘 잡는다.
+메모리:
 
-Memory:
+> 과거 교훈의 재사용이 오래되거나 오염된 정보를 쓰는 위험보다 더 큰 이득을 준다.
 
-> past lesson reuse가 stale/poisoning risk보다 더 큰 이득을 준다.
+하위 에이전트:
 
-Subagent:
-
-> context isolation benefit이 coordination cost보다 크다.
+> 컨텍스트를 분리해 얻는 이득이 협업 조율 비용보다 크다.
 
 이 가설은 측정돼야 한다.
 
 ### Minimal Baseline
 
-Ablation을 하려면 단순한 Baseline이 필요하다.
+제거 비교 실험(Ablation: 구성 요소를 빼고 효과를 비교하는 실험)을 하려면 단순한 비교 기준이 필요하다.
 
 예:
 
@@ -1291,13 +1151,11 @@ Model
 + deterministic verifier
 ~~~
 
-여기에 Component를 하나씩 추가한다.
-
-Baseline 자체가 복잡하면 어떤 Scaffold가 기여했는지 알기 어렵다.
+여기에 구성 요소를 하나씩 추가한다. 비교 기준 자체가 복잡하면 어떤 모델의 약점을 보완하는 보조 장치가 기여했는지 알기 어렵다.
 
 ### Component Inventory
 
-현재 Harness에 무엇이 들어 있는지 목록화한다.
+현재 하네스에 무엇이 들어 있는지 목록화한다.
 
 예:
 
@@ -1313,7 +1171,7 @@ Baseline 자체가 복잡하면 어떤 Scaffold가 기여했는지 알기 어렵
 - progress artifact
 - completion verifier
 
-각 Component에 존재 이유를 연결한다.
+각 구성 요소에 존재 이유를 연결한다.
 
 ### Harness Component Record
 
@@ -1331,7 +1189,7 @@ last_verified_model: model-C
 owner: agent-platform
 ~~~
 
-이 Record가 있으면 Model Upgrade 때 Audit하기 쉽다.
+이 기록이 있으면 모델 교체 때 감사하기 쉽다.
 
 ### Ablation
 
@@ -1347,13 +1205,11 @@ Run Same Eval Set
 Compare
 ~~~
 
-하지만 Agent는 Nondeterministic하다.
-
-한 번의 실행으로 결론 내리면 위험하다.
+하지만 에이전트는 같은 입력에도 결과가 달라질 수 있는하다. 한 번의 실행으로 결론 내리면 위험하다.
 
 ### Repeated Trials
 
-Anthropic이 공개한 Automated Alignment Researchers harness ablation에서는 일부 조건을 한 번씩 비교했고, 저자들은 반복 조건에서 관찰한 run-to-run variance가 조건 간 차이보다 클 수 있어 결과를 suggestive하게 해석한다고 밝힌다. 이 사례를 일반 법칙으로 확장하지 않고, 오히려 repeated trial이 필요한 근거로 사용한다.
+Anthropic이 공개한 Automated Alignment Researchers harness ablation에서는 일부 조건을 한 번씩 비교했고, 저자들은 반복 조건에서 관찰한 실행마다 달라지는 결과의 편차가 조건 간 차이보다 클 수 있어 결과를 확정적 결론이 아닌 시사점으로 해석한다고 밝힌다. 이 사례를 일반 법칙으로 확장하지 않고, 오히려 반복 실험이 필요한 근거로 사용한다.
 
 따라서:
 
@@ -1367,29 +1223,25 @@ Ablated
 Compare distribution
 ~~~
 
-이 필요하다.
-
-한 번 Pass/Fail로 Component 가치를 판단하지 않는다.
+이 필요하다. 한 번 Pass/Fail로 구성 요소 가치를 판단하지 않는다.
 
 ### Pin the Environment
 
-Ablation 중 다른 변수를 바꾸면 해석이 어려워진다.
+제거 비교 실험 중 다른 변수를 바꾸면 해석이 어려워진다. 가능하면 다음을 고정한다.
 
-가능하면 다음을 고정한다.
-
-- Model Version
+- 모델 버전
 - Tool Version
-- Runtime
-- Dataset
-- Grader
-- Policy
+- 실행 환경
+- 평가 데이터 모음
+- 채점기
+- 정책
 - Resource Limit
 
 한 번에 하나의 주요 변수를 바꾼다.
 
 ### Capability Slice
 
-평균 Score만 보면 Component 효과가 숨는다.
+평균 점수만으로는 구성 요소가 어떤 작업에 도움이 되는지 드러나지 않을 수 있다.
 
 예:
 
@@ -1405,13 +1257,11 @@ Memory:
 + context_efficiency
 ~~~
 
-Component마다 다른 Trade-off가 있다.
-
-그래서 Capability Slice를 본다.
+구성 요소마다 다른 얻는 점과 감수할 점이 있다. 그래서 Capability Slice를 본다.
 
 ### Safety Slice
 
-Harness Component를 제거하면 Quality는 비슷하지만 Security가 나빠질 수 있다.
+하네스 구성 요소를 제거하면 Quality는 비슷하지만 보안이 나빠질 수 있다.
 
 예:
 
@@ -1421,13 +1271,11 @@ remove tool filter
 → unauthorized action +8%
 ~~~
 
-이 Component는 단순 Success 기준으로 제거하면 안 된다.
-
-Ablation Metric에 Safety를 포함한다.
+이 구성 요소는 단순 성공 기준으로 제거하면 안 된다. Ablation Metric에 Safety를 포함한다.
 
 ### Cost와 Latency
 
-Evaluator가 Success를 조금 높이지만 모든 Turn에 추가 Model Call을 만들 수 있다.
+평가기가 성공을 조금 높이지만 모든 차례에 추가 모델 호출을 만들 수 있다.
 
 예:
 
@@ -1442,9 +1290,7 @@ Cost:
 +40%
 ~~~
 
-이득이 모든 Task에 필요한지 판단해야 한다.
-
-Conditional Component가 더 적합할 수 있다.
+이득이 모든 작업에 필요한지 판단해야 한다. Conditional Component가 더 적합할 수 있다.
 
 ~~~text
 Evaluator
@@ -1453,7 +1299,7 @@ Evaluator
 
 ### Interaction Effect
 
-Component는 서로 독립적이지 않을 수 있다.
+구성 요소는 서로 독립적이지 않을 수 있다.
 
 예:
 
@@ -1475,15 +1321,11 @@ Planner + long-horizon task:
 positive
 ~~~
 
-필요하면 2-way Interaction까지 본다.
-
-모든 Combination을 Exhaustive하게 실험할 필요는 없지만 중요한 Dependency는 확인해야 한다.
+필요하면 두 요소가 함께 작용할 때의 효과(2-way Interaction)까지 살펴본다. 가능한 모든 조합을 빠짐없이 실험할 필요는 없지만, 중요한 의존 관계는 확인해야 한다.
 
 ### Model Upgrade는 Audit Trigger다
 
-Harness는 Model Capability에 대한 가정을 포함한다.
-
-Model이 좋아지면 오래된 Scaffold가 필요 없을 수 있다.
+하네스는 모델의 능력에 대한 가정을 포함한다. 모델이 좋아지면 오래된 모델의 약점을 보완하는 보조 장치가 필요 없을 수 있다.
 
 추천 절차:
 
@@ -1501,13 +1343,11 @@ Measure Marginal Value
 Keep Load-bearing Components
 ~~~
 
-이 과정은 단순 Cost Cutting이 아니다.
-
-오래된 Rule이 새로운 Model의 좋은 행동을 방해하는 것을 막는다.
+이 과정은 단순 Cost Cutting이 아니다. 오래된 규칙이 새로운 모델의 좋은 행동을 방해하는 것을 막는다.
 
 ### Stable Interface와 Mutable Harness
 
-Anthropic Managed Agents 사례에서 중요한 관점 중 하나는 외부 Interface와 내부 Harness를 분리하는 것이다.
+Anthropic Managed Agents 사례에서 중요한 관점 중 하나는 외부 인터페이스와 내부 하네스를 분리하는 것이다.
 
 ~~~text
 Stable:
@@ -1517,30 +1357,28 @@ Mutable:
 planner / context strategy / model adaptation
 ~~~
 
-이렇게 하면 Harness를 자주 실험해도 Application Integration 전체를 흔들지 않을 수 있다.
+이렇게 하면 하네스를 자주 실험해도 Application Integration 전체를 흔들지 않을 수 있다.
 
 ### Harness Debt
 
-이 책에서는 다음 상태를 Harness Debt라고 부른다.
-
-외부 표준 용어는 아니다.
+이 책에서는 다음 상태를 Harness Debt라고 부른다. 외부 표준 용어는 아니다.
 
 증상:
 
-- 왜 존재하는지 모르는 Rule
+- 왜 존재하는지 모르는 규칙
 - 과거 Model Workaround
-- 중복 Planner
-- 중복 Evaluator
+- 중복 계획기
+- 중복 평가기
 - 사용되지 않는 State Field
 - obsolete Tool Wrapper
-- 필요성 불명의 Memory
-- 과도한 Subagent
+- 필요성 불명의 메모리
+- 과도한 하위 에이전트
 
 일반 Software의 Dead Code와 비슷하다.
 
 ### Debt Review
 
-정기적으로 Component를 묻는다.
+정기적으로 구성 요소를 묻는다.
 
 ~~~text
 왜 존재하는가?
@@ -1556,7 +1394,7 @@ Owner는 누구인가?
 
 ### 작은 예: Planner 제거
 
-현재 Harness:
+현재 하네스:
 
 ~~~text
 Planner
@@ -1574,9 +1412,7 @@ B:
 Executor + Evaluator
 ~~~
 
-반복 실행에서 Success 차이는 거의 없는데 Planner가 Latency와 Cost를 일관되게 늘린다고 하자. 이 경우 Planner가 현재 Model과 Task Distribution에서 Load-bearing Component인지 다시 검토할 수 있다.
-
-다만 Dataset과 run-to-run variance를 함께 확인해야 한다. 한 번의 결과만으로 제거하지 않는다.
+반복 실행에서 성공 차이는 거의 없는데 계획기가 응답 지연 시간과 비용을 일관되게 늘린다고 하자. 이 경우 계획기가 현재 모델과 작업 분포에서 꼭 필요한 구성 요소인지 다시 검토할 수 있다. 다만 평가 데이터 모음과 실행마다 달라지는 결과의 편차를 함께 확인해야 한다. 한 번의 결과만으로 제거하지 않는다.
 
 ### Component가 해결한 Failure를 기록한다
 
@@ -1605,13 +1441,11 @@ Evidence:
 failure rate reduced
 ~~~
 
-이렇게 연결하면 나중에 Component를 제거할 때 영향도 확인할 수 있다.
+이렇게 연결하면 나중에 구성 요소를 제거할 때 영향도 확인할 수 있다.
 
 ### 이 장에서 가져갈 것
 
-Harness는 시간이 지나며 자연스럽게 복잡해진다.
-
-복잡성을 피할 수는 없지만 근거 없는 Scaffold를 계속 유지할 필요도 없다.
+하네스는 시간이 지나며 자연스럽게 복잡해진다. 복잡성을 피할 수는 없지만 근거 없는 모델의 약점을 보완하는 보조 장치를 계속 유지할 필요도 없다.
 
 핵심 원칙:
 
@@ -1629,11 +1463,7 @@ Add
 → Remove if no longer load-bearing
 ~~~
 
-Part VI에서는 Trace에서 시작해 Eval, Eval CI, Harness Ablation까지 Improvement Loop를 완성했다.
-
-이제 마지막 Part로 넘어간다.
-
-Single-Agent가 안정된 뒤 언제 Multi-Agent를 도입할 것인가. Agent-as-Tool과 Handoff는 무엇이 다른가. Remote Agent와 A2A는 어디에 위치하는가.
+Part VI에서는 실행 추적 기록(Trace)에서 시작해 평가, 개발 과정에 통합한 지속적 평가, 하네스 구성 요소의 제거 비교 실험까지 Improvement Loop를 완성했다. 이제 마지막 Part로 넘어간다. 단일 에이전트가 안정된 뒤 언제 여러 에이전트의 협업을 도입할 것인가. Agent-as-Tool과 작업 인계는 무엇이 다른가. 원격 에이전트와 A2A는 어디에 위치하는가.
 
 ### Source Notes
 
