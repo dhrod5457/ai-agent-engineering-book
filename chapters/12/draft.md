@@ -1,18 +1,10 @@
 # 12장. Agent Memory의 실제 경계
 
-Agent에 Memory를 붙이면 더 똑똑해질 것처럼 보인다.
+에이전트에 메모리를 붙이면 더 똑똑해질 것처럼 보인다. 이전 대화를 기억하고, 과거 실수를 기억하고, 사용자의 선호를 기억하고, 저장소 구조도 기억한다. 하지만 무엇을 기억할지보다 먼저 물어야 할 질문이 있다.
 
-이전 대화를 기억하고, 과거 실수를 기억하고, 사용자의 선호를 기억하고, Repository 구조도 기억한다.
+> 이 정보는 정말 장기 메모리에 들어가야 하는가?
 
-하지만 무엇을 기억할지보다 먼저 물어야 할 질문이 있다.
-
-> 이 정보는 정말 Long-term Memory에 들어가야 하는가?
-
-Agent 시스템에서 Memory는 자주 과도하게 사용된다. Session History도 Memory라고 부르고, Current Progress도 Memory라고 부르고, Vector Database도 Memory라고 부른다.
-
-이렇게 되면 실행 복구와 장기 학습, 사용자 선호와 외부 사실이 한 저장소에 섞인다.
-
-이 장에서는 Memory의 범위를 좁힌다.
+에이전트 시스템에서 메모리는 자주 과도하게 사용된다. 세션 이력도 메모리라고 부르고, 현재 진행 상황도 메모리라고 부르고, 벡터 데이터베이스도 메모리라고 부른다. 이렇게 되면 실행 복구와 장기 학습, 사용자 선호와 외부 사실이 한 저장소에 섞인다. 이 장에서는 메모리의 범위를 좁힌다.
 
 ## Memory는 Execution State가 아니다
 
@@ -27,22 +19,18 @@ Artifact
 External Source
 ~~~
 
-이들은 현재 실행을 이해하고 복구하는 데 필요한 State다.
+이 정보들은 현재 실행을 이해하고 복구하는 데 필요한 상태를 나타낸다. 장기 메모리는 목적이 다르다. 이 책에서는 메모리를 다음처럼 정의한다.
 
-Long-term Memory는 목적이 다르다.
-
-이 책에서는 Memory를 다음처럼 정의한다.
-
-> **Memory는 현재 Run을 넘어 미래 실행에서 재사용하기 위해 보존하는 정보다.**
+> **메모리는 현재 개별 실행을 넘어 미래 실행에서 재사용하기 위해 보존하는 정보다.**
 
 예:
 
 - 사용자가 선호하는 출력 형식
-- 반복적으로 등장하는 Repository 규칙
-- 이전 Task에서 얻은 유용한 Lesson
+- 반복적으로 등장하는 저장소 규칙
+- 이전 작업에서 얻은 유용한 교훈
 - 자주 발생하는 Failure Pattern
 
-반대로 다음은 Memory가 아니라 다른 State에 더 가깝다.
+반대로 다음은 메모리가 아니라 다른 상태에 더 가깝다.
 
 ~~~text
 현재 Tool Retry Count
@@ -58,11 +46,11 @@ Long-term Memory는 목적이 다르다.
 → Goal State
 ~~~
 
-Memory에 모든 것을 넣으면 Lifecycle이 꼬인다.
+모든 정보를 메모리에 넣으면 각 정보를 언제 유지하고 갱신하거나 버려야 하는지 구분하기 어려워진다.
 
 ## Session과 Memory
 
-Session은 대화의 연속성을 위한 것이다.
+세션은 대화의 연속성을 위한 것이다.
 
 ~~~text
 Turn 1
@@ -72,7 +60,7 @@ User Correction
 Turn 3
 ~~~
 
-Memory는 Session을 넘어 재사용될 수 있다.
+메모리는 세션을 넘어 재사용될 수 있다.
 
 ~~~text
 Session A
@@ -89,15 +77,11 @@ Session
 ≠ Memory
 ~~~
 
-이다.
-
-Session을 오래 보존한다고 자동으로 좋은 Memory가 되는 것도 아니다.
-
-대화에는 일시적 가정과 잘못된 추측도 섞여 있다.
+이다. 세션을 오래 보존한다고 자동으로 좋은 메모리가 되는 것도 아니다. 대화에는 일시적 가정과 잘못된 추측도 섞여 있다.
 
 ## Checkpoint와 Memory
 
-Checkpoint는 현재 실행을 이어가기 위한 State다.
+체크포인트(Checkpoint: 실행을 이어가기 위한 상태 기록)는 현재 실행을 이어가기 위한 상태다.
 
 예:
 
@@ -107,7 +91,7 @@ step: verify integration test
 pending: create PR
 ~~~
 
-Memory는 미래 Task에서 재사용하기 위한 것이다.
+메모리는 미래 작업에서 재사용하기 위한 것이다.
 
 예:
 
@@ -130,7 +114,7 @@ Memory
 
 ## Memory가 유용한 경우
 
-Memory는 다음 상황에서 가치가 있다.
+메모리는 다음 상황에서 가치가 있다.
 
 ### 반복되는 사용자 선호
 
@@ -156,23 +140,23 @@ auth package 수정 시 integration test를 반드시 실행한다.
 이 프로젝트는 기본적으로 develop branch에서 작업한다.
 ~~~
 
-다만 이런 사실은 외부에서 바뀔 수 있다. Memory는 탐색의 출발점으로 쓸 수 있지만 실제 Action 전에는 현재 Source of Truth를 다시 확인해야 한다.
+다만 이런 사실은 외부에서 바뀔 수 있다. 메모리는 탐색의 출발점으로 쓸 수 있지만 실제 행동 전에는 현재 기준이 되는 원본을 다시 확인해야 한다.
 
 ## Memory가 필요하지 않은 경우
 
-다음은 Memory보다 다른 Mechanism이 적합할 수 있다.
+다음은 메모리보다 다른 작동 방식이 적합할 수 있다.
 
 ### 현재 Task Progress
 
-State Plane.
+상태 관리 계층.
 
 ### Canonical Configuration
 
-Config Service / Repository.
+Config Service / 저장소.
 
 ### 정책 문서
 
-Resource / Knowledge Base.
+접근 대상 자원 / Knowledge Base.
 
 ### 대용량 Raw Log
 
@@ -180,13 +164,11 @@ Artifact Storage.
 
 ### 일회성 Observation
 
-현재 Context 또는 Run State.
-
-Memory를 만능 저장소로 만들지 않는다.
+현재 컨텍스트(Context: 모델에 전달하는 정보) 또는 개별 실행 상태. 메모리를 만능 저장소로 만들지 않는다.
 
 ## Memory Scope
 
-Memory는 누구에게 적용되는지 명확해야 한다.
+메모리는 누구에게 적용되는지 명확해야 한다.
 
 예:
 
@@ -200,9 +182,7 @@ Organization
 Global
 ~~~
 
-가능하면 가장 좁은 Scope를 사용한다.
-
-예를 들어 특정 Repository의 Build 규칙을 Global Memory로 저장하면 다른 Repository에서 잘못 적용될 수 있다.
+가능하면 가장 좁은 적용 범위를 사용한다. 예를 들어 특정 저장소의 빌드 규칙을 Global Memory로 저장하면 다른 저장소에서 잘못 적용될 수 있다.
 
 ~~~text
 repo-A rule
@@ -210,28 +190,28 @@ repo-A rule
 → repo-B에 잘못 적용
 ~~~
 
-Scope는 정확성과 Security 모두에 영향을 준다.
+적용 범위는 정확성과 보안 모두에 영향을 준다.
 
 ## Memory Freshness
 
-Memory에는 시간이 지나도 유효한 정보와 빠르게 변하는 정보가 있다.
+메모리에는 시간이 지나도 유효한 정보와 빠르게 변하는 정보가 있다.
 
 상대적으로 오래 유지되는 정보:
 
 - 사용자의 문체 선호
-- Repository의 오래된 설계 원칙
+- 저장소의 오래된 설계 원칙
 - 반복되는 Troubleshooting Lesson
 
 빠르게 변할 수 있는 정보:
 
 - API Endpoint
-- 현재 Branch
-- 운영 Server
+- 현재 브랜치
+- 운영 서버
 - 권한 정책
 - 가격
 - 담당자
 
-따라서 Memory Metadata에 다음을 둘 수 있다.
+따라서 메모리의 부가 정보에 다음을 둘 수 있다.
 
 ~~~text
 source
@@ -243,13 +223,11 @@ expires_at
 refresh_before
 ~~~
 
-모든 Memory에 TTL이 필요한 것은 아니다.
-
-하지만 "언제 다시 확인해야 하는가"라는 질문은 필요하다.
+모든 메모리에 TTL이 필요한 것은 아니다. 하지만 "언제 다시 확인해야 하는가"라는 질문은 필요하다.
 
 ## Memory는 Source of Truth가 아니다
 
-Memory가 다음을 가지고 있다고 하자.
+메모리가 다음을 가지고 있다고 하자.
 
 ~~~text
 Production host = prod-01
@@ -261,7 +239,7 @@ Production host = prod-01
 Production host = prod-02
 ~~~
 
-External Action을 실행할 때 Memory를 우선하면 안 된다.
+External Action을 실행할 때 메모리를 우선하면 안 된다.
 
 ~~~text
 Memory
@@ -271,9 +249,7 @@ Current Source
 → authority
 ~~~
 
-Memory는 Discovery Cost를 줄일 수 있다.
-
-하지만 External Reality를 고정하지 않는다.
+메모리는 Discovery Cost를 줄일 수 있다. 하지만 External Reality를 고정하지 않는다.
 
 ## Retrieval은 단순 검색이 아니다
 
@@ -285,15 +261,13 @@ query
 → top-k memories
 ~~~
 
-하지만 운영 Agent에서는 Retrieval 자체가 Policy Decision일 수 있다.
+하지만 운영 에이전트에서는 저장된 정보 검색 자체가 Policy Decision일 수 있다. 다음 질문이 필요하다.
 
-다음 질문이 필요하다.
-
-- 현재 Task와 관련 있는가.
-- 현재 User/Agent가 읽어도 되는 Scope인가.
-- Source가 아직 유효한가.
-- 더 최신 Memory나 External Source가 있는가.
-- 서로 충돌하는 Memory가 있는가.
+- 현재 작업과 관련 있는가.
+- 현재 User/Agent가 읽어도 되는 적용 범위인가.
+- 정보 원본이 아직 유효한가.
+- 더 최신 메모리나 외부 원본이 있는가.
+- 서로 충돌하는 메모리가 있는가.
 - Sensitive Information인가.
 
 따라서:
@@ -307,9 +281,7 @@ Memory Retrieval
 
 ## Progressive Memory Retrieval
 
-과거 실행을 모두 Context에 넣을 필요는 없다.
-
-Memory Summary와 Index를 먼저 제공하고 필요할 때 상세 기록을 조회하는 방식이 가능하다. 일부 Agent memory 구현에서도 이런 progressive retrieval 패턴을 사용한다.
+과거 실행을 모두 컨텍스트에 넣을 필요는 없다. Memory Summary와 Index를 먼저 제공하고 필요할 때 상세 기록을 조회하는 방식이 가능하다. 일부 Agent memory 구현에서도 이런 progressive retrieval 패턴을 사용한다.
 
 개념적으로:
 
@@ -323,13 +295,11 @@ Selected Detail
 Context
 ~~~
 
-이 방식은 Memory 자체에도 Progressive Disclosure를 적용한다.
-
-Context Cost와 Stale Detail 노출을 줄일 수 있다.
+이 방식은 메모리 자체에도 Progressive Disclosure를 적용한다. Context Cost와 Stale Detail 노출을 줄일 수 있다.
 
 ## Contradictory Memory
 
-Memory가 서로 충돌할 수 있다.
+메모리가 서로 충돌할 수 있다.
 
 ~~~text
 Memory A:
@@ -349,11 +319,11 @@ integration tests are disabled for auth module
 - confidence
 - validity scope
 
-Memory Store도 Version과 Lineage를 가질 수 있다.
+Memory Store도 버전과 Lineage를 가질 수 있다.
 
 ## Memory와 User Correction
 
-사용자가 이전 Memory를 수정할 수 있어야 한다.
+사용자가 이전 메모리를 수정할 수 있어야 한다.
 
 예:
 
@@ -365,7 +335,7 @@ User:
 이제부터 JSON으로 줘
 ~~~
 
-새 Memory를 추가할 뿐 아니라 이전 Memory가 Superseded됐다는 관계를 남길 수 있다.
+새 메모리를 추가할 뿐 아니라 이전 메모리가 Superseded됐다는 관계를 남길 수 있다.
 
 ~~~text
 mem-10
@@ -377,9 +347,7 @@ by: mem-22
 
 ## Memory가 항상 Agent Capability를 높이는 것은 아니다
 
-Memory를 추가하면 과거 경험을 재사용할 수 있다.
-
-동시에 새로운 Risk가 생긴다.
+메모리를 추가하면 과거 경험을 재사용할 수 있다. 동시에 새로운 위험이 생긴다.
 
 - stale assumption
 - poisoning
@@ -388,7 +356,7 @@ Memory를 추가하면 과거 경험을 재사용할 수 있다.
 - retrieval cost
 - conflict resolution
 
-그래서 Memory는 기본 Component가 아니라 필요가 확인될 때 추가하는 편이 낫다.
+그래서 메모리는 기본 구성 요소가 아니라 필요가 확인될 때 추가하는 편이 낫다.
 
 ~~~text
 No Memory
@@ -398,11 +366,11 @@ No Memory
 → evaluate
 ~~~
 
-Harness Component와 같은 방식으로 접근할 수 있다.
+하네스 구성 요소와 같은 방식으로 접근할 수 있다.
 
 ## 작은 예: Coding Agent의 Repository Memory
 
-좋은 Candidate:
+좋은 후보:
 
 ~~~text
 scope: repository/app-a
@@ -417,7 +385,7 @@ freshness:
 review on instruction change
 ~~~
 
-나쁜 Candidate:
+나쁜 후보:
 
 ~~~text
 scope: global
@@ -425,13 +393,11 @@ memory:
 all Java projects require integration/auth tests
 ~~~
 
-첫 번째는 Scope와 Source가 명확하다.
-
-두 번째는 과도하게 일반화됐다.
+첫 번째는 적용 범위와 정보 원본이 명확하다. 두 번째는 과도하게 일반화됐다.
 
 ## Memory Read에도 Audit이 필요할 수 있다
 
-민감한 Memory가 Agent Decision에 영향을 준다면 어떤 Memory가 읽혔는지 추적할 가치가 있다.
+민감한 메모리가 Agent Decision에 영향을 준다면 어떤 메모리가 읽혔는지 추적할 가치가 있다.
 
 예:
 
@@ -442,17 +408,11 @@ run_id: G-100
 reason: repository_convention
 ~~~
 
-이 기록은 나중에 잘못된 Decision의 원인을 분석하는 데 도움이 된다.
-
-특히 Memory Poisoning 사고에서 중요하다.
+이 기록을 남기면 나중에 잘못된 판단이 어떤 정보에서 비롯됐는지 분석하는 데 도움이 된다. 특히 메모리에 악성 정보를 심는 공격(Memory Poisoning) 사고에서 중요하다.
 
 ## 이 장에서 가져갈 것
 
-Memory는 Agent가 가진 모든 State의 이름이 아니다.
-
-이 책에서는 Memory를 미래 실행에서 재사용하기 위한 Long-term Information으로 좁힌다.
-
-그래서 다음 경계를 유지한다.
+메모리는 에이전트가 가진 모든 상태의 이름이 아니다. 이 책에서는 메모리를 미래 실행에서 재사용하기 위한 장기 보존 정보로 좁힌다. 그래서 다음 경계를 유지한다.
 
 ~~~text
 Session
@@ -461,20 +421,16 @@ Session
 ≠ Source of Truth
 ~~~
 
-Memory를 추가할 때는 다음을 묻는다.
+메모리를 추가할 때는 다음을 묻는다.
 
 - 왜 저장하는가.
-- 어느 Scope인가.
+- 어느 적용 범위인가.
 - 얼마나 오래 유효한가.
-- Source는 무엇인가.
+- 정보 원본은 무엇인가.
 - 누가 읽을 수 있는가.
-- 더 최신 Source와 충돌하면 무엇을 우선할 것인가.
+- 더 최신 정보 원본과 충돌하면 무엇을 우선할 것인가.
 
-다음 장에서는 한 단계 더 위험한 질문으로 간다.
-
-Memory를 읽는 것보다 먼저, **누가 어떤 정보를 Long-term Memory에 쓸 수 있어야 하는가.**
-
-Memory Write를 Side Effect로 다룬다.
+다음 장에서는 한 단계 더 위험한 질문으로 간다. 메모리를 읽는 것보다 먼저, **누가 어떤 정보를 장기 메모리에 쓸 수 있어야 하는가.** 메모리 기록을 외부 상태 변화(Side Effect: 외부 상태에 생기는 변화)로 다룬다.
 
 ## 주요 근거
 

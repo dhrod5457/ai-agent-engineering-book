@@ -1,48 +1,30 @@
 # 21장. Harness Ablation과 Debt
 
-Agent가 실패했다.
-
-Planner를 추가했다.
-
-다른 Failure가 생겼다.
-
-Evaluator를 추가했다.
-
-Context가 길어졌다.
-
-Compaction을 추가했다.
-
-이전 실수를 반복해서 Memory를 추가했다.
-
-몇 달 뒤 Harness에는 많은 Component가 있지만 어떤 것이 필요한지 아무도 모른다.
-
-Agent Harness에도 Debt가 생긴다.
+에이전트가 실패하자 계획을 세우는 기능을 추가했다. 다른 실패가 생기자 평가 기능을 붙였고, 모델에 전달할 정보가 길어지자 이를 압축하는 기능을 넣었다. 이전 실수를 반복하자 메모리도 추가했다. 몇 달 뒤 하네스(Harness: 모델 실행과 도구 사용을 제어하는 계층)에는 많은 구성 요소가 있지만 어떤 것이 필요한지 아무도 모른다. 에이전트 하네스에도 유지보수 부담이 생긴다.
 
 ## Harness Component는 가설이다
 
-Planner 하나를 예로 들어보자.
+계획기(Planner: 계획을 세우는 구성 요소) 하나를 예로 들어보자. 계획기를 추가한다는 것은 사실 다음 가설을 넣는 것이다.
 
-Planner를 추가한다는 것은 사실 다음 가설을 넣는 것이다.
+> 작업을 시작하기 전에 세부 단계로 나누면 이 작업 분포에서 성공률이 높아진다.
 
-> upfront decomposition이 이 Task Distribution에서 Success를 높인다.
+평가기(Evaluator: 결과를 평가하는 구성 요소):
 
-Evaluator:
+> 독립된 평가가 스스로 검증하는 것보다 오류를 더 잘 잡는다.
 
-> independent evaluation이 self-verification보다 Error를 더 잘 잡는다.
+메모리:
 
-Memory:
+> 과거 교훈의 재사용이 오래되거나 오염된 정보를 쓰는 위험보다 더 큰 이득을 준다.
 
-> past lesson reuse가 stale/poisoning risk보다 더 큰 이득을 준다.
+하위 에이전트:
 
-Subagent:
-
-> context isolation benefit이 coordination cost보다 크다.
+> 컨텍스트를 분리해 얻는 이득이 협업 조율 비용보다 크다.
 
 이 가설은 측정돼야 한다.
 
 ## Minimal Baseline
 
-Ablation을 하려면 단순한 Baseline이 필요하다.
+제거 비교 실험(Ablation: 구성 요소를 빼고 효과를 비교하는 실험)을 하려면 단순한 비교 기준이 필요하다.
 
 예:
 
@@ -53,13 +35,11 @@ Model
 + deterministic verifier
 ~~~
 
-여기에 Component를 하나씩 추가한다.
-
-Baseline 자체가 복잡하면 어떤 Scaffold가 기여했는지 알기 어렵다.
+여기에 구성 요소를 하나씩 추가한다. 비교 기준 자체가 복잡하면 어떤 모델의 약점을 보완하는 보조 장치가 기여했는지 알기 어렵다.
 
 ## Component Inventory
 
-현재 Harness에 무엇이 들어 있는지 목록화한다.
+현재 하네스에 무엇이 들어 있는지 목록화한다.
 
 예:
 
@@ -75,7 +55,7 @@ Baseline 자체가 복잡하면 어떤 Scaffold가 기여했는지 알기 어렵
 - progress artifact
 - completion verifier
 
-각 Component에 존재 이유를 연결한다.
+각 구성 요소에 존재 이유를 연결한다.
 
 ## Harness Component Record
 
@@ -93,7 +73,7 @@ last_verified_model: model-C
 owner: agent-platform
 ~~~
 
-이 Record가 있으면 Model Upgrade 때 Audit하기 쉽다.
+이 기록이 있으면 모델 교체 때 감사하기 쉽다.
 
 ## Ablation
 
@@ -109,13 +89,11 @@ Run Same Eval Set
 Compare
 ~~~
 
-하지만 Agent는 Nondeterministic하다.
-
-한 번의 실행으로 결론 내리면 위험하다.
+하지만 에이전트는 같은 입력에도 결과가 달라질 수 있다. 한 번의 실행으로 결론 내리면 위험하다.
 
 ## Repeated Trials
 
-Anthropic이 공개한 Automated Alignment Researchers harness ablation에서는 일부 조건을 한 번씩 비교했고, 저자들은 반복 조건에서 관찰한 run-to-run variance가 조건 간 차이보다 클 수 있어 결과를 suggestive하게 해석한다고 밝힌다. 이 사례를 일반 법칙으로 확장하지 않고, 오히려 repeated trial이 필요한 근거로 사용한다.
+Anthropic이 공개한 Automated Alignment Researchers harness ablation에서는 일부 조건을 한 번씩 비교했고, 저자들은 반복 조건에서 관찰한 실행마다 달라지는 결과의 편차가 조건 간 차이보다 클 수 있어 결과를 확정적 결론이 아닌 시사점으로 해석한다고 밝힌다. 이 사례를 일반 법칙으로 확장하지 않고, 오히려 반복 실험이 필요한 근거로 사용한다.
 
 따라서:
 
@@ -129,29 +107,25 @@ Ablated
 Compare distribution
 ~~~
 
-이 필요하다.
-
-한 번 Pass/Fail로 Component 가치를 판단하지 않는다.
+이 필요하다. 한 번 Pass/Fail로 구성 요소 가치를 판단하지 않는다.
 
 ## Pin the Environment
 
-Ablation 중 다른 변수를 바꾸면 해석이 어려워진다.
+제거 비교 실험 중 다른 변수를 바꾸면 해석이 어려워진다. 가능하면 다음을 고정한다.
 
-가능하면 다음을 고정한다.
-
-- Model Version
+- 모델 버전
 - Tool Version
-- Runtime
-- Dataset
-- Grader
-- Policy
+- 실행 환경
+- 평가 데이터 모음
+- 채점기
+- 정책
 - Resource Limit
 
 한 번에 하나의 주요 변수를 바꾼다.
 
 ## Capability Slice
 
-평균 Score만 보면 Component 효과가 숨는다.
+평균 점수만으로는 구성 요소가 어떤 작업에 도움이 되는지 드러나지 않을 수 있다.
 
 예:
 
@@ -167,13 +141,11 @@ Memory:
 + context_efficiency
 ~~~
 
-Component마다 다른 Trade-off가 있다.
-
-그래서 Capability Slice를 본다.
+구성 요소마다 다른 얻는 점과 감수할 점이 있다. 그래서 Capability Slice를 본다.
 
 ## Safety Slice
 
-Harness Component를 제거하면 Quality는 비슷하지만 Security가 나빠질 수 있다.
+하네스 구성 요소를 제거하면 Quality는 비슷하지만 보안이 나빠질 수 있다.
 
 예:
 
@@ -183,13 +155,11 @@ remove tool filter
 → unauthorized action +8%
 ~~~
 
-이 Component는 단순 Success 기준으로 제거하면 안 된다.
-
-Ablation Metric에 Safety를 포함한다.
+이 구성 요소는 단순 성공 기준으로 제거하면 안 된다. Ablation Metric에 Safety를 포함한다.
 
 ## Cost와 Latency
 
-Evaluator가 Success를 조금 높이지만 모든 Turn에 추가 Model Call을 만들 수 있다.
+평가기가 성공을 조금 높이지만 모든 차례에 추가 모델 호출을 만들 수 있다.
 
 예:
 
@@ -204,9 +174,7 @@ Cost:
 +40%
 ~~~
 
-이득이 모든 Task에 필요한지 판단해야 한다.
-
-Conditional Component가 더 적합할 수 있다.
+이득이 모든 작업에 필요한지 판단해야 한다. Conditional Component가 더 적합할 수 있다.
 
 ~~~text
 Evaluator
@@ -215,7 +183,7 @@ Evaluator
 
 ## Interaction Effect
 
-Component는 서로 독립적이지 않을 수 있다.
+구성 요소는 서로 독립적이지 않을 수 있다.
 
 예:
 
@@ -237,15 +205,11 @@ Planner + long-horizon task:
 positive
 ~~~
 
-필요하면 2-way Interaction까지 본다.
-
-모든 Combination을 Exhaustive하게 실험할 필요는 없지만 중요한 Dependency는 확인해야 한다.
+필요하면 두 요소가 함께 작용할 때의 효과(2-way Interaction)까지 살펴본다. 가능한 모든 조합을 빠짐없이 실험할 필요는 없지만, 중요한 의존 관계는 확인해야 한다.
 
 ## Model Upgrade는 Audit Trigger다
 
-Harness는 Model Capability에 대한 가정을 포함한다.
-
-Model이 좋아지면 오래된 Scaffold가 필요 없을 수 있다.
+하네스는 모델의 능력에 대한 가정을 포함한다. 모델이 좋아지면 오래된 모델의 약점을 보완하는 보조 장치가 필요 없을 수 있다.
 
 추천 절차:
 
@@ -263,13 +227,11 @@ Measure Marginal Value
 Keep Load-bearing Components
 ~~~
 
-이 과정은 단순 Cost Cutting이 아니다.
-
-오래된 Rule이 새로운 Model의 좋은 행동을 방해하는 것을 막는다.
+이 과정은 단순 Cost Cutting이 아니다. 오래된 규칙이 새로운 모델의 좋은 행동을 방해하는 것을 막는다.
 
 ## Stable Interface와 Mutable Harness
 
-Anthropic Managed Agents 사례에서 중요한 관점 중 하나는 외부 Interface와 내부 Harness를 분리하는 것이다.
+Anthropic Managed Agents 사례에서 중요한 관점 중 하나는 외부 인터페이스와 내부 하네스를 분리하는 것이다.
 
 ~~~text
 Stable:
@@ -279,30 +241,28 @@ Mutable:
 planner / context strategy / model adaptation
 ~~~
 
-이렇게 하면 Harness를 자주 실험해도 Application Integration 전체를 흔들지 않을 수 있다.
+이렇게 하면 하네스를 자주 실험해도 Application Integration 전체를 흔들지 않을 수 있다.
 
 ## Harness Debt
 
-이 책에서는 다음 상태를 Harness Debt라고 부른다.
-
-외부 표준 용어는 아니다.
+이 책에서는 다음 상태를 Harness Debt라고 부른다. 외부 표준 용어는 아니다.
 
 증상:
 
-- 왜 존재하는지 모르는 Rule
+- 왜 존재하는지 모르는 규칙
 - 과거 Model Workaround
-- 중복 Planner
-- 중복 Evaluator
+- 중복 계획기
+- 중복 평가기
 - 사용되지 않는 State Field
 - obsolete Tool Wrapper
-- 필요성 불명의 Memory
-- 과도한 Subagent
+- 필요성 불명의 메모리
+- 과도한 하위 에이전트
 
 일반 Software의 Dead Code와 비슷하다.
 
 ## Debt Review
 
-정기적으로 Component를 묻는다.
+정기적으로 구성 요소를 묻는다.
 
 ~~~text
 왜 존재하는가?
@@ -318,7 +278,7 @@ Owner는 누구인가?
 
 ## 작은 예: Planner 제거
 
-현재 Harness:
+현재 하네스:
 
 ~~~text
 Planner
@@ -336,9 +296,7 @@ B:
 Executor + Evaluator
 ~~~
 
-반복 실행에서 Success 차이는 거의 없는데 Planner가 Latency와 Cost를 일관되게 늘린다고 하자. 이 경우 Planner가 현재 Model과 Task Distribution에서 Load-bearing Component인지 다시 검토할 수 있다.
-
-다만 Dataset과 run-to-run variance를 함께 확인해야 한다. 한 번의 결과만으로 제거하지 않는다.
+반복 실행에서 성공 차이는 거의 없는데 계획기가 응답 지연 시간과 비용을 일관되게 늘린다고 하자. 이 경우 계획기가 현재 모델과 작업 분포에서 꼭 필요한 구성 요소인지 다시 검토할 수 있다. 다만 평가 데이터 모음과 실행마다 달라지는 결과의 편차를 함께 확인해야 한다. 한 번의 결과만으로 제거하지 않는다.
 
 ## Component가 해결한 Failure를 기록한다
 
@@ -367,13 +325,11 @@ Evidence:
 failure rate reduced
 ~~~
 
-이렇게 연결하면 나중에 Component를 제거할 때 영향도 확인할 수 있다.
+이렇게 연결하면 나중에 구성 요소를 제거할 때 영향도 확인할 수 있다.
 
 ## 이 장에서 가져갈 것
 
-Harness는 시간이 지나며 자연스럽게 복잡해진다.
-
-복잡성을 피할 수는 없지만 근거 없는 Scaffold를 계속 유지할 필요도 없다.
+하네스는 시간이 지나며 자연스럽게 복잡해진다. 복잡성을 피할 수는 없지만 효과를 뒷받침할 근거가 없는 보조 장치를 계속 유지할 필요도 없다.
 
 핵심 원칙:
 
@@ -391,11 +347,7 @@ Add
 → Remove if no longer load-bearing
 ~~~
 
-Part VI에서는 Trace에서 시작해 Eval, Eval CI, Harness Ablation까지 Improvement Loop를 완성했다.
-
-이제 마지막 Part로 넘어간다.
-
-Single-Agent가 안정된 뒤 언제 Multi-Agent를 도입할 것인가. Agent-as-Tool과 Handoff는 무엇이 다른가. Remote Agent와 A2A는 어디에 위치하는가.
+Part VI에서는 실행 추적 기록(Trace)에서 시작해 평가, 개발 과정에 통합한 지속적 평가, 하네스 구성 요소의 제거 비교 실험까지 Improvement Loop를 완성했다. 이제 마지막 Part로 넘어간다. 단일 에이전트가 안정된 뒤 언제 여러 에이전트의 협업을 도입할 것인가. Agent-as-Tool과 작업 인계는 무엇이 다른가. 원격 에이전트와 A2A는 어디에 위치하는가.
 
 ## 주요 근거
 

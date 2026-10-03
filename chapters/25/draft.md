@@ -1,23 +1,19 @@
 # 25장. Minimum Viable Production Agent
 
-여기까지 읽으면 Agent 시스템에 넣을 수 있는 기능이 매우 많아 보인다.
+여기까지 읽으면 에이전트 시스템에 넣을 수 있는 기능이 매우 많아 보인다.
 
-- Memory
-- State Plane
-- Sandbox
-- Identity
+- 메모리
+- 상태 관리 계층
+- 샌드박스(Sandbox: 접근할 수 있는 범위를 제한하는 환경)
+- 신원
 - Credential Broker
 - Policy Engine
-- Eval
-- Multi-Agent
+- 평가
+- 여러 에이전트의 협업
 - MCP
 - A2A
 
-처음부터 모두 만들 필요는 없다.
-
-오히려 그렇게 시작하면 Agent를 만들기 전에 Platform부터 만들어질 수 있다.
-
-운영 Agent의 출발점은 더 작게 잡을 수 있다.
+처음부터 모두 만들 필요는 없다. 그렇게 시작하면 에이전트보다 이를 뒷받침할 플랫폼을 먼저 만들게 될 수 있다. 실제 운영에 쓸 에이전트도 더 작은 구조에서 출발할 수 있다.
 
 ## Minimum Viable Agent
 
@@ -32,11 +28,11 @@ Model
 + Trace
 ~~~
 
-이 구조가 Task를 끝낼 수 있는지 먼저 본다.
+이 구조가 작업을 끝낼 수 있는지 먼저 본다.
 
 ## 1단계: Clear Tool Contract
 
-Agent가 어떤 Action을 할 수 있는지 좁힌다.
+에이전트가 어떤 행동을 할 수 있는지 좁힌다.
 
 예:
 
@@ -47,13 +43,11 @@ run_test
 git_diff
 ~~~
 
-처음부터 Generic Shell + Full Network + Broad Credential을 줄 이유는 없다.
-
-Tool Contract와 Error Model을 먼저 만든다.
+처음부터 Generic Shell + Full Network + 권한 범위가 넓은 인증 정보를 줄 이유는 없다. 도구 사용 계약(Tool Contract: 도구의 입력·출력·사용 조건)과 Error Model을 먼저 만든다.
 
 ## 2단계: Controlled Runtime
 
-Agent가 잘못 행동해도 피해가 제한되도록 한다.
+에이전트가 잘못 행동해도 피해가 제한되도록 한다.
 
 예:
 
@@ -62,11 +56,11 @@ Agent가 잘못 행동해도 피해가 제한되도록 한다.
 - Resource Limit
 - No Production Credential
 
-Capability보다 Boundary를 먼저 만든다.
+기능보다 경계를 먼저 만든다.
 
 ## 3단계: Deterministic Verification
 
-Completion Claim을 Model에게 맡기지 않는다.
+완료했다는 주장을 모델에게 맡기지 않는다.
 
 ~~~text
 Model:
@@ -82,9 +76,7 @@ artifact correct?
 
 ## 4단계: Trace
 
-실패했을 때 이유를 볼 수 있어야 한다.
-
-처음부터 거대한 Observability Platform이 필요하지 않다.
+실패했을 때 이유를 볼 수 있어야 한다. 처음부터 거대한 Observability Platform이 필요하지 않다.
 
 최소한:
 
@@ -98,7 +90,7 @@ artifact correct?
 
 ## 5단계: Eval
 
-운영 실패를 모아 Regression Case를 만든다.
+운영 실패를 모아 회귀를 확인할 평가 사례를 만든다.
 
 ~~~text
 Failure
@@ -107,41 +99,39 @@ Failure
 → Re-run
 ~~~
 
-Agent를 "감으로 개선"하지 않는다.
+에이전트를 "감으로 개선"하지 않는다.
 
 ## 6단계: Durable State
 
-Task가 한 Process를 넘어가기 시작하면 State Plane이 필요해진다.
+작업이 한 프로세스를 넘어가기 시작하면 상태 관리 계층이 필요해진다.
 
 Trigger:
 
-- Approval 대기
-- Long-running
-- Crash Recovery
-- External Mutation
+- 승인 대기
+- 장시간 실행
+- 비정상 종료 뒤 복구
+- 외부 상태 변경
 - Multi-step Goal
 
-이때 Event History, Goal, Artifact, Approval State를 도입한다.
+이때 이벤트 이력, 목표, 산출물, 승인 상태를 도입한다.
 
 ## 7단계: Identity와 Policy
 
-External System에 접근하기 시작하면:
+외부 시스템에 접근하기 시작하면:
 
-- User / Agent Identity
-- Credential Scope
-- Authorization
-- Sandbox
-- Approval
+- 사용자 / 에이전트의 신원
+- 인증 정보로 행사할 수 있는 권한 범위
+- 권한 확인(Authorization)
+- 샌드박스
+- 승인
 
-을 분리한다.
-
-Risk가 올라갈수록 Control을 강화한다.
+을 분리한다. 위험이 올라갈수록 통제를 강화한다.
 
 ## 8단계: Memory
 
-반복 Task에서 이득이 확인될 때 추가한다.
+반복 작업에서 이득이 확인될 때 추가한다.
 
-Memory를 넣기 전 질문:
+메모리를 넣기 전 질문:
 
 ~~~text
 무엇을 반복해서 다시 찾고 있는가?
@@ -154,21 +144,19 @@ Memory Risk를 감당할 가치가 있는가?
 
 ## 9단계: Long-running
 
-Task가 길어지면:
+작업이 길어지면:
 
-- Milestone
+- 중간 완료 지점
 - Progress State
-- Phase Budget
-- Reconciliation
+- 단계별 실행 한도
+- 상태 재조정(Reconciliation: 현재 외부 상태와 내부 판단을 다시 맞추는 과정)
 - Verification Reserve
 
-를 추가한다.
-
-Long Context만 늘리는 것으로 해결하지 않는다.
+를 추가한다. 긴 컨텍스트만 늘리는 것으로 해결하지 않는다.
 
 ## 10단계: Multi-Agent
 
-Single-Agent Baseline이 안정된 뒤에도 Context·Permission 분리, 독립 검증, 병렬화에서 명확한 이득이 있을 때만 Multi-Agent를 추가한다. 판단 기준 자체는 22장에서 다뤘으므로 여기서는 확장 순서의 마지막 선택지로만 둔다.
+Single-Agent Baseline이 안정된 뒤에도 컨텍스트(Context: 모델에 전달하는 정보)·권한 분리, 독립 검증, 병렬화에서 명확한 이득이 있을 때만 여러 에이전트의 협업을 추가한다. 판단 기준 자체는 22장에서 다뤘으므로 여기서는 확장 순서의 마지막 선택지로만 둔다.
 
 ## 확장 순서의 한 예
 
@@ -187,11 +175,11 @@ Minimal Agent
 → Multi-Agent
 ~~~
 
-공식 Maturity Model이나 권장 순서를 뜻하지 않는다. 시스템의 Risk와 업무 특성에 따라 순서는 달라질 수 있으며, 필요한 문제가 생길 때 어떤 구조를 추가할지 보여주는 Reference다.
+공식 Maturity Model이나 권장 순서를 뜻하지 않는다. 시스템의 위험과 업무 특성에 따라 순서는 달라질 수 있으며, 필요한 문제가 생길 때 어떤 구조를 추가할지 보여주는 참조다.
 
 ## Control before Autonomy
 
-Agent Engineering에서 자주 반대로 진행한다.
+에이전트 엔지니어링에서 자주 반대로 진행한다.
 
 ~~~text
 More Autonomy
@@ -208,11 +196,11 @@ Boundary
 → Autonomy
 ~~~
 
-즉 Agent에게 더 많은 Capability를 주기 전에 실패를 감당할 구조를 만든다.
+즉 에이전트에게 더 많은 기능을 주기 전에 실패를 감당할 구조를 만든다.
 
 ## Verification before Scale
 
-한 Agent가 Task를 안정적으로 끝내지 못하는데 Agent 수를 늘리면 Failure도 병렬화될 수 있다.
+한 에이전트가 작업을 안정적으로 끝내지 못하는데 에이전트 수를 늘리면 실패도 병렬화될 수 있다.
 
 ~~~text
 Single Agent
@@ -238,7 +226,7 @@ Model
 
 ### V1
 
-Approval이 필요해졌다.
+승인이 필요해졌다.
 
 ~~~text
 + durable goal state
@@ -257,7 +245,7 @@ GitHub Mutation을 한다.
 
 ### V3
 
-Long-running Task가 생겼다.
+장시간 작업이 생겼다.
 
 ~~~text
 + milestone
@@ -288,7 +276,7 @@ Security Review를 분리할 이득이 생겼다.
 
 이 책의 마지막 경계를 다시 확인한다.
 
-Agent State Plane:
+에이전트 상태 관리 계층(Agent State Plane: 실행이 중단돼도 목표와 진행 상태를 보존하는 계층):
 
 ~~~text
 one Agent execution
@@ -300,7 +288,7 @@ artifact
 recovery
 ~~~
 
-Software Factory Control Plane:
+소프트웨어 팩토리의 제어 계층:
 
 ~~~text
 many work items
@@ -312,21 +300,21 @@ delivery
 feedback
 ~~~
 
-Agent Engineering이 한 Worker를 신뢰할 수 있게 만드는 문제라면 Software Factory Engineering은 많은 Work를 시스템적으로 흘리는 문제다.
+에이전트 엔지니어링이 한 작업 수행 주체를 신뢰할 수 있게 만드는 문제라면 Software Factory Engineering은 많은 업무를 시스템적으로 흘리는 문제다.
 
 ## 언제 Factory로 넘어가는가
 
 다음 문제가 커지면 Agent-level Architecture만으로는 부족해진다.
 
 - Backlog가 많다.
-- 여러 Worker가 있다.
+- 여러 작업 수행 주체가 있다.
 - Task Dependency가 있다.
 - Assignment가 필요하다.
 - Acceptance Authority가 필요하다.
 - Merge/Deploy Delivery가 필요하다.
 - Retry/Reassignment가 조직 수준에서 필요하다.
 
-이때 Software Factory Control Plane이 등장한다.
+이때 소프트웨어 팩토리의 제어 계층이 등장한다.
 
 ## Production Readiness Checklist
 
@@ -345,13 +333,11 @@ High-risk Action에 Policy가 있는가?
 Regression Eval이 있는가?
 ~~~
 
-각 항목의 필요 수준은 시스템 Risk에 따라 달라진다. 중요한 것은 기능 목록을 채우는 것이 아니라 이 질문에 명시적으로 답할 수 있는가이다.
+각 항목의 필요 수준은 시스템 위험에 따라 달라진다. 중요한 것은 기능 목록을 채우는 것이 아니라 이 질문에 명시적으로 답할 수 있는가이다.
 
 ## 이 장에서 가져갈 것
 
-운영 Agent는 기능 수로 정의되지 않는다.
-
-더 중요한 것은 다음이다.
+운영 에이전트는 기능 수로 정의되지 않는다. 더 중요한 것은 다음이다.
 
 ~~~text
 Can it act?
@@ -361,11 +347,7 @@ Can it recover?
 Can it prove completion?
 ~~~
 
-Agent Engineering의 목표는 Agent를 최대한 자유롭게 만드는 것이 아니다.
-
-필요한 자유를 주면서도 업무를 맡길 수 있는 구조를 만드는 것이다.
-
-이 책의 마지막에는 하나의 원칙이 남는다.
+에이전트 엔지니어링의 목표는 에이전트를 최대한 자유롭게 만드는 것이 아니다. 필요한 자유를 주면서도 업무를 맡길 수 있는 구조를 만드는 것이다. 이 책의 마지막에는 하나의 원칙이 남는다.
 
 > 모델을 더 믿는 것이 아니라, 모델을 덜 믿어도 일을 맡길 수 있는 시스템을 만든다.
 
