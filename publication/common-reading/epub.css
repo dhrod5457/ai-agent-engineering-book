@@ -1,0 +1,11 @@
+/* Reflowable edition: reader font and size preferences remain available. */
+body{font-family:sans-serif;color:#182c38;line-height:1.8;margin:0 5%;text-align:left}
+p{margin:0 0 1em;orphans:3;widows:3;overflow-wrap:anywhere}
+h1,h2,h3,h4{line-height:1.45;word-break:keep-all;overflow-wrap:anywhere;page-break-after:avoid}
+h1{font-size:1.9em;margin:1.8em 0 .9em}h2{font-size:1.4em;margin:1.6em 0 .7em}h3{font-size:1.15em;margin:1.4em 0 .6em}
+a{color:#155b72;text-decoration:underline;overflow-wrap:anywhere}code{font-family:monospace;font-size:.9em;overflow-wrap:anywhere}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-all;font-size:.85em;line-height:1.6;background:#f2f6f8;padding:.8em;border:1px solid #c5d3da}pre code{white-space:pre-wrap}
+table{width:100%;border-collapse:collapse;font-size:.85em;line-height:1.6;table-layout:fixed}th,td{padding:.5em;border-bottom:1px solid #c5d3da;vertical-align:top;text-align:left;overflow-wrap:anywhere}th{background:#edf3f5}
+blockquote{border-left:3px solid #155b72;margin:1em 0;padding:.6em .9em;background:#f2f6f8}img,svg{max-width:100%;height:auto}
+.titlepage{padding:2em 1em;background:#123344;color:#fff;border-top:.4em solid #6fa9b8;text-align:left;page-break-after:always}.titlepage h1{color:#fff;font-size:2.1em;margin:1.8em 0 1em}.titlepage .subtitle,.titlepage .date,.titlepage .author,.titlepage .rights{color:#e1edf1;line-height:1.6}
+.footnotes{font-size:.85em;line-height:1.7}.references{font-size:.95em}nav{line-height:1.7}.part-label{color:#155b72;font-weight:bold}hr{border:0;border-top:1px solid #c5d3da}
