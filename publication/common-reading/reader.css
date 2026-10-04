@@ -42,3 +42,5 @@ nav details{margin:.4em 0}nav summary{cursor:pointer;color:#455d69;font-size:.85
  p{margin-bottom:3.5mm}pre,pre.sourceCode{white-space:pre-wrap;overflow:visible;overflow-wrap:anywhere;word-break:break-all;font-size:8pt;line-height:1.55;padding:3mm;margin:4mm 0;break-inside:auto}pre code{white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-all}
  .table-scroll{overflow:visible;border:0;margin:4mm 0}table{width:100%;min-width:0;table-layout:fixed;font-size:8pt;line-height:1.5}th,td{min-width:0;padding:1.8mm;overflow-wrap:anywhere}tr{break-inside:avoid}img{max-height:190mm;object-fit:contain;break-inside:avoid}a{text-decoration:none}hr:has(+h1),hr:has(+.reader-chapter){display:none}.references{font-size:9pt}
 }
+
+.current-edition{font-size:.85rem;color:#e1edf1;margin-top:1.4rem}@media print{.current-edition{font-size:9pt;margin-top:6mm}}

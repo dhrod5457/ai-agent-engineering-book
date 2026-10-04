@@ -1,11 +1,9 @@
-# 공통 독서 디자인 시안
+# 공통 독서판 2026.10.04-preview.1
 
-이 책의 본문 기준은 `b6abea82394b54ce9e2058f95a9a11551d6be140`입니다. 원고는 수정하지 않았습니다.
+본문·코드·사례·인용·장 순서는 원고 커밋 `b6abea82394b54ce9e2058f95a9a11551d6be140`에서 보존했습니다. 새 디자인은 표지·목차·본문·코드·표·참고문헌·쪽번호 및 HTML 탐색을 공통화합니다. 원고의 검토 상태는 유지합니다.
 
-`published-book/design`이 공통 스타일의 기준 원본입니다. 이 폴더의 CSS/JS는 동일한 파일의 검토용 사본이며, 기존 출판·연구 빌더와 원격 워크플로는 유지합니다.
+[이 판의 PDF·EPUB·HTML](https://github.com/dhrod5457/ai-agent-engineering-book/releases/tag/2026.10.04-preview.1) · [여섯 권 보관소](https://github.com/dhrod5457/published-book/releases/tag/collection-2026-10-04.1).
 
-공통 판형 176×250mm, PDF 본문 10pt/1.8, 화면 최대 42rem, 모바일 17px/1.8을 사용합니다. 표·코드는 화면에서 독립 가로 스크롤, PDF/EPUB에서는 긴 줄을 감쌉니다. 제목 계층과 장 순서, 본문·코드·사례·인용·검토 상태는 보존합니다.
+`edition.json`에는 버전, 원고 파일 해시와 공통 스타일 해시가 있습니다. `python3 publication/common-reading/verify.py`로 보존 여부를 확인합니다. 실제 제작 기준은 형제 저장소 `published-book`의 `design` 및 `scripts/build_common_books.py`입니다. 기존 연구용 빌더와 과거 발행본은 보존합니다.
 
-여섯 권과 `published-book`의 `design/common-reading-20261004` 로컬 브랜치를 형제 폴더에 두고 `python3 publication/common-reading/preview.py`를 실행하면 고정 발행본에 디자인을 적용한 HTML·EPUB·PDF 시안을 생성합니다. 환경별 Chrome/Puppeteer 경로는 `CHROME_PATH`, `PUPPETEER_MODULE`로 지정합니다.
-
-생성물은 `published-book/preview/common-reading-20261004/ai-agent-engineering-book/`에 있으며 기존 릴리스 파일을 덮어쓰지 않습니다. 발행에는 별도 승인과 검수 완료된 파일의 버전·해시 기록이 필요합니다.
+형제 `published-book`에서 `python3 scripts/build_common_books.py ai-agent-engineering-book`를 실행하고, `READING_OUT`을 설정해 `node scripts/build_reading_pdf.cjs ai-agent-engineering-book`를 실행합니다. `CHROME_PATH`, `PUPPETEER_MODULE`, `PYMUPDF_PATH`로 실행 도구 경로를 지정합니다. 검수 완료된 정확한 파일을 새 릴리스에 배포합니다.
