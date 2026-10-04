@@ -1,0 +1,33 @@
+{
+  "repository": "dhrod5457/ai-agent-engineering-book",
+  "version": "2026.10.04-preview.1",
+  "date": "2026-10-04",
+  "manuscript_commit": "b6abea82394b54ce9e2058f95a9a11551d6be140",
+  "baseline_collection_commit": "a8688c83fe0d169a8c2141c5100ac70fc6b87781",
+  "baseline_version": "2026.10.03-preview.2",
+  "publication_pipeline": "published-book/scripts/build_common_books.py",
+  "collection_version": "collection-2026-10-04.1",
+  "status": "Assembly v0.1 검토본 — 최종 출처·freshness 검토 미완료",
+  "manuscript_sha256": {
+    "manuscript/README.md": "7390c41dd92f3dc4137e61d5991e77ed4f1adfeeabbb26a675a78d23fb9100e8",
+    "manuscript/assembly-plan.md": "344eebf14ae4665f0d7de9b6da39703f26dace1bd157c0988d8f1a2152d88582",
+    "manuscript/book.md": "babecdfdc0a5362eb2b6a9fa1e3474a991558032f71ddf20d333fd4c9bfcd8a6",
+    "manuscript/epilogue.md": "8e0f75c20d14cd520b6d9d4526e206490bdb632a5ecd3816582d39205c1576b3",
+    "manuscript/freshness-checklist.md": "01e71f6169e421f0a24b49f79aadf7fb1c876331110e6fd0dd343e8c2e825d83",
+    "manuscript/frontmatter.md": "6508a8206ecf27a7aa2c900db2941fa729655908b9f35483b41a39efba245f84",
+    "manuscript/part-01.md": "ab00c371f01af59c973475b059e5ade32ca6a90936be1c34263962e004710283",
+    "manuscript/part-02.md": "57c9cb7b265d90c2459da621d05d1511950478fcea24e02ef4e2ddf6970344af",
+    "manuscript/part-03.md": "9152a44b89cf4238e659331a3162e838def6acb458a59cf27d86fc02ced403ca",
+    "manuscript/part-04.md": "a21db6d06ca100c1367863288e2e8d6b6e6e8857cfeefde9a6701df1e9ef25ea",
+    "manuscript/part-05.md": "1d7ed3900c24f3e5c0c891b223192399ac0b1dac72369d82af452497f075331e",
+    "manuscript/part-06.md": "db455f86990b2ed36a0e0ee9a269845432567579ad3666b6a297e612d7bd28d5",
+    "manuscript/part-07.md": "bd47e022101823cc06c3340c9f262aeaf2213e4cab4ffcd16dd84422e49b7633",
+    "manuscript/references.md": "2c24d95702887dc94740010b53c5baf3aef950de970c6da85ae7bcddb4d8f739",
+    "planning/source-catalog.md": "f50759eb2e27a9b07193cd57ab53e213d0836a118a6a823ac6a027a8aa354d71"
+  },
+  "style_sha256": {
+    "reader.css": "4150300c1b6075a022aa333775ba73f7db0633f41b2ea921ed808fc0e5008474",
+    "epub.css": "52823eb43282e43f7bebe0bab5587bfd67d3c5ba6b4a272ac172303af9806f80",
+    "reader.js": "d2c7ccf83caf2a42b5712932740dd7e2524754d80b7c95aab864c8e18dfbd265"
+  }
+}

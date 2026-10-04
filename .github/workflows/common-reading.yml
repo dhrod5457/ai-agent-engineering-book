@@ -1,0 +1,17 @@
+name: Validate common reading edition
+on:
+  pull_request:
+    paths: ['publication/common-reading/**', '.github/workflows/common-reading.yml']
+  push:
+    branches: [main]
+    paths: ['publication/common-reading/**', '.github/workflows/common-reading.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reading-edition:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Verify manuscript and shared styles
+        run: python3 publication/common-reading/verify.py
